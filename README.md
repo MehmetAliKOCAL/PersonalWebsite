@@ -1,7 +1,6 @@
 ## This website is still in early development stage. To preview it, visit [here](https://gwyndev.netlify.app).
 
 Also this product is licensed under GNU license. That means you can download, use, change, make copies, and distribute the original or altered version.
-
 Made with Nuxt 3 & TailwindCSS. For further instructions about Nuxt, view [docs](https://nuxt.com/docs/getting-started/introduction).
 
 # Setup
