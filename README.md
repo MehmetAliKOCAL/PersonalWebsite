@@ -1,12 +1,23 @@
-# Nuxt 3 Minimal Starter
+## This website is still in early development stage. To preview it, visit [here](https://gwyndev.netlify.app).
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Also this product is licensed under GNU license. That means you can download, use, change, make copies, and distribute the original or altered version.
 
-## Setup
+Made with Nuxt 3 & TailwindCSS. For further instructions about Nuxt, view [docs](https://nuxt.com/docs/getting-started/introduction).
 
-Make sure to install the dependencies:
+# Setup
+
+1. Download the repository:
 
 ```bash
+git clone https://github.com/MehmetAliKOCAL/PortfolioWebsite
+```
+
+2. Install the dependencies:
+
+```bash
+# Open the folder
+cd PortfolioWebsite
+
 # yarn
 yarn install
 
@@ -17,7 +28,7 @@ npm install
 pnpm install
 ```
 
-## Development Server
+# Run the Development Server
 
 Start the development server on http://localhost:3000
 
@@ -25,7 +36,7 @@ Start the development server on http://localhost:3000
 npm run dev
 ```
 
-## Production
+# Production
 
 Build the application for production:
 
@@ -39,4 +50,4 @@ Locally preview production build:
 npm run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Check out the [Nuxt deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
