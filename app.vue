@@ -1,48 +1,20 @@
 <script setup>
 let isHovering = ref(null);
-
-let recentlyPlayedGames = ref(null);
-async function getRecentlyPlayedGames() {
-  await fetch("https://pwapi.fly.dev/steam/recentlyPlayedGames", {
-    method: "GET",
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .then((text) => {
-      return (recentlyPlayedGames.value = text);
-    })
-    .catch((e) =>
-      console.error(
-        "ERROR! Can't get the recently played games data from Steam. Error Message: " +
-          e
-      )
-    );
-}
-
-let mostPlayedGames = ref(null);
-async function getMostPlayedGames() {
-  await fetch("https://pwapi.fly.dev/steam/mostPlayedGames", {
-    method: "GET",
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .then((json) => {
-      return (mostPlayedGames.value = json);
-    })
-    .catch((e) =>
-      console.error(
-        "ERROR! Can't get the recently played games data from Steam. Error Message: " +
-          e
-      )
-    );
-}
+let showDev = ref(true);
 
 onBeforeMount(() => {
   getRecentlyPlayedGames();
   getMostPlayedGames();
 });
+
+let animationDelay = 0;
+function increaseDelay() {
+  if (animationDelay == 300) {
+    animationDelay = 0;
+  }
+  animationDelay += 100;
+  return animationDelay;
+}
 
 const infoAboutMe = `I'm Mehmet, an associate degree ${(
   new Date().getUTCFullYear() - 2000.8
@@ -77,50 +49,6 @@ const proficienciesSecondColumn = [
   ["Adobe Photoshop", "#1E293B", "#0ea5e9", "w-5/10"],
   ["Adobe After Effects", "#1e40af", "#6366f1", "w-5/10"],
 ];
-
-function calculateLastTimePlayed(seconds) {
-  const resultInDays = Math.round((Date.now() / 1000 - seconds) / 60 / 60 / 24);
-  if (resultInDays < 1) {
-    return "Today";
-  } else if (resultInDays < 2) {
-    return "Yesterday";
-  } else if (resultInDays > 365) {
-    return (resultInDays / 365).toFixed(0) + " years ago";
-  } else {
-    return resultInDays + " days ago";
-  }
-}
-
-function calculatePlayTime(minutes, shouldBeRounded) {
-  if (minutes < 2) {
-    return minutes + " minute";
-  } else if (minutes < 60) {
-    return minutes + " minutes";
-  } else if (minutes / 60 < 1.2) {
-    return "1 hour";
-  } else {
-    if (
-      (minutes / 60).toFixed(1) % 1 < 0.2 ||
-      (minutes / 60).toFixed(1) % 1 >= 0.8 ||
-      shouldBeRounded == true
-    ) {
-      return Math.round(minutes / 60) + " hours";
-    } else {
-      return (minutes / 60).toFixed(1) + " hours";
-    }
-  }
-}
-
-let showDev = ref(true);
-
-let animationDelay = 0;
-function increaseDelay() {
-  if (animationDelay == 600) {
-    animationDelay = 0;
-  }
-  animationDelay += 100;
-  return animationDelay;
-}
 </script>
 <template>
   <div
@@ -154,7 +82,7 @@ function increaseDelay() {
               <div class="bg-slate-900 rounded-md">
                 <div
                   :class="[
-                    `${item[3]} py-5 rounded-md my-3 transition-all duration-1000`,
+                    `w-0 ${item[3]} py-5 rounded-md my-3 transition-all duration-1000`,
                   ]"
                   :style="[
                     `box-shadow: 20px 0 60px ${item[2]}, -20px 0 60px #000;
@@ -184,7 +112,7 @@ function increaseDelay() {
       </section>
       <section>
         <h1
-          class="text-5xl font-bold mb-6 mt-10"
+          class="text-5xl font-bold mb-4 mt-10"
           data-aos="fade-left"
           data-aos-duration="800"
         >
@@ -286,11 +214,7 @@ function increaseDelay() {
             :data-aos="[
               mostPlayedGames.indexOf(item) < 3 ? 'fade-up' : 'flip-up',
             ]"
-            :data-aos-delay="[
-              recentlyPlayedGames.indexOf(item) == 2
-                ? `${increaseDelay()}`
-                : `${increaseDelay()}`,
-            ]"
+            :data-aos-delay="`${increaseDelay()}`"
           >
             <div class="relative inline-flex overflow-hidden w-full">
               <img
