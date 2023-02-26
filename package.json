@@ -11,5 +11,8 @@
     "@types/node": "^18.14.0",
     "nuxt": "^3.2.2",
     "nuxt-windicss": "^2.6.0"
+  },
+  "dependencies": {
+    "aos": "^2.3.4"
   }
 }

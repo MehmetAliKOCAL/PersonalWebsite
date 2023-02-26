@@ -1,6 +1,5 @@
 <script setup>
 let isHovering = ref(null);
-let loaded = ref(null);
 
 let recentlyPlayedGames = ref(null);
 async function getRecentlyPlayedGames() {
@@ -44,17 +43,17 @@ onBeforeMount(() => {
   getRecentlyPlayedGames();
   getMostPlayedGames();
 });
-onMounted(() => {
-  setTimeout(() => {
-    loaded.value = true;
-  }, 100);
-});
 
-const infoAboutMe =
-  "I'm Mehmet, an associate degree 22 years old computer programming student from Turkey. I am currently studying Unity3D, Blender, C#, Vue.js, Nuxt.js, and MySQL. I started my programming journey with front-end web development, by learning HTML, CSS, and JavaScript. After a couple of months, I started learning Vue.js along with the Nuxt.js to advance my front-end skills. But I always wanted to make something related to video games because I love everything about video games and I was always a massive fan of them. So after a year of web development, I find myself in a situation where I had to build something as a school project. While I catch the chance, I started learning Unity to make a video game. And now here I am making games with Unity for fun, using Blender for 3D modeling, and Adobe Photoshop for texturing.";
+const infoAboutMe = `I'm Mehmet, an associate degree ${(
+  new Date().getUTCFullYear() - 2000.8
+).toFixed(
+  0
+)} years old computer programming student from Turkey. I am currently studying Unity3D, Blender, C#, Vue.js, Nuxt.js, and MySQL. I started my programming journey with front-end web development, by learning HTML, CSS, and JavaScript. After a couple of months, I started learning Vue.js along with the Nuxt.js to advance my front-end skills. But I always wanted to make something related to video games because I love everything about video games and I was always a massive fan of them. So after a year of web development, I find myself in a situation where I had to build something as a school project. While I catch the chance, I started learning Unity to make a video game. And now here I am making games with Unity for fun, using Blender for 3D modeling, and Adobe Photoshop for texturing.`;
+
+const currentlyWorkingOn = "A news website to post about video games,";
 
 const proficienciesFirstColumn = [
-  // Tailwind.css colors are used for first and second colors
+  // Tailwind.css colors are used
   // Check https://windicss.org/utilities/general/colors for colors
 
   // Name | First Color | Second Color | Proficiency Level
@@ -67,7 +66,7 @@ const proficienciesFirstColumn = [
 ];
 
 const proficienciesSecondColumn = [
-  // Tailwind.css colors are used for first and second colors
+  // Tailwind.css colors are used
   // Check https://windicss.org/utilities/general/colors for colors
 
   // Name | First Color | Second Color | Proficiency Level
@@ -113,6 +112,15 @@ function calculatePlayTime(minutes, shouldBeRounded) {
 }
 
 let showDev = ref(true);
+
+let animationDelay = 0;
+function increaseDelay() {
+  if (animationDelay == 600) {
+    animationDelay = 0;
+  }
+  animationDelay += 100;
+  return animationDelay;
+}
 </script>
 <template>
   <div
@@ -132,53 +140,22 @@ let showDev = ref(true);
     <div class="color-wrapper absolute h-full min-w-full min-h-full -z-10" />
     <div class="mx-auto px-40 py-40 text-slate-200/95">
       <section>
-        <h1
-          class="text-5xl font-bold mb-6 transform transition-all duration-1100"
-          :class="[
-            loaded == true
-              ? 'translate-x-0 visible opacity-100'
-              : '-translate-x-72 invisible opacity-0',
-          ]"
-        >
-          Hello
-        </h1>
-        <p
-          class="text-3xl font-normal text-slate-400 transform transition-all duration-1000"
-          :class="[
-            loaded == true
-              ? 'translate-x-0 visible opacity-100'
-              : '-translate-x-48 invisible opacity-0',
-          ]"
-        >
+        <h1 class="text-5xl font-bold mb-6">Hello</h1>
+        <p class="text-3xl font-normal text-slate-400">
           {{ infoAboutMe }}
         </p>
       </section>
       <section>
-        <h1
-          class="text-5xl font-bold mb-6 mt-10 transform transition-all duration-1300"
-          :class="[
-            loaded == true
-              ? 'translate-x-0 visible opacity-100'
-              : 'translate-x-48 invisible opacity-0',
-          ]"
-        >
-          Proficiencies
-        </h1>
+        <h1 class="text-5xl font-bold mb-6 mt-10">Proficiencies</h1>
         <div class="flex w-full">
           <div class="w-1/2 mr-4">
-            <div
-              v-for="item in proficienciesFirstColumn"
-              class="transform transition-all"
-              :class="[
-                loaded == true
-                  ? `translate-x-0 visible opacity-100 duration-${1000}`
-                  : `-translate-x-48 invisible opacity-0 `,
-              ]"
-            >
+            <div v-for="item in proficienciesFirstColumn">
               <h2 class="font-semibold text-2xl">{{ item[0] }}</h2>
               <div class="bg-slate-900 rounded-md">
                 <div
-                  :class="[`${item[3]} py-5 rounded-md my-3`]"
+                  :class="[
+                    `${item[3]} py-5 rounded-md my-3 transition-all duration-1000`,
+                  ]"
                   :style="[
                     `box-shadow: 20px 0 60px ${item[2]}, -20px 0 60px #000;
                     background:linear-gradient(to right,${item[1]},${item[2]})`,
@@ -188,19 +165,13 @@ let showDev = ref(true);
             </div>
           </div>
           <div class="w-1/2 ml-4">
-            <div
-              v-for="item in proficienciesSecondColumn"
-              class="transform transition-all"
-              :class="[
-                loaded == true
-                  ? `translate-x-0 visible opacity-100 duration-${1000}`
-                  : `translate-x-48 invisible opacity-0 `,
-              ]"
-            >
+            <div v-for="item in proficienciesSecondColumn">
               <h2 class="font-semibold text-2xl">{{ item[0] }}</h2>
               <div class="bg-slate-900 rounded-md">
                 <div
-                  :class="[`${item[3]} py-5 rounded-md my-3`]"
+                  :class="[
+                    `${item[3]} py-5 rounded-md my-3 transition-all duration-1000`,
+                  ]"
                   :style="[
                     `box-shadow: 20px 0 60px ${item[2]}, -20px 0 60px #000;
                     background:linear-gradient(to right,${item[1]},${item[2]})`,
@@ -212,16 +183,32 @@ let showDev = ref(true);
         </div>
       </section>
       <section>
-        <h1 class="text-5xl font-bold mb-6 mt-10">Currently Working On</h1>
-        <p class="text-3xl font-normal text-slate-400">
-          A news website to post about video games,
+        <h1
+          class="text-5xl font-bold mb-6 mt-10"
+          data-aos="fade-left"
+          data-aos-duration="800"
+        >
+          Currently Working On
+        </h1>
+        <p
+          class="text-3xl font-normal text-slate-400"
+          data-aos="fade-right"
+          data-aos-duration="700"
+        >
+          {{ currentlyWorkingOn }}
           <a href="" target="_blank" class="text-cyan-500 font-medium">
             check it!
           </a>
         </p>
       </section>
       <section>
-        <h1 class="text-5xl font-bold mb-6 mt-10">Recently Played Games</h1>
+        <h1
+          class="text-5xl font-bold mb-6 mt-10"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+        >
+          Recently Played Games
+        </h1>
         <div
           class="flex flex-wrap gap-2 justify-between"
           v-if="recentlyPlayedGames != null"
@@ -234,6 +221,12 @@ let showDev = ref(true);
                 : 'border-transparent',
             ]"
             v-for="item in recentlyPlayedGames"
+            :data-aos="[
+              recentlyPlayedGames.indexOf(item) < 3
+                ? 'fade-right'
+                : 'fade-left',
+            ]"
+            :data-aos-delay="`${increaseDelay()}`"
           >
             <div class="relative inline-flex overflow-hidden w-full">
               <img
@@ -271,7 +264,13 @@ let showDev = ref(true);
         </div>
       </section>
       <section>
-        <h1 class="text-5xl font-bold mb-6 mt-10">Most Played Games</h1>
+        <h1
+          class="text-5xl font-bold mb-6 mt-10"
+          data-aos="fade-right"
+          data-aos-duration="1200"
+        >
+          Most Played Games
+        </h1>
         <div
           class="flex flex-wrap gap-2 justify-between"
           v-if="mostPlayedGames != null"
@@ -284,6 +283,14 @@ let showDev = ref(true);
                 : 'border-transparent',
             ]"
             v-for="item in mostPlayedGames"
+            :data-aos="[
+              mostPlayedGames.indexOf(item) < 3 ? 'fade-up' : 'flip-up',
+            ]"
+            :data-aos-delay="[
+              recentlyPlayedGames.indexOf(item) == 2
+                ? `${increaseDelay()}`
+                : `${increaseDelay()}`,
+            ]"
           >
             <div class="relative inline-flex overflow-hidden w-full">
               <img

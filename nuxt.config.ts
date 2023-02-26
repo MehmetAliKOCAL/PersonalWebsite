@@ -3,4 +3,7 @@ export default defineNuxtConfig({
     modules: [
         'nuxt-windicss',
       ],
+      plugins: [
+        { src: '~/plugins/aos.client', mode: 'client' },
+      ],
 })
