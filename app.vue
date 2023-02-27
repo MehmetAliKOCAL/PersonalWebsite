@@ -1,11 +1,15 @@
 <script setup>
+import { useRecentGamesStore } from "~~/store/steamInfo";
+import { useMostPlayedGamesStore } from "~~/store/steamInfo";
+const recentGames = useRecentGamesStore();
+const topGames = useMostPlayedGamesStore();
+
+var recentlyPlayedGames = ref(recentGames.getRecentlyPlayedGames());
+var mostPlayedGames = ref(topGames.getMostPlayedGames());
+console.log(recentGames.getRecentlyPlayedGames());
+
 let isHovering = ref(null);
 let showDev = ref(true);
-
-onBeforeMount(() => {
-  getRecentlyPlayedGames();
-  getMostPlayedGames();
-});
 
 let animationDelay = 0;
 function increaseDelay() {
@@ -67,9 +71,10 @@ const proficienciesSecondColumn = [
     <div class="change-colors absolute h-full min-w-full min-h-full -z-20" />
     <div class="color-wrapper absolute h-full min-w-full min-h-full -z-10" />
     <div class="mx-auto px-40 py-40 text-slate-200/95">
-      <section>
+      <!-- <section>
         <h1 class="text-5xl font-bold mb-6">Hello</h1>
         <p class="text-3xl font-normal text-slate-400">
+          {{ recentlyPlayedGames[0] }}
           {{ infoAboutMe }}
         </p>
       </section>
@@ -254,7 +259,7 @@ const proficienciesSecondColumn = [
       </section>
       <section>
         <h1 class="text-5xl font-bold">Contact Me</h1>
-      </section>
+      </section> -->
     </div>
   </div>
 </template>

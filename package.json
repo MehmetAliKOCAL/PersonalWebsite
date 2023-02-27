@@ -13,6 +13,11 @@
     "nuxt-windicss": "^2.6.0"
   },
   "dependencies": {
-    "aos": "^2.3.4"
+    "@pinia/nuxt": "^0.4.7",
+    "aos": "^2.3.4",
+    "pinia": "^2.0.32"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }
