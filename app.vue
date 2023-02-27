@@ -1,12 +1,14 @@
 <script setup>
-import { useRecentGamesStore } from "~~/store/steamInfo";
-import { useMostPlayedGamesStore } from "~~/store/steamInfo";
+import {
+  useRecentGamesStore,
+  useMostPlayedGamesStore,
+} from "~~/store/steamInfo";
 const recentGames = useRecentGamesStore();
 const topGames = useMostPlayedGamesStore();
 
 var recentlyPlayedGames = ref(recentGames.getRecentlyPlayedGames());
 var mostPlayedGames = ref(topGames.getMostPlayedGames());
-console.log(recentGames.getRecentlyPlayedGames());
+console.log(await recentGames.getRecentlyPlayedGames());
 
 let isHovering = ref(null);
 let showDev = ref(true);

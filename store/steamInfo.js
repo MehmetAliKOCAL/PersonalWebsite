@@ -4,52 +4,29 @@ export const useRecentGamesStore = defineStore("recentGames", {
   state: () => ({
     recentGames: [],
   }),
+
   actions: {
-    getRecentlyPlayedGames() {
-      try {
-        this.recentGames = fetch(
-          "https://pwapi.fly.dev/steam/recentlyPlayedGames",
-          {
-            method: "GET",
-          }
-        ).then((res) => {
-          return res.json();
-        });
-      } catch (e) {
-        console.error(
-          "ERROR! Can't get the recently played games data from Steam. Error Message: '" +
-            e +
-            "'"
-        );
-      }
+    async getRecentlyPlayedGames() {
+      const data = await fetch(
+        "https://pwapi.fly.dev/steam/recentlyPlayedGames"
+      );
+
+      this.recentGames = await data.json();
+
       return this.recentGames;
     },
   },
 });
-onBeforeMount(() => {
-  getRecentlyPlayedGames();
-});
+
 export const useMostPlayedGamesStore = defineStore("mostPlayedGames", {
   state: () => ({
     mostPlayedGames: null,
   }),
   actions: {
-    getMostPlayedGames() {
-      try {
-        this.mostPlayedGames = fetch(
-          "https://pwapi.fly.dev/steam/mostPlayedGames",
-          {
-            method: "GET",
-          }
-        ).then((res) => {
-          res.json();
-        });
-      } catch (e) {
-        console.error(
-          "ERROR! Can't get the most played games data from Steam. Error Message: " +
-            e
-        );
-      }
+    async getMostPlayedGames() {
+      const data = await fetch("https://pwapi.fly.dev/steam/mostPlayedGames");
+      this.mostPlayedGames = await data.json();
+
       return this.mostPlayedGames;
     },
   },
