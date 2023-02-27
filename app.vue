@@ -5,21 +5,22 @@ import {
 } from "~~/store/steamInfo";
 const recentGames = useRecentGamesStore();
 const topGames = useMostPlayedGamesStore();
+var recentlyPlayedGames = reactive(await recentGames.getRecentlyPlayedGames());
+var mostPlayedGames = reactive(await topGames.getMostPlayedGames());
 
-var recentlyPlayedGames = ref(recentGames.getRecentlyPlayedGames());
-var mostPlayedGames = ref(topGames.getMostPlayedGames());
-console.log(await recentGames.getRecentlyPlayedGames());
+var isHovering = ref(null);
 
-let isHovering = ref(null);
-let showDev = ref(true);
-
-let animationDelay = 0;
+var animationDelay = 0;
 function increaseDelay() {
   if (animationDelay == 300) {
     animationDelay = 0;
   }
   animationDelay += 100;
   return animationDelay;
+}
+function animDirection(itemIndex) {
+  if (itemIndex < 3) return "fade-right";
+  else return "fade-left";
 }
 
 const infoAboutMe = `I'm Mehmet, an associate degree ${(
@@ -57,26 +58,13 @@ const proficienciesSecondColumn = [
 ];
 </script>
 <template>
-  <div
-    v-if="showDev"
-    class="sticky top-0 bg-slate-800 text-center z-20 text-slate-200 font-bold text-xl py-4 px-2 flex justify-center"
-  >
-    <div>Still in development</div>
-    <div
-      @click="showDev = !showDev"
-      class="right-5 absolute px-4 cursor-pointer"
-    >
-      X
-    </div>
-  </div>
   <div class="min-h-screen min-w-full h-full relative">
     <div class="change-colors absolute h-full min-w-full min-h-full -z-20" />
     <div class="color-wrapper absolute h-full min-w-full min-h-full -z-10" />
     <div class="mx-auto px-40 py-40 text-slate-200/95">
-      <!-- <section>
+      <section>
         <h1 class="text-5xl font-bold mb-6">Hello</h1>
         <p class="text-3xl font-normal text-slate-400">
-          {{ recentlyPlayedGames[0] }}
           {{ infoAboutMe }}
         </p>
       </section>
@@ -89,7 +77,7 @@ const proficienciesSecondColumn = [
               <div class="bg-slate-900 rounded-md">
                 <div
                   :class="[
-                    `w-0 ${item[3]} py-5 rounded-md my-3 transition-all duration-1000`,
+                    `${item[3]} py-5 rounded-md my-3 transition-all duration-1000`,
                   ]"
                   :style="[
                     `box-shadow: 20px 0 60px ${item[2]}, -20px 0 60px #000;
@@ -120,15 +108,15 @@ const proficienciesSecondColumn = [
       <section>
         <h1
           class="text-5xl font-bold mb-4 mt-10"
-          data-aos="fade-left"
-          data-aos-duration="800"
+          data-aos="fade-right"
+          data-aos-duration="600"
         >
           Currently Working On
         </h1>
         <p
           class="text-3xl font-normal text-slate-400"
-          data-aos="fade-right"
-          data-aos-duration="700"
+          data-aos="fade-left"
+          data-aos-duration="800"
         >
           {{ currentlyWorkingOn }}
           <a href="" target="_blank" class="text-cyan-500 font-medium">
@@ -140,7 +128,7 @@ const proficienciesSecondColumn = [
         <h1
           class="text-5xl font-bold mb-6 mt-10"
           data-aos="fade-right"
-          data-aos-duration="1000"
+          data-aos-duration="1100"
         >
           Recently Played Games
         </h1>
@@ -149,30 +137,20 @@ const proficienciesSecondColumn = [
           v-if="recentlyPlayedGames != null"
         >
           <div
-            class="w-[calc(33.3%-0.5rem)] transition-all duration-300 border-2"
-            :class="[
-              isHovering == recentlyPlayedGames.indexOf(item)
-                ? 'border-slate-400'
-                : 'border-transparent',
-            ]"
+            class="w-[calc(33.3%-0.5rem)] transition-all duration-300 border-1 border-transparent hover:border-slate-400"
             v-for="item in recentlyPlayedGames"
-            :data-aos="[
-              recentlyPlayedGames.indexOf(item) < 3
-                ? 'fade-right'
-                : 'fade-left',
-            ]"
+            :data-aos="`${animDirection(recentlyPlayedGames.indexOf(item))}`"
             :data-aos-delay="`${increaseDelay()}`"
           >
             <div class="relative inline-flex overflow-hidden w-full">
               <img
                 class="transform transition-all duration-300 w-full"
-                :class="[
-                  isHovering == recentlyPlayedGames.indexOf(item)
-                    ? 'scale-110 filter blur-[1px]'
-                    : 'scale-100 filter blur-[0px]',
-                ]"
+                :class="{
+                  'scale-110 filter blur-[1px]':
+                    isHovering == recentlyPlayedGames.indexOf(item),
+                }"
                 :src="`https://steamcdn-a.akamaihd.net/steam/apps/${item.appid}/header.jpg`"
-                :alt="item.name + ' Banner'"
+                :alt="item.name"
               />
               <a
                 @mouseenter="isHovering = recentlyPlayedGames.indexOf(item)"
@@ -184,13 +162,16 @@ const proficienciesSecondColumn = [
                 <h2 class="text-2xl font-bold text-center">{{ item.name }}</h2>
                 <p class="text-lg font-semibold mt-2 -mb-2">
                   {{
-                    calculatePlayTime(item.playtime_2weeks, false) +
+                    recentGames.calculatePlayTime(item.playtime_2weeks, false) +
                     " in last 2 weeks"
                   }}
                 </p>
                 <p class="text-lg font-semibold">
                   {{
-                    calculatePlayTime(item.playtime_forever, false) + " total"
+                    recentGames.calculatePlayTime(
+                      item.playtime_forever,
+                      false
+                    ) + " total"
                   }}
                 </p>
               </a>
@@ -201,8 +182,8 @@ const proficienciesSecondColumn = [
       <section>
         <h1
           class="text-5xl font-bold mb-6 mt-10"
-          data-aos="fade-right"
-          data-aos-duration="1200"
+          data-aos="fade-left"
+          data-aos-duration="800"
         >
           Most Played Games
         </h1>
@@ -211,28 +192,20 @@ const proficienciesSecondColumn = [
           v-if="mostPlayedGames != null"
         >
           <div
-            class="w-[calc(33.3%-0.5rem)] transition-all duration-300 border-2"
-            :class="[
-              isHovering == mostPlayedGames.indexOf(item) + 6
-                ? 'border-slate-400'
-                : 'border-transparent',
-            ]"
+            class="w-[calc(33.3%-0.5rem)] transition-all duration-300 border-1 border-transparent hover:border-slate-400"
             v-for="item in mostPlayedGames"
-            :data-aos="[
-              mostPlayedGames.indexOf(item) < 3 ? 'fade-up' : 'flip-up',
-            ]"
+            :data-aos="`${animDirection(mostPlayedGames.indexOf(item))}`"
             :data-aos-delay="`${increaseDelay()}`"
           >
             <div class="relative inline-flex overflow-hidden w-full">
               <img
-                class="transform transition-all duration-300 w-full"
-                :class="[
-                  isHovering == mostPlayedGames.indexOf(item) + 6
-                    ? 'scale-110 filter blur-[1px]'
-                    : 'scale-100 filter blur-[0px]',
-                ]"
+                class="transform transition-all duration-300 w-full filter"
+                :class="{
+                  'scale-110 blur-[1px]':
+                    isHovering == mostPlayedGames.indexOf(item) + 6,
+                }"
                 :src="`https://steamcdn-a.akamaihd.net/steam/apps/${item.appid}/header.jpg`"
-                :alt="item.name + ' Banner'"
+                :alt="item.name"
               />
               <a
                 @mouseenter="isHovering = mostPlayedGames.indexOf(item) + 6"
@@ -245,13 +218,13 @@ const proficienciesSecondColumn = [
                 <p class="text-lg font-semibold mt-2 -mb-2">
                   {{
                     "Total playtime: " +
-                    calculatePlayTime(item.playtime_forever, true)
+                    recentGames.calculatePlayTime(item.playtime_forever, true)
                   }}
                 </p>
                 <p class="text-lg font-semibold">
                   {{
                     "Last played: " +
-                    calculateLastTimePlayed(item.rtime_last_played)
+                    topGames.calculateLastTimePlayed(item.rtime_last_played)
                   }}
                 </p>
               </a>
@@ -259,9 +232,6 @@ const proficienciesSecondColumn = [
           </div>
         </div>
       </section>
-      <section>
-        <h1 class="text-5xl font-bold">Contact Me</h1>
-      </section> -->
     </div>
   </div>
 </template>
@@ -269,6 +239,22 @@ const proficienciesSecondColumn = [
 ::selection {
   background-color: rgba(0, 255, 255, 0.8);
   color: white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(20, 20, 20);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(60, 60, 75);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(80, 80, 100);
 }
 
 .color-wrapper {

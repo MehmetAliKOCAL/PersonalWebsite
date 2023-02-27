@@ -1,3 +1,4 @@
+import { defineNuxtPlugin } from "#app";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -18,10 +19,10 @@ export default defineNuxtPlugin((nuxtApp) => {
       offset: 0, // offset (in px) from the original trigger point
       delay: 0, // values from 0 to 3000, with step 50ms
       duration: 500, // values from 0 to 3000, with step 50ms
-      easing: "ease-in-out-cubic", // default easing for AOS animations
+      easing: "ease-out-cubic", // default easing for AOS animations
       once: false, // whether animation should happen only once - while scrolling down
       mirror: true, // whether elements should animate out while scrolling past them
-      anchorPlacement: "bottom-bottom", // defines which position of the element regarding to window should trigger the animation
+      anchorPlacement: "center-bottom", // defines which position of the element regarding to window should trigger the animation
     });
   }
 });
