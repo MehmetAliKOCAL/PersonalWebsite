@@ -65,6 +65,7 @@ const proficiencies = [
     <!-- OpenGraph meta tags, edit it for yourself. -->
     <Head>
       <Title>Mehmet Ali KOÇAL</Title>
+      <Link rel="icon" type="image/png" href="favicon.png" />
       <Meta
         name="description"
         content="Mehmet is a front-end web developer, student, and video game lover. He develops websites or tries to make games in his spare time. Click to learn more!"
