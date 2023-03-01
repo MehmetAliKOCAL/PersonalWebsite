@@ -3,19 +3,22 @@ import {
   useRecentGamesStore,
   useMostPlayedGamesStore,
 } from "~~/store/steamInfo";
+import { useSongStatsStore } from "~~/store/songInfo";
 import { useElementVisibility } from "@vueuse/core";
+const recentGames = useRecentGamesStore();
+const topGames = useMostPlayedGamesStore();
+const songInfo = useSongStatsStore();
+
+var recentlyPlayedGames = reactive(await recentGames.getRecentlyPlayedGames());
+var mostPlayedGames = reactive(await topGames.getMostPlayedGames());
+var songStats = reactive(await songInfo.getRecentlyListenedSongs());
+
+var isHovering = ref(null);
+var essentialsLoaded = ref(false);
 
 const target = ref(null);
 const targetIsVisible = useElementVisibility(target);
 
-const recentGames = useRecentGamesStore();
-const topGames = useMostPlayedGamesStore();
-var recentlyPlayedGames = reactive(await recentGames.getRecentlyPlayedGames());
-var mostPlayedGames = reactive(await topGames.getMostPlayedGames());
-
-var isHovering = ref(null);
-var essentialsLoaded = ref(false);
-var proficienciesAnim = ref(false);
 onMounted(() => {
   essentialsLoaded.value = true;
 });
@@ -83,7 +86,7 @@ const proficiencies = [
       />
       <Meta name="twitter:card" content="summary_large_image" />
       <Meta property="twitter:domain" content="gwyndev.netlify.app" />
-      <meta property="twitter:url" content="https://gwyndev.netlify.app" />
+      <Meta property="twitter:url" content="https://gwyndev.netlify.app" />
       <Meta name="twitter:title" content="Mehmet Ali KOÇAL" />
       <Meta
         name="twitter:description"
@@ -241,7 +244,7 @@ const proficiencies = [
             </div>
           </div>
         </section>
-        <section class="pb-[10%]">
+        <section>
           <h1
             class="text-5xl font-bold mb-6 mt-10"
             data-aos="fade-left"
@@ -294,6 +297,63 @@ const proficiencies = [
                 </a>
               </div>
             </div>
+          </div>
+        </section>
+        <section v-if="Object.values(songStats[0])[6].nowplaying == 'true'">
+          <h1
+            class="text-5xl font-bold mb-6 mt-10"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+          >
+            Currently listening
+          </h1>
+          <a
+            class="py-4 px-10 block w-fit bg-gray-900 rounded-md"
+            :href="`${songStats[0].url}`"
+            target="_blank"
+            data-aos="fade-right"
+            data-aos-duration="70"
+          >
+            <!-- <img
+              class="inline mr-6 w-36"
+              :src="`${song.track.album.images[1].url}`"
+              :alt="`${song.track.name}`"
+            /> -->
+            <p class="text-slate-300/80">
+              {{ Object.values(songStats[0].artist)[1] }}
+            </p>
+            <p class="text-slate-200 font-bold text-xl">
+              {{ songStats[0].name }}
+            </p></a
+          >
+        </section>
+        <section class="pb-[10%]">
+          <h1
+            class="text-5xl font-bold mb-6 mt-10"
+            data-aos="fade-left"
+            data-aos-duration="1100"
+          >
+            Last Tracks Listened
+          </h1>
+          <div
+            class="bg-gray-900 rounded-md mb-4 w-fit flex flex-wrap"
+            data-aos="fade-right"
+            :data-aos-delay="`${increaseDelay()}`"
+            v-for="song in songStats"
+          >
+            <a class="py-4 px-10 block" :href="`${song.url}`" target="_blank">
+              <!-- <img
+              class="inline mr-6 w-36"
+              :src="`${song.track.album.images[1].url}`"
+              :alt="`${song.track.name}`"
+            /> -->
+              <p class="text-slate-300/80">
+                {{ Object.values(song.artist)[1] }}
+              </p>
+              <p class="text-slate-200 font-bold text-xl">
+                {{ song.name }}
+              </p></a
+            >
           </div>
         </section>
       </div>
