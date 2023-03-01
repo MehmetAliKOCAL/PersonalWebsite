@@ -9,13 +9,16 @@
   },
   "devDependencies": {
     "@types/node": "^18.14.0",
+    "@vueuse/core": "^9.13.0",
+    "@vueuse/nuxt": "^9.13.0",
     "nuxt": "^3.2.2",
     "nuxt-windicss": "^2.6.0"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.7",
     "aos": "^2.3.4",
-    "pinia": "^2.0.32"
+    "pinia": "^2.0.32",
+    "vue-gtag": "^2.0.1"
   },
   "overrides": {
     "vue": "latest"
