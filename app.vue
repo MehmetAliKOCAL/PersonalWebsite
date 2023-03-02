@@ -108,7 +108,7 @@ const proficiencies = [
           class="min-h-screen flex items-center flex-col text-center justify-center relative z-20 pt-[12.5%]"
         >
           <h1
-            class="text-5xl font-bold mb-6 transform transition-all duration-800"
+            class="text-5xl font-bold mb-6 transform transition-all duration-500"
             :class="[
               essentialsLoaded
                 ? 'translate-y-0 opacity-100'
@@ -118,7 +118,7 @@ const proficiencies = [
             Hello
           </h1>
           <p
-            class="text-3xl font-normal text-slate-400 transform transition-all duration-800"
+            class="text-3xl font-normal text-slate-400 transform transition-all duration-500"
             :class="[
               essentialsLoaded
                 ? 'translate-y-0 opacity-100'
@@ -128,7 +128,7 @@ const proficiencies = [
             {{ infoAboutMe }}
           </p>
           <hr
-            class="absolute top-0 mt-[12.5%] border-1 border-slate-500 relative z-20 transition-all duration-1000 transform"
+            class="absolute top-0 mt-[12.5%] border-1 border-slate-500 relative z-20 transition-all duration-500 transform"
             :class="[
               essentialsLoaded ? 'w-1/5 translate-y-0' : 'w-0 -translate-y-22',
             ]"
@@ -299,60 +299,79 @@ const proficiencies = [
             </div>
           </div>
         </section>
-        <section v-if="Object.values(songStats[0])[6].nowplaying == 'true'">
+        <section
+          class="mt-20"
+          v-if="Object.values(songStats[0])[6].nowplaying == 'true'"
+        >
           <h1
             class="text-5xl font-bold mb-6 mt-10"
             data-aos="fade-right"
             data-aos-duration="1000"
           >
-            Currently listening
+            Currently Listening
           </h1>
           <a
-            class="py-4 px-10 block w-fit bg-gray-900 rounded-md"
+            class="p-4 pr-14 w-fit rounded-md flex items-center bg-gradient-to-b from-gray-800 to-gray-900"
             :href="`${songStats[0].url}`"
             target="_blank"
             data-aos="fade-right"
-            data-aos-duration="70"
+            data-aos-duration="700"
           >
-            <!-- <img
-              class="inline mr-6 w-36"
-              :src="`${song.track.album.images[1].url}`"
-              :alt="`${song.track.name}`"
-            /> -->
-            <p class="text-slate-300/80">
-              {{ Object.values(songStats[0].artist)[1] }}
-            </p>
-            <p class="text-slate-200 font-bold text-xl">
-              {{ songStats[0].name }}
-            </p></a
-          >
+            <img
+              class="inline mr-5 w-20 rounded-sm"
+              :src="[
+                Object.values(songStats[0].image[2])[1] != ''
+                  ? `${Object.values(songStats[0].image[2])[1]}`
+                  : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg',
+              ]"
+              :alt="`${songStats[0].name}`"
+            />
+            <div>
+              <p class="text-slate-300/80 font-light text-lg">
+                {{ Object.values(songStats[0].artist)[1] }}
+              </p>
+              <p class="text-slate-200 font-bold text-xl">
+                {{ songStats[0].name }}
+              </p>
+            </div>
+          </a>
         </section>
-        <section class="pb-[10%]">
+        <section class="pb-[10%] mt-20 flex flex-wrap gap-4">
           <h1
-            class="text-5xl font-bold mb-6 mt-10"
+            class="text-5xl font-bold mb-6 w-full"
             data-aos="fade-left"
             data-aos-duration="1100"
           >
             Last Tracks Listened
           </h1>
           <div
-            class="bg-gray-900 rounded-md mb-4 w-fit flex flex-wrap"
+            class="w-fit flex flex-wrap"
             data-aos="fade-right"
             :data-aos-delay="`${increaseDelay()}`"
             v-for="song in songStats"
           >
-            <a class="py-4 px-10 block" :href="`${song.url}`" target="_blank">
-              <!-- <img
-              class="inline mr-6 w-36"
-              :src="`${song.track.album.images[1].url}`"
-              :alt="`${song.track.name}`"
-            /> -->
-              <p class="text-slate-300/80">
-                {{ Object.values(song.artist)[1] }}
-              </p>
-              <p class="text-slate-200 font-bold text-xl">
-                {{ song.name }}
-              </p></a
+            <a
+              class="p-4 pr-14 flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:opacity-80 transition-all duration-300 rounded-md"
+              :href="`${song.url}`"
+              target="_blank"
+            >
+              <img
+                class="inline mr-5 w-20 rounded-sm"
+                :src="[
+                  Object.values(song.image[2])[1] != ''
+                    ? `${Object.values(song.image[2])[1]}`
+                    : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg',
+                ]"
+                :alt="`${song.name}`"
+              />
+              <div>
+                <p class="text-slate-300/80 font-light text-lg">
+                  {{ Object.values(song.artist)[1] }}
+                </p>
+                <p class="text-slate-200 font-bold text-xl">
+                  {{ song.name }}
+                </p>
+              </div></a
             >
           </div>
         </section>
