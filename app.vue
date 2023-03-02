@@ -3,15 +3,19 @@ import {
   useRecentGamesStore,
   useMostPlayedGamesStore,
 } from "~~/store/steamInfo";
-import { useSongStatsStore } from "~~/store/songInfo";
+import { useRecentTracksStore, useTopTracksStore } from "~/store/songInfo";
 import { useElementVisibility } from "@vueuse/core";
 const recentGames = useRecentGamesStore();
 const topGames = useMostPlayedGamesStore();
-const songInfo = useSongStatsStore();
+const recentTracks = useRecentTracksStore();
+const topTracks = useTopTracksStore();
 
 var recentlyPlayedGames = reactive(await recentGames.getRecentlyPlayedGames());
 var mostPlayedGames = reactive(await topGames.getMostPlayedGames());
-var songStats = reactive(await songInfo.getRecentlyListenedSongs());
+var recentlyListenedTracks = reactive(
+  await recentTracks.getRecentlyListenedSongs()
+);
+var mostListenedTracks = reactive(await topTracks.getMostListenedSongs());
 
 var isHovering = ref(null);
 var essentialsLoaded = ref(false);
@@ -40,7 +44,7 @@ const infoAboutMe = `I'm Mehmet, a ${(
   new Date().getUTCFullYear() - 2000.8
 ).toFixed(
   0
-)} years old associate degree computer programming student. I enjoy programming and 3D modeling. I am currently studying Blender, C#, Vue.js, and Nuxt.js. Also, I love video games, I try to code games in Unity3D for fun in my free time.`;
+)} years old associate degree computer programming student. I enjoy programming and 3D modeling. I am currently studying Blender, C#, Vue.js, and Nuxt.js. Also, I love video games, I try to code games in Unity3D for fun in my spare time.`;
 
 const currentlyWorkingOn = "A news website to post about video games,";
 
@@ -301,7 +305,9 @@ const proficiencies = [
         </section>
         <section
           class="mt-20"
-          v-if="Object.values(songStats[0])[6].nowplaying == 'true'"
+          v-if="
+            Object.values(recentlyListenedTracks[0])[6].nowplaying == 'true'
+          "
         >
           <h1
             class="text-5xl font-bold mb-6 mt-10"
@@ -312,7 +318,7 @@ const proficiencies = [
           </h1>
           <a
             class="p-4 pr-14 w-fit rounded-md flex items-center bg-gradient-to-b from-gray-800 to-gray-900"
-            :href="`${songStats[0].url}`"
+            :href="`${recentlyListenedTracks[0].url}`"
             target="_blank"
             data-aos="fade-right"
             data-aos-duration="700"
@@ -320,35 +326,38 @@ const proficiencies = [
             <img
               class="inline mr-5 w-20 rounded-sm"
               :src="[
-                Object.values(songStats[0].image[2])[1] != ''
-                  ? `${Object.values(songStats[0].image[2])[1]}`
+                Object.values(recentlyListenedTracks[0].image[2])[1] != ''
+                  ? `${Object.values(recentlyListenedTracks[0].image[2])[1]}`
                   : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg',
               ]"
-              :alt="`${songStats[0].name}`"
+              :alt="`${recentlyListenedTracks[0].name}`"
             />
             <div>
               <p class="text-slate-300/80 font-light text-lg">
-                {{ Object.values(songStats[0].artist)[1] }}
+                {{ Object.values(recentlyListenedTracks[0].artist)[1] }}
               </p>
               <p class="text-slate-200 font-bold text-xl">
-                {{ songStats[0].name }}
+                {{ recentlyListenedTracks[0].name }}
               </p>
+              <p>{{ Object.values(recentlyListenedTracks[0].album)[1] }}</p>
             </div>
           </a>
         </section>
-        <section class="pb-[10%] mt-20 flex flex-wrap gap-4">
+        <section class="mt-20 flex flex-wrap gap-4">
           <h1
             class="text-5xl font-bold mb-6 w-full"
             data-aos="fade-left"
             data-aos-duration="1100"
           >
-            Last Tracks Listened
+            Recently Listened Tracks
           </h1>
           <div
             class="w-fit flex flex-wrap"
             data-aos="fade-right"
             :data-aos-delay="`${increaseDelay()}`"
-            v-for="song in songStats"
+            v-for="song in recentlyListenedTracks.filter((song) => {
+              return song.hasOwnProperty('@attr') == false;
+            })"
           >
             <a
               class="p-4 pr-14 flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:opacity-80 transition-all duration-300 rounded-md"
@@ -371,13 +380,61 @@ const proficiencies = [
                 <p class="text-slate-200 font-bold text-xl">
                   {{ song.name }}
                 </p>
+                <p>{{ Object.values(song.album)[1] }}</p>
+              </div></a
+            >
+          </div>
+        </section>
+        <section class="mt-20 flex flex-wrap gap-4">
+          <h1
+            class="text-5xl font-bold mb-6 w-full"
+            data-aos="fade-left"
+            data-aos-duration="1100"
+          >
+            Most Listened Tracks
+          </h1>
+          <div
+            class="w-fit flex flex-wrap"
+            data-aos="fade-right"
+            :data-aos-delay="`${increaseDelay()}`"
+            v-for="song in mostListenedTracks"
+          >
+            <a
+              class="p-4 pr-14 flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:opacity-80 transition-all duration-300 rounded-md"
+              :href="`${song.url}`"
+              target="_blank"
+            >
+              <img
+                class="inline mr-5 w-20 rounded-sm"
+                :src="[
+                  Object.values(song.image[2])[1] != ''
+                    ? `${Object.values(song.image[2])[1]}`
+                    : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg',
+                ]"
+                :alt="`${song.name}`"
+              />
+              <div>
+                <p class="text-slate-300/80 font-light text-lg">
+                  {{ song.artist.name }}
+                </p>
+                <p class="text-slate-200 font-bold text-xl">
+                  {{ song.name }}
+                </p>
+                <div class="flex items-center flex-shrink-0">
+                  <div
+                    class="pt-[1px] border-t-2 border-slate-500/80 w-6 mr-4"
+                  ></div>
+                  <p class="text-gray-500/80 font-semibold">
+                    {{ song.playcount + " Listens" }}
+                  </p>
+                </div>
               </div></a
             >
           </div>
         </section>
       </div>
       <footer
-        class="bg-[rgb(3,3,3)] py-5 text-sm text-center text-slate-400"
+        class="bg-[rgb(3,3,3)] mt-20 py-5 text-sm text-center text-slate-400"
       ></footer>
     </div>
   </div>
