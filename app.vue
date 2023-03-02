@@ -161,7 +161,7 @@ const proficiencies = [
               <h2 class="font-semibold text-2xl <md:text-xl">{{ item[0] }}</h2>
               <div class="bg-slate-900 rounded-md">
                 <div
-                  class="py-5 rounded-md my-3"
+                  class="py-5 rounded-md my-3 transition-all duration-2000"
                   :class="[targetIsVisible ? `${item[3]}` : 'w-0']"
                   :style="[
                     `box-shadow: 20px 0 60px ${item[2]}, -20px 0 60px #000;
@@ -311,9 +311,7 @@ const proficiencies = [
 
         <section
           class="mt-20"
-          v-if="
-            Object.values(recentlyListenedTracks[0])[6].nowplaying == 'true'
-          "
+          v-if="recentlyListenedTracks[0].hasOwnProperty('@attr')"
         >
           <h1
             class="text-5xl <md:text-4xl font-bold mb-6 mt-10"
@@ -332,20 +330,20 @@ const proficiencies = [
             <img
               class="inline mr-5 w-20 rounded-sm"
               :src="[
-                Object.values(recentlyListenedTracks[0].image[2])[1] != ''
-                  ? `${Object.values(recentlyListenedTracks[0].image[2])[1]}`
+                recentlyListenedTracks[0].image[2]['#text'] != ''
+                  ? `${recentlyListenedTracks[0].image[2]['#text']}`
                   : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg',
               ]"
               :alt="`${recentlyListenedTracks[0].name}`"
             />
             <div>
               <p class="text-slate-300/80 font-light text-lg">
-                {{ Object.values(recentlyListenedTracks[0].artist)[1] }}
+                {{ recentlyListenedTracks[0].artist["#text"] }}
               </p>
               <p class="text-slate-200 font-bold text-xl">
                 {{ recentlyListenedTracks[0].name }}
               </p>
-              <p>{{ Object.values(recentlyListenedTracks[0].album)[1] }}</p>
+              <p>{{ recentlyListenedTracks[0].album["#text"] }}</p>
             </div>
           </a>
         </section>
@@ -363,7 +361,7 @@ const proficiencies = [
             data-aos="fade-right"
             :data-aos-delay="`${increaseDelay()}`"
             v-for="song in recentlyListenedTracks.filter((song) => {
-              return song.hasOwnProperty('@attr') == false;
+              return !song.hasOwnProperty('@attr');
             })"
           >
             <a
@@ -374,20 +372,22 @@ const proficiencies = [
               <img
                 class="inline mr-5 w-20 rounded-sm"
                 :src="[
-                  Object.values(song.image[2])[1] != ''
-                    ? `${Object.values(song.image[2])[1]}`
+                  song.image[2]['#text'] != ''
+                    ? `${song.image[2]['#text']}`
                     : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg',
                 ]"
                 :alt="`${song.name}`"
               />
               <div>
                 <p class="text-slate-300/80 font-light text-lg <md:text-base">
-                  {{ Object.values(song.artist)[1] }}
+                  {{ song.artist["#text"] }}
                 </p>
                 <p class="text-slate-200 font-bold text-xl <md:text-lg">
                   {{ song.name }}
                 </p>
-                <p>{{ Object.values(song.album)[1] }}</p>
+                <p class="text-gray-400 font-semibold">
+                  {{ song.album["#text"] }}
+                </p>
               </div></a
             >
           </div>
@@ -415,8 +415,8 @@ const proficiencies = [
               <img
                 class="inline mr-5 w-20 rounded-sm"
                 :src="[
-                  Object.values(song.image[2])[1] != ''
-                    ? `${Object.values(song.image[2])[1]}`
+                  song.image[2]['#text'] != ''
+                    ? `${song.image[2]['#text']}`
                     : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg',
                 ]"
                 :alt="`${song.name}`"
