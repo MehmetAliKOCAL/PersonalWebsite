@@ -107,12 +107,13 @@ const proficiencies = [
     >
       <div class="change-colors absolute min-w-full min-h-screen z-0" />
       <div class="color-wrapper absolute min-w-full min-h-screen z-10" />
-      <div class="mx-auto px-60">
+
+      <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-10">
         <section
           class="min-h-screen flex items-center flex-col text-center justify-center relative z-20 pt-[12.5%]"
         >
           <h1
-            class="text-5xl font-bold mb-6 transform transition-all duration-500"
+            class="text-5xl <md:text-4xl font-bold mb-6 transform transition-all duration-500"
             :class="[
               essentialsLoaded
                 ? 'translate-y-0 opacity-100'
@@ -122,7 +123,7 @@ const proficiencies = [
             Hello
           </h1>
           <p
-            class="text-3xl font-normal text-slate-400 transform transition-all duration-500"
+            class="text-3xl <md:text-2xl font-normal text-slate-400 transform transition-all duration-500"
             :class="[
               essentialsLoaded
                 ? 'translate-y-0 opacity-100'
@@ -138,9 +139,10 @@ const proficiencies = [
             ]"
           />
         </section>
+
         <section>
           <h1
-            class="text-5xl font-bold mb-6"
+            class="text-5xl <md:text-4xl font-bold mb-6"
             data-aos="fade-left"
             data-aos-duration="900"
           >
@@ -154,12 +156,12 @@ const proficiencies = [
               v-for="item in proficiencies"
               data-aos="fade-right"
               :data-aos-delay="`${increaseDelay()}`"
-              class="w-[calc(50%-1rem)]"
+              class="w-[calc(50%-1rem)] <lg:w-full transition-all duration-300"
             >
-              <h2 class="font-semibold text-2xl">{{ item[0] }}</h2>
+              <h2 class="font-semibold text-2xl <md:text-xl">{{ item[0] }}</h2>
               <div class="bg-slate-900 rounded-md">
                 <div
-                  class="py-5 rounded-md my-3 transition-all duration-2000"
+                  class="py-5 rounded-md my-3"
                   :class="[targetIsVisible ? `${item[3]}` : 'w-0']"
                   :style="[
                     `box-shadow: 20px 0 60px ${item[2]}, -20px 0 60px #000;
@@ -170,16 +172,17 @@ const proficiencies = [
             </div>
           </div>
         </section>
+
         <section>
           <h1
-            class="text-5xl font-bold mb-4 mt-25"
+            class="text-5xl <md:text-4xl font-bold mb-4 mt-25"
             data-aos="fade-right"
             data-aos-duration="900"
           >
             Currently Working On
           </h1>
           <p
-            class="text-3xl font-normal text-slate-400"
+            class="text-3xl <md:text-2xl font-normal text-slate-400"
             data-aos="fade-right"
             data-aos-duration="550"
           >
@@ -189,9 +192,10 @@ const proficiencies = [
             </a>
           </p>
         </section>
+
         <section>
           <h1
-            class="text-5xl font-bold mb-6 mt-20"
+            class="text-5xl <md:text-4xl font-bold mb-6 mt-20"
             data-aos="fade-left"
             data-aos-duration="1100"
           >
@@ -202,7 +206,7 @@ const proficiencies = [
             v-if="recentlyPlayedGames != null"
           >
             <div
-              class="w-[calc(33.3%-0.5rem)] transition-all duration-300 border-1 border-transparent hover:border-slate-400"
+              class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full transition-all duration-300 border-1 border-transparent hover:border-slate-400"
               v-for="item in recentlyPlayedGames"
               :data-aos="`${animDirection(recentlyPlayedGames.indexOf(item))}`"
               :data-aos-delay="`${increaseDelay()}`"
@@ -224,10 +228,10 @@ const proficiencies = [
                   :href="`https://store.steampowered.com/app/${item.appid}/`"
                   target="_blank"
                 >
-                  <h2 class="text-2xl font-bold text-center">
+                  <h2 class="text-2xl <md:text-xl font-bold text-center">
                     {{ item.name }}
                   </h2>
-                  <p class="text-lg font-semibold mt-2 -mb-2">
+                  <p class="text-lg <md:text-base font-semibold mt-2 -mb-2">
                     {{
                       recentGames.calculatePlayTime(
                         item.playtime_2weeks,
@@ -235,7 +239,7 @@ const proficiencies = [
                       ) + " in last 2 weeks"
                     }}
                   </p>
-                  <p class="text-lg font-semibold">
+                  <p class="text-lg <md:text-base font-semibold">
                     {{
                       recentGames.calculatePlayTime(
                         item.playtime_forever,
@@ -248,9 +252,10 @@ const proficiencies = [
             </div>
           </div>
         </section>
+
         <section>
           <h1
-            class="text-5xl font-bold mb-6 mt-10"
+            class="text-5xl <md:text-4xl font-bold mb-6 mt-10"
             data-aos="fade-left"
             data-aos-duration="800"
           >
@@ -261,7 +266,7 @@ const proficiencies = [
             v-if="mostPlayedGames != null"
           >
             <div
-              class="w-[calc(33.3%-0.5rem)] transition-all duration-300 border-1 border-transparent hover:border-slate-400"
+              class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full transition-all duration-300 border-1 border-transparent hover:border-slate-400"
               v-for="item in mostPlayedGames"
               :data-aos="`${animDirection(mostPlayedGames.indexOf(item))}`"
               :data-aos-delay="`${increaseDelay()}`"
@@ -283,16 +288,16 @@ const proficiencies = [
                   :href="`https://store.steampowered.com/app/${item.appid}/`"
                   target="_blank"
                 >
-                  <h2 class="text-2xl font-bold text-center">
+                  <h2 class="text-2xl <md:text-xl font-bold text-center">
                     {{ item.name }}
                   </h2>
-                  <p class="text-lg font-semibold mt-2 -mb-2">
+                  <p class="text-lg <md:text-base font-semibold mt-2 -mb-2">
                     {{
                       "Total playtime: " +
                       recentGames.calculatePlayTime(item.playtime_forever, true)
                     }}
                   </p>
-                  <p class="text-lg font-semibold">
+                  <p class="text-lg <md:text-base font-semibold">
                     {{
                       "Last played: " +
                       topGames.calculateLastTimePlayed(item.rtime_last_played)
@@ -303,6 +308,7 @@ const proficiencies = [
             </div>
           </div>
         </section>
+
         <section
           class="mt-20"
           v-if="
@@ -310,7 +316,7 @@ const proficiencies = [
           "
         >
           <h1
-            class="text-5xl font-bold mb-6 mt-10"
+            class="text-5xl <md:text-4xl font-bold mb-6 mt-10"
             data-aos="fade-right"
             data-aos-duration="1000"
           >
@@ -343,16 +349,17 @@ const proficiencies = [
             </div>
           </a>
         </section>
+
         <section class="mt-20 flex flex-wrap gap-4">
           <h1
-            class="text-5xl font-bold mb-6 w-full"
+            class="text-5xl <md:text-4xl font-bold mb-6 w-full"
             data-aos="fade-left"
             data-aos-duration="1100"
           >
             Recently Listened Tracks
           </h1>
           <div
-            class="w-fit flex flex-wrap"
+            class="w-fit <sm:w-full sm:(flex flex-wrap)"
             data-aos="fade-right"
             :data-aos-delay="`${increaseDelay()}`"
             v-for="song in recentlyListenedTracks.filter((song) => {
@@ -360,7 +367,7 @@ const proficiencies = [
             })"
           >
             <a
-              class="p-4 pr-14 flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:opacity-80 transition-all duration-300 rounded-md"
+              class="p-4 md:pr-14 flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:opacity-80 transition-all duration-300 rounded-md"
               :href="`${song.url}`"
               target="_blank"
             >
@@ -374,10 +381,10 @@ const proficiencies = [
                 :alt="`${song.name}`"
               />
               <div>
-                <p class="text-slate-300/80 font-light text-lg">
+                <p class="text-slate-300/80 font-light text-lg <md:text-base">
                   {{ Object.values(song.artist)[1] }}
                 </p>
-                <p class="text-slate-200 font-bold text-xl">
+                <p class="text-slate-200 font-bold text-xl <md:text-lg">
                   {{ song.name }}
                 </p>
                 <p>{{ Object.values(song.album)[1] }}</p>
@@ -385,22 +392,23 @@ const proficiencies = [
             >
           </div>
         </section>
+
         <section class="mt-20 flex flex-wrap gap-4">
           <h1
-            class="text-5xl font-bold mb-6 w-full"
+            class="text-5xl <md:text-4xl font-bold mb-6 w-full"
             data-aos="fade-left"
             data-aos-duration="1100"
           >
             Most Listened Tracks
           </h1>
           <div
-            class="w-fit flex flex-wrap"
+            class="w-fit <sm:w-full sm:(flex flex-wrap)"
             data-aos="fade-right"
             :data-aos-delay="`${increaseDelay()}`"
             v-for="song in mostListenedTracks"
           >
             <a
-              class="p-4 pr-14 flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:opacity-80 transition-all duration-300 rounded-md"
+              class="p-4 md:pr-14 flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:opacity-80 transition-all duration-300 rounded-md"
               :href="`${song.url}`"
               target="_blank"
             >
@@ -414,10 +422,10 @@ const proficiencies = [
                 :alt="`${song.name}`"
               />
               <div>
-                <p class="text-slate-300/80 font-light text-lg">
+                <p class="text-slate-300/80 font-light text-lg <md:text-base">
                   {{ song.artist.name }}
                 </p>
-                <p class="text-slate-200 font-bold text-xl">
+                <p class="text-slate-200 font-bold text-xl <md:text-lg">
                   {{ song.name }}
                 </p>
                 <div class="flex items-center flex-shrink-0">
@@ -433,8 +441,9 @@ const proficiencies = [
           </div>
         </section>
       </div>
+
       <footer
-        class="bg-[rgb(3,3,3)] mt-20 py-5 text-sm text-center text-slate-400"
+        class="bg-[rgb(3,3,3)] mt-40 py-10 h-10 flex flex-col items-center border-t-1 border-gray-800"
       ></footer>
     </div>
   </div>
