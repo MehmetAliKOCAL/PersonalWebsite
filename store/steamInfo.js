@@ -1,18 +1,10 @@
 import { defineStore } from "pinia";
 
 export const useRecentGamesStore = defineStore("recentGames", {
-  state: () => ({
-    recentGames: null,
-  }),
-
   actions: {
     async getRecentlyPlayedGames() {
-      const data = await fetch(
-        "https://pwapi.fly.dev/steam/recentlyPlayedGames"
-      );
-      this.recentGames = await data.json();
-
-      return this.recentGames;
+      const data = await $fetch("/api/games/recentlyPlayedGames");
+      return await data.api;
     },
 
     calculatePlayTime(minutes, shouldBeRounded) {
@@ -33,16 +25,10 @@ export const useRecentGamesStore = defineStore("recentGames", {
 });
 
 export const useMostPlayedGamesStore = defineStore("mostPlayedGames", {
-  state: () => ({
-    mostPlayedGames: null,
-  }),
-
   actions: {
     async getMostPlayedGames() {
-      const data = await fetch("https://pwapi.fly.dev/steam/mostPlayedGames");
-      this.mostPlayedGames = await data.json();
-
-      return this.mostPlayedGames;
+      const data = await $fetch("/api/games/mostPlayedGames");
+      return await data.api;
     },
 
     calculateLastTimePlayed(seconds) {
