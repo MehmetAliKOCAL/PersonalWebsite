@@ -18,13 +18,11 @@ var recentlyListenedTracks = reactive(
 var mostListenedTracks = reactive(await topTracks.getMostListenedSongs());
 
 var isHovering = ref(null);
-var essentialsLoaded = ref(false);
-
+var isPageLoaded = ref(false);
 const target = ref(null);
 const targetIsVisible = useElementVisibility(target);
-
 onMounted(() => {
-  essentialsLoaded.value = true;
+  isPageLoaded.value = true;
 });
 
 var animationDelay = 0;
@@ -115,7 +113,7 @@ const proficiencies = [
           <h1
             class="text-5xl <md:text-4xl font-bold mb-6 transform transition-all duration-500"
             :class="[
-              essentialsLoaded
+              isPageLoaded
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-22 opacity-0',
             ]"
@@ -125,7 +123,7 @@ const proficiencies = [
           <p
             class="text-3xl <md:text-2xl font-normal text-slate-400 transform transition-all duration-500"
             :class="[
-              essentialsLoaded
+              isPageLoaded
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-22 opacity-0',
             ]"
@@ -135,7 +133,7 @@ const proficiencies = [
           <hr
             class="absolute top-0 mt-[12.5%] border-1 border-slate-500 relative z-20 transition-all duration-500 transform"
             :class="[
-              essentialsLoaded ? 'w-1/5 translate-y-0' : 'w-0 -translate-y-22',
+              isPageLoaded ? 'w-1/5 translate-y-0' : 'w-0 -translate-y-22',
             ]"
           />
         </section>
