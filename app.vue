@@ -98,6 +98,10 @@ const proficiencies = [
         name="twitter:image"
         content="https://avatars.githubusercontent.com/u/102923401?v=4"
       />
+      <Meta
+        name="google-site-verification"
+        content="2xTTxKCxtHcZM5l6TQbilvVLzL6G6hkI0XseGZf6s0c"
+      />
     </Head>
 
     <div
