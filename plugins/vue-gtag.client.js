@@ -6,7 +6,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       // Put your Google Analytics Measurement ID below if you want to use Google Analytics.
       // For more info: https://analytics.google.com/
 
-      id: "G-5T2GDLFX5S",
+      id: "G-LZKNWS1PMP",
     },
   });
 });
