@@ -12,11 +12,9 @@ export default defineEventHandler(async(event) => {
       const response:any = await $fetch(
         `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${config.STEAM_WEB_API_KEY}&steamid=${config.STEAM_ID}&include_appinfo=true&format=json`
       );
-      console.log(response);
       allGamesArray = response.response.games;
       return allGamesArray;
     } catch (error) {
-      console.error(error);
       return error;
     }
   }
