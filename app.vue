@@ -44,7 +44,7 @@ const infoAboutMe = `I'm Mehmet, a ${(
   0
 )} years old associate degree computer programming student. I enjoy programming and 3D modeling. I am currently studying Blender, C#, Vue.js, and Nuxt.js. Also, I love video games, I try to code games in Unity3D for fun in my spare time.`;
 
-const currentlyWorkingOn = "A news website to post about video games,";
+const currentlyWorkingOn = "Internship tracking app for a university,";
 
 const proficiencies = [
   // Tailwind.css colors are used
@@ -189,7 +189,11 @@ const proficiencies = [
             data-aos-duration="550"
           >
             {{ currentlyWorkingOn }}
-            <a href="" target="_blank" class="text-cyan-500 font-medium">
+            <a
+              href="https://stajtakip.vercel.app/"
+              target="_blank"
+              class="text-cyan-500 font-medium"
+            >
               check it!
             </a>
           </p>
