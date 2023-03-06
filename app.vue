@@ -42,7 +42,7 @@ const infoAboutMe = `I'm Mehmet, a ${(
   new Date().getUTCFullYear() - 2000.8
 ).toFixed(
   0
-)} years old associate degree computer programming student. I enjoy programming and 3D modeling. I am currently studying Blender, C#, Vue.js, and Nuxt.js. Also, I love video games, I try to code games in Unity3D for fun in my spare time.`;
+)} years old associate degree computer programming student. I enjoy programming and 3D modeling. I am currently studying Blender, C#, Vue.js, and Nuxt.js. Also, I love video games. I try to code games in Unity3D for fun in my spare time.`;
 
 const currentlyWorkingOn = "Internship tracking app for a university,";
 
@@ -110,28 +110,15 @@ const proficiencies = [
       <div class="change-colors absolute min-w-full min-h-screen z-0" />
       <div class="color-wrapper absolute min-w-full min-h-screen z-10" />
 
+      <Header />
+
       <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-10">
         <section
-          class="min-h-screen flex items-center flex-col text-center justify-center relative z-20 pt-[12.5%]"
+          id="hello"
+          class="min-h-screen flex items-center flex-col text-center justify-center relative z-20"
         >
-          <h1
-            class="text-5xl <md:text-4xl font-bold mb-6 transform transition-all duration-500"
-            :class="[
-              isPageLoaded
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-22 opacity-0',
-            ]"
-          >
-            Hello
-          </h1>
-          <p
-            class="text-3xl <md:text-2xl font-normal text-slate-400 transform transition-all duration-500"
-            :class="[
-              isPageLoaded
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-22 opacity-0',
-            ]"
-          >
+          <h1 class="text-5xl <md:text-4xl font-bold mb-6 ml-20">Hello 👋</h1>
+          <p class="text-3xl <md:text-2xl font-normal text-slate-400">
             {{ infoAboutMe }}
           </p>
           <hr
@@ -148,7 +135,14 @@ const proficiencies = [
             data-aos="fade-left"
             data-aos-duration="900"
           >
-            Proficiencies
+            <a
+              id="proficiencies"
+              class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+              href="#proficiencies"
+            >
+              #
+            </a>
+            Proficiencies ✨
           </h1>
           <div
             ref="target"
@@ -181,7 +175,14 @@ const proficiencies = [
             data-aos="fade-right"
             data-aos-duration="900"
           >
-            Currently Working On
+            <a
+              id="currently"
+              class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+              href="#currently"
+            >
+              #
+            </a>
+            Currently Working On 👨‍💻
           </h1>
           <p
             class="text-3xl <md:text-2xl font-normal text-slate-400"
@@ -205,7 +206,14 @@ const proficiencies = [
             data-aos="fade-left"
             data-aos-duration="1100"
           >
-            Recently Played Games
+            <a
+              id="recentGames"
+              class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+              href="#recentGames"
+            >
+              #
+            </a>
+            Recently Played Games 🎮
           </h1>
           <div
             class="flex flex-wrap gap-2 justify-between"
@@ -265,7 +273,14 @@ const proficiencies = [
             data-aos="fade-left"
             data-aos-duration="800"
           >
-            Most Played Games
+            <a
+              id="topGames"
+              class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+              href="#topGames"
+            >
+              #
+            </a>
+            Most Played Games 🔝🎮
           </h1>
           <div
             class="flex flex-wrap gap-2 justify-between"
@@ -320,11 +335,17 @@ const proficiencies = [
           v-if="recentlyListenedTracks[0].hasOwnProperty('@attr')"
         >
           <h1
+            id="currentlyListening"
             class="text-5xl <md:text-4xl font-bold mb-6 mt-10"
             data-aos="fade-right"
             data-aos-duration="1000"
           >
-            Currently Listening
+            <a
+              href="#currentlyListening"
+              class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+              >♪</a
+            >
+            Currently Listening 🎧
           </h1>
           <a
             class="p-4 pr-14 w-fit rounded-md flex items-center bg-gradient-to-b from-gray-800 to-gray-900"
@@ -360,7 +381,14 @@ const proficiencies = [
             data-aos="fade-left"
             data-aos-duration="1100"
           >
-            Recently Listened Tracks
+            <a
+              id="recentTracks"
+              class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+              href="#recentTracks"
+            >
+              #
+            </a>
+            Recently Listened Tracks 📻
           </h1>
           <div
             class="w-fit <sm:w-full sm:(flex flex-wrap)"
@@ -405,7 +433,14 @@ const proficiencies = [
             data-aos="fade-left"
             data-aos-duration="1100"
           >
-            Most Listened Tracks
+            <a
+              id="topTracks"
+              class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+              href="#topTracks"
+            >
+              #
+            </a>
+            Most Listened Tracks 🔝🍒
           </h1>
           <div
             class="w-fit <sm:w-full sm:(flex flex-wrap)"
@@ -474,6 +509,19 @@ const proficiencies = [
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(60, 60, 68);
+}
+
+:target:before {
+  content: "";
+  display: block;
+  height: 80px;
+  margin: -80px 0 0;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 .color-wrapper {
