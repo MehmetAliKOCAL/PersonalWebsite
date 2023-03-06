@@ -267,7 +267,7 @@ const proficiencies = [
           </div>
         </section>
 
-        <section>
+        <section class="mt-20">
           <h1
             class="text-5xl <md:text-4xl font-bold mb-6 mt-10"
             data-aos="fade-left"
@@ -280,7 +280,7 @@ const proficiencies = [
             >
               #
             </a>
-            Most Played Games 🔝🎮
+            Most Played Games 🎮🔝
           </h1>
           <div
             class="flex flex-wrap gap-2 justify-between"
@@ -440,7 +440,7 @@ const proficiencies = [
             >
               #
             </a>
-            Most Listened Tracks 🔝🍒
+            Most Listened Tracks 🍒🔝
           </h1>
           <div
             class="w-fit <sm:w-full sm:(flex flex-wrap)"
@@ -477,15 +477,12 @@ const proficiencies = [
                     {{ song.playcount + " Listens" }}
                   </p>
                 </div>
-              </div></a
-            >
+              </div>
+            </a>
           </div>
         </section>
       </div>
-
-      <footer
-        class="bg-[rgb(3,3,3)] mt-40 py-10 h-10 flex flex-col items-center border-t-1 border-gray-800"
-      ></footer>
+      <Footer />
     </div>
   </div>
 </template>
