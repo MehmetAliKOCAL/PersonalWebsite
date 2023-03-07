@@ -24,7 +24,7 @@
           </NuxtLink>
           <NuxtLink
             class="w-8"
-            to="https://github.com/MehmetAliKOCAL"
+            to="https://discordapp.com/users/554061262229864458"
             target="_blank"
           >
             <IconsDiscord />
