@@ -225,7 +225,14 @@ const proficiencies = [
               :data-aos="`${animDirection(recentlyPlayedGames.indexOf(item))}`"
               :data-aos-delay="`${increaseDelay()}`"
             >
-              <div class="relative inline-flex overflow-hidden w-full">
+              <div
+                v-if="item.img_icon_url == ''"
+                class="w-full h-full flex items-center text-semibold text-2xl text-center"
+              >
+                This game is not available in Steam anymore.
+              </div>
+
+              <div v-else class="relative inline-flex overflow-hidden w-full">
                 <img
                   class="transform transition-all duration-300 w-full"
                   :class="{
