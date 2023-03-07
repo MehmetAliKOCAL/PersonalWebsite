@@ -4,7 +4,7 @@ var isHovering = ref(null);
 
 <template>
   <header
-    class="w-full text-slate-300 fixed top-0 z-30 flex justify-center gap-x-10 gap-y-4 <md:gap-x-4 py-4 px-10 font-bold text-md font-mono backdrop-filter backdrop-blur-sm bg-sky-400/10 flex flex-wrap"
+    class="w-full text-slate-300 fixed top-0 z-30 flex justify-center gap-x-10 gap-y-4 py-4 px-10 font-bold text-md font-mono backdrop-filter backdrop-blur-sm <md:hidden bg-sky-400/10 flex flex-wrap"
   >
     <a
       @mouseenter="isHovering = 1"
