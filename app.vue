@@ -227,9 +227,9 @@ const proficiencies = [
             >
               <div
                 v-if="item.img_icon_url == ''"
-                class="w-full h-full flex items-center text-semibold text-2xl text-center"
+                class="w-full h-full text-semibold text-2xl flex items-center justify-center text-center"
               >
-                This game is not available in Steam anymore.
+                This game is not available in Steam.
               </div>
 
               <div v-else class="relative inline-flex overflow-hidden w-full">

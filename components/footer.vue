@@ -1,57 +1,59 @@
+<script setup>
+const eMail = "root.gwyn@hotmail.com";
+const socials = [
+  ["Github", "https://github.com/MehmetAliKOCAL", "github"],
+  ["LinkedIn", "https://www.linkedin.com/in/gwyndev/", "linkedin"],
+  ["Discord", "https://discordapp.com/users/554061262229864458", "discord"],
+  ["Reddit", "https://www.reddit.com/user/Primary_Ad5726", "<IconsReddit/>"],
+  [
+    "YouTube",
+    "https://www.youtube.com/channel/UCqsbqOqrLaKWaJ-1fB1RqyQ",
+    "<IconsYoutube/>",
+  ],
+  ["LastFM", "https://www.last.fm/user/GwynDev", "<IconsLastfm/>"],
+];
+var isHovering = ref(null);
+</script>
+
 <template>
   <div
-    class="w-full bg-gradient-to-r from-blue-800 via-sky-400 to-blue-800 h-[1px] mt-40"
+    class="w-full bg-gradient-to-r from-blue-800 via-sky-400 to-blue-800 h-[1px] mt-40 relative"
   />
-  <footer class="bg-[rgb(6,6,6)] py-10 font-mono relative">
-    <h3 class="text-lg text-center">Get In Touch</h3>
+  <footer class="bg-[rgba(6,6,6,1)] py-10 font-mono relative bg-opacity-5 z-10">
+    <h3 class="text-xl text-center">~ Get In Touch</h3>
     <div class="flex justify-between px-150 <2xl:px-40 <xl:px-20 <lg:px-10">
       <div class="flex flex-col">
-        <h4>Socials</h4>
-        <nav class="flex gap-x-1">
-          <NuxtLink
-            class="w-8"
-            to="https://github.com/MehmetAliKOCAL"
-            target="_blank"
+        <h4 class="border-b-2 border-sky-500 mb-2 font-semibold w-fit text-lg">
+          Socials
+        </h4>
+        <nav class="flex flex-col w-full gap-x-1 justify-center">
+          <NuxtLink :to="site[1]" target="_blank" v-for="site in socials">
+            <div
+              @mouseenter="isHovering = site[0]"
+              @mouseleave="isHovering = null"
+              class="flex items-center"
+            >
+              <IconRenderer
+                :iconName="site[0].toLowerCase()"
+                class="w-8 mr-2"
+              />
+              <p
+                class="transition-colors duration-300"
+                :class="{ 'text-sky-600': isHovering == site[0] }"
+              >
+                {{ site[0] }}
+              </p>
+            </div></NuxtLink
           >
-            <IconsGithub
-          /></NuxtLink>
-          <NuxtLink
-            class="w-8"
-            to="https://www.linkedin.com/in/gwyndev/"
-            target="_blank"
-          >
-            <IconsLinkedin />
-          </NuxtLink>
-          <NuxtLink
-            class="w-8"
-            to="https://discordapp.com/users/554061262229864458"
-            target="_blank"
-          >
-            <IconsDiscord />
-          </NuxtLink>
-          <NuxtLink
-            class="w-8"
-            to="https://www.reddit.com/user/Primary_Ad5726"
-            target="_blank"
-          >
-            <IconsReddit />
-          </NuxtLink>
-          <NuxtLink
-            class="w-8"
-            to="https://www.youtube.com/channel/UCqsbqOqrLaKWaJ-1fB1RqyQ"
-            target="_blank"
-          >
-            <IconsYoutube />
-          </NuxtLink>
         </nav>
       </div>
       <div>
-        <h4 class="border-b-2 border-sky-500 mb-2 font-semibold w-fit">
+        <h4 class="border-b-2 border-sky-500 mb-2 font-semibold w-fit text-lg">
           Contact
         </h4>
         <a
-          href="mailto:root.gwyn@hotmail.com"
-          class="hover:text-sky-600 transition-colors duration-300"
+          :href="`mailto:${eMail}`"
+          class="hover:text-sky-600 transition-colors duration-300 text-md"
         >
           Mail Me <IconsClick />
         </a>
