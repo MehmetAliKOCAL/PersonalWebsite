@@ -112,7 +112,7 @@ const proficiencies = [
 
       <Header />
 
-      <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-10">
+      <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5">
         <section
           id="hello"
           class="min-h-screen flex items-center flex-col text-center justify-center relative z-20 relative"
@@ -216,7 +216,7 @@ const proficiencies = [
             Recently Played Games 🎮
           </h1>
           <div
-            class="flex flex-wrap gap-2 justify-between"
+            class="flex flex-wrap gap-x-3 gap-y-2"
             v-if="recentlyPlayedGames != null"
           >
             <div
@@ -227,9 +227,18 @@ const proficiencies = [
             >
               <div
                 v-if="item.img_icon_url == ''"
-                class="w-full h-full text-semibold text-2xl flex items-center justify-center text-center"
+                class="w-full text-2xl flex relative"
               >
-                This game is not available in Steam.
+                <img
+                  class="w-full"
+                  src="https://steamcdn-a.akamaihd.net/steam/apps/753/header.jpg"
+                  alt="Steam Logo"
+                />
+                <h2
+                  class="absolute w-full h-full bg-black/60 flex justify-center items-center text-center transition duration-300 hover:bg-black/90"
+                >
+                  This game is not available on Steam.
+                </h2>
               </div>
 
               <div v-else class="relative inline-flex overflow-hidden w-full">
@@ -271,6 +280,10 @@ const proficiencies = [
                 </a>
               </div>
             </div>
+          </div>
+          <div v-else class="text-3xl <md:text-2xl font-normal text-slate-400">
+            It seems like I haven't played any video games in the last 2 weeks.
+            🥸
           </div>
         </section>
 
