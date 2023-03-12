@@ -18,12 +18,8 @@ var recentlyListenedTracks = reactive(
 var mostListenedTracks = reactive(await topTracks.getMostListenedSongs());
 
 var isHovering = ref(null);
-var isPageLoaded = ref(false);
 const target = ref(null);
 const targetIsVisible = useElementVisibility(target);
-onMounted(() => {
-  isPageLoaded.value = true;
-});
 
 var animationDelay = 0;
 function increaseDelay() {
@@ -115,18 +111,12 @@ const proficiencies = [
       <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5">
         <section
           id="hello"
-          class="min-h-screen flex items-center flex-col text-center justify-center relative z-20 relative"
+          class="min-h-screen flex items-center flex-col text-center justify-center relative z-20"
         >
           <h1 class="text-5xl <md:text-4xl font-bold mb-6 hello">Hello</h1>
           <p class="text-3xl <md:text-2xl font-normal text-slate-400">
             {{ infoAboutMe }}
           </p>
-          <hr
-            class="absolute top-0 mt-[12.5%] border-1 border-slate-500 relative z-20 transition-all duration-500 transform"
-            :class="[
-              isPageLoaded ? 'w-1/5 translate-y-0' : 'w-0 -translate-y-22',
-            ]"
-          />
         </section>
 
         <section>
@@ -368,7 +358,7 @@ const proficiencies = [
             Currently Listening 🎧
           </h1>
           <a
-            class="p-4 pr-14 w-fit rounded-md flex items-center bg-gradient-to-b from-gray-800 to-gray-900"
+            class="p-4 pr-14 w-fit rounded-md flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:(from-gray-800/80 to-gray-900/80)"
             :href="`${recentlyListenedTracks[0].url}`"
             target="_blank"
             data-aos="fade-right"
