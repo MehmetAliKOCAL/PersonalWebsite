@@ -111,7 +111,7 @@ const proficiencies = [
       <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5">
         <section
           id="hello"
-          class="min-h-screen flex items-center flex-col text-center justify-center relative z-20"
+          class="min-h-screen flex items-center flex-col justify-center relative z-20"
         >
           <h1 class="text-5xl <md:text-4xl font-bold mb-6 hello">Hello</h1>
           <p class="text-3xl <md:text-2xl font-normal text-slate-400">
