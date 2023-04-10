@@ -4,7 +4,7 @@ var isHovering = ref(null);
 
 <template>
   <header
-    class="w-full text-slate-300 fixed top-0 z-30 font-bold text-md font-thin bg-[rgb(6,6,6)] <md:hidden"
+    class="w-full text-slate-300 fixed top-0 z-30 text-md font-thin bg-[rgb(6,6,6)] <md:hidden"
   >
     <div
       class="flex py-4 px-60 <2xl:px-40 <xl:px-20 <lg:px-5 items-center justify-between"
