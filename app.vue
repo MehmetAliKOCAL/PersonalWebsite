@@ -103,9 +103,6 @@ const proficiencies = [
     <div
       class="min-h-screen min-w-full h-full relative bg-[rgb(10,10,10)] text-slate-200/95"
     >
-      <div class="change-colors absolute min-w-full min-h-screen z-0" />
-      <div class="color-wrapper absolute min-w-full min-h-screen z-10" />
-
       <Header />
 
       <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5">
@@ -113,8 +110,10 @@ const proficiencies = [
           id="hello"
           class="min-h-screen flex items-center flex-col justify-center relative z-20"
         >
-          <h1 class="text-5xl <md:text-4xl font-bold mb-6 hello">Hello</h1>
-          <p class="text-3xl <md:text-2xl font-normal text-slate-400">
+          <h1 class="text-5xl <md:text-4xl font-bold mb-6 hello">Hello👋</h1>
+          <p
+            class="text-3xl <md:text-2xl font-normal text-slate-400 text-center"
+          >
             {{ infoAboutMe }}
           </p>
         </section>
@@ -529,43 +528,5 @@ html,
 body {
   scroll-behavior: smooth;
   overflow-x: hidden;
-}
-
-.hello:after {
-  content: "👋";
-  position: absolute;
-}
-
-.color-wrapper {
-  background-image: radial-gradient(
-    ellipse at left top,
-    transparent -100%,
-    rgb(10, 10, 10) 35%
-  );
-}
-
-.change-colors {
-  background: linear-gradient(
-    280deg,
-    #e92c2c,
-    #ff0062,
-    #00bbff,
-    #00ffc3,
-    #00ff73
-  );
-  animation: change-colors 20s ease infinite;
-  background-size: 400% 400%;
-}
-
-@keyframes change-colors {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 115% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 </style>
