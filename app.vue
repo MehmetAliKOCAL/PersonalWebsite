@@ -103,6 +103,9 @@ const proficiencies = [
     <div
       class="min-h-screen min-w-full h-full relative bg-[rgb(10,10,10)] text-slate-200/95"
     >
+      <div class="<md:hidden absolute w-full h-50vh z-0 landing-color" />
+      <div class="absolute w-full h-50vh z-10 landing-color-wrapper" />
+
       <Header />
 
       <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5">
@@ -528,5 +531,22 @@ html,
 body {
   scroll-behavior: smooth;
   overflow-x: hidden;
+}
+
+.landing-color {
+  background-image: radial-gradient(
+    ellipse at center top,
+    #38bdf8 10%,
+    #1e40af 50%
+  );
+}
+
+.landing-color-wrapper {
+  background-image: radial-gradient(
+    ellipse at center top,
+    transparent -80%,
+    rgb(10, 10, 10) 80%,
+    rgb(10, 10, 10) 100%
+  );
 }
 </style>
