@@ -19,7 +19,7 @@ var isHovering = ref(null);
   <div
     class="w-full bg-gradient-to-r from-blue-800 via-sky-400 to-blue-800 h-[1px] mt-40 relative"
   />
-  <footer class="bg-[rgba(6,6,6,1)] py-10 font-mono relative bg-opacity-5 z-10">
+  <footer class="bg-[rgb(6,6,6)] py-10 font-mono relative bg-opacity-5 z-10">
     <h3 class="text-xl text-center mb-10">~ Get In Touch</h3>
     <div class="flex justify-around px-5">
       <div class="flex flex-col">
