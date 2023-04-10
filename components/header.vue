@@ -10,7 +10,7 @@ var isHovering = ref(null);
       class="flex py-4 px-60 <2xl:px-40 <xl:px-20 <lg:px-5 items-center justify-between"
     >
       <a href="#hello">
-        <img src="favicon.png" width="40" height="40" alt="GwynDev Logo"
+        <img src="/favicon.png" width="40" height="40" alt="GwynDev Logo"
       /></a>
       <nav class="flex flex-wrap gap-x-10 gap-y-4">
         <a
