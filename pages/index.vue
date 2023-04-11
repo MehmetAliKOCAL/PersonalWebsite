@@ -44,21 +44,40 @@ const age = Math.abs(
 
 const infoAboutMe = `I'm Mehmet, a ${age} years old associate degree computer programming student. I enjoy programming and 3D modeling. I am currently studying Blender, C#, Vue.js, and Nuxt.js. Also, I love video games. I try to code games in Unity3D for fun in my spare time.`;
 
-if (process.client) {
-  gsap.to("#infoAboutMe", {
-    delay: 0.7,
-    duration: 7,
-    text: infoAboutMe,
-    ease: "none",
-  });
-  gsap.to("#helloTitle", {
-    duration: 0.7,
-    text: "Hello👋",
-    ease: "none",
-  });
-}
+onMounted(()=>{
+  if (process.client) {
+    gsap.to("#infoAboutMe", {
+      delay: 0.7,
+      duration: 7,
+      text: infoAboutMe,
+      ease: "none",
+    });
+    gsap.to("#helloTitle", {
+      duration: 0.7,
+      text: "Hello👋",
+      ease: "none",
+    });
+  }
+})
 
 const currentlyWorkingOn = "An internship tracking website for a university,";
+
+const pastWorks = [
+  {
+    role: "Made",
+    name: "Volcanoids Turkish Localization",
+    link: "https://steamcommunity.com/sharedfiles/filedetails/?id=2952920316",
+    emoji: "",
+    summary: "a localization project for a video game",
+  },
+  {
+    role: "Developed the front-end of",
+    name: "AhniWeb",
+    link: "https://ahni-web.vercel.app/",
+    emoji: "",
+    summary: "graduates' meeting website of a high school",
+  },
+];
 
 const proficiencies = [
   // Tailwind.css colors are used
@@ -81,13 +100,9 @@ const proficiencies = [
 </script>
 
 <template>
-  <div
-    class="min-h-screen min-w-full h-full relative bg-[rgb(10,10,10)] text-slate-200/95"
-  >
     <div class="<md:hidden absolute w-full h-50vh z-0 landing-color" />
-    <div class="absolute w-full h-50vh z-10 landing-color-wrapper" />
+    <div class="<md:hidden absolute w-full h-50vh z-10 landing-color-wrapper" />
 
-    <Header />
     <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5">
       <section
         id="hello"
@@ -110,7 +125,7 @@ const proficiencies = [
         >
           <a
             id="proficiencies"
-            class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
             href="#proficiencies"
           >
             #
@@ -147,12 +162,12 @@ const proficiencies = [
         >
           <a
             id="currently"
-            class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
             href="#currently"
           >
             #
           </a>
-          Currently Working On 👨‍💻
+          Currently Working On 👨🏻‍💻🌱
         </h1>
         <p
           class="text-3xl <md:text-2xl font-normal text-slate-400"
@@ -172,13 +187,55 @@ const proficiencies = [
 
       <section>
         <h1
+          class="text-5xl <md:text-4xl font-bold mb-4 mt-25"
+          data-aos="fade-right"
+          data-aos-duration="900"
+        >
+          <a
+            id="pastWorks"
+            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
+            href="#pastWorks"
+          >
+            #
+          </a>
+          My Past Works 👨🏻‍💻🌳
+        </h1>
+        <p
+          v-for="work in pastWorks"
+          class="text-3xl <md:text-2xl font-normal text-slate-400 flex mb-2 flex-wrap"
+          data-aos="fade-right"
+          data-aos-duration="550"
+          :data-aos-delay="increaseDelay()"
+        >
+          {{ work.role + " " + work.emoji }}
+          <a
+            :href="work.link"
+            class="font-bold text-slate-200 ml-2" target='_blank' 
+            :class="{
+              'pointer-events-none' : work.link == '' ||
+              work.hasOwnProperty('link') == false
+            }"
+          >{{ work.name }}</a>
+          <div>{{ ", " + work.summary }}</div>
+          <div v-html="' - '" class="mx-2"/>
+          <NuxtLink
+            to="/details"
+            class="text-cyan-500 font-medium"
+          >
+            see details
+          </NuxtLink>
+        </p>
+      </section>
+
+      <section>
+        <h1
           class="text-5xl <md:text-4xl font-bold mb-6 mt-20"
           data-aos="fade-left"
           data-aos-duration="1100"
         >
           <a
             id="recentGames"
-            class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
             href="#recentGames"
           >
             #
@@ -262,7 +319,7 @@ const proficiencies = [
         >
           <a
             id="topGames"
-            class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
             href="#topGames"
           >
             #
@@ -323,7 +380,7 @@ const proficiencies = [
       >
         <h1
           id="currentlyListening"
-          class="text-5xl <md:text-4xl font-bold mb-6 mt-10"
+          class="text-5xl <md:text-4xl font-bold pt-36 mb-6 mt-10"
           data-aos="fade-right"
           data-aos-duration="1000"
         >
@@ -370,7 +427,7 @@ const proficiencies = [
         >
           <a
             id="recentTracks"
-            class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
             href="#recentTracks"
           >
             #
@@ -414,7 +471,7 @@ const proficiencies = [
         </div>
       </section>
 
-      <section class="mt-20 flex flex-wrap gap-4">
+      <section class="mt-20 mb-40 flex flex-wrap gap-4">
         <h1
           class="text-5xl <md:text-4xl font-bold mb-6 w-full"
           data-aos="fade-left"
@@ -422,7 +479,7 @@ const proficiencies = [
         >
           <a
             id="topTracks"
-            class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
             href="#topTracks"
           >
             #
@@ -469,45 +526,9 @@ const proficiencies = [
         </div>
       </section>
     </div>
-    <Footer />
-  </div>
 </template>
 
 <style>
-::selection {
-  background-color: rgba(0, 255, 255, 0.8);
-  color: white;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgb(20, 20, 20);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgb(40, 40, 45);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(60, 60, 68);
-}
-
-:target:before {
-  content: "";
-  display: block;
-  height: 80px;
-  margin: -80px 0 0;
-}
-
-html,
-body {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
 .landing-color {
   background-image: radial-gradient(
     ellipse at center top,
@@ -520,7 +541,7 @@ body {
   background-image: radial-gradient(
     ellipse at center top,
     transparent -80%,
-    rgb(10, 10, 10) 80%,
+    rgb(10, 10, 10) 70%,
     rgb(10, 10, 10) 100%
   );
 }
