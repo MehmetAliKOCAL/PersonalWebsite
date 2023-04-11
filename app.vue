@@ -1,10 +1,13 @@
 <script setup>
+import { gsap } from "gsap";
+import { TextPlugin } from "gsap/TextPlugin";
 import {
   useRecentGamesStore,
   useMostPlayedGamesStore,
 } from "~~/store/steamInfo";
 import { useRecentTracksStore, useTopTracksStore } from "~/store/songInfo";
 import { useElementVisibility } from "@vueuse/core";
+if (process.client) gsap.registerPlugin(TextPlugin);
 const recentGames = useRecentGamesStore();
 const topGames = useMostPlayedGamesStore();
 const recentTracks = useRecentTracksStore();
@@ -34,13 +37,28 @@ function animDirection(itemIndex) {
   else return "fade-left";
 }
 
-const infoAboutMe = `I'm Mehmet, a ${(
-  new Date().getUTCFullYear() - 2000.8
-).toFixed(
-  0
-)} years old associate degree computer programming student. I enjoy programming and 3D modeling. I am currently studying Blender, C#, Vue.js, and Nuxt.js. Also, I love video games. I try to code games in Unity3D for fun in my spare time.`;
+const age = Math.abs(
+  new Date(Date.now() - new Date("08/25/2000").getTime()).getUTCFullYear() -
+    1970
+);
 
-const currentlyWorkingOn = "Internship tracking app for a university,";
+const infoAboutMe = `I'm Mehmet, a ${age} years old associate degree computer programming student. I enjoy programming and 3D modeling. I am currently studying Blender, C#, Vue.js, and Nuxt.js. Also, I love video games. I try to code games in Unity3D for fun in my spare time.`;
+
+if (process.client) {
+  gsap.to("#infoAboutMe", {
+    delay: 0.7,
+    duration: 7,
+    text: infoAboutMe,
+    ease: "none",
+  });
+  gsap.to("#helloTitle", {
+    duration: 0.7,
+    text: "Hello👋",
+    ease: "none",
+  });
+}
+
+const currentlyWorkingOn = "An internship tracking website for a university,";
 
 const proficiencies = [
   // Tailwind.css colors are used
@@ -61,6 +79,7 @@ const proficiencies = [
   ["Adobe After Effects", "#1e40af", "#6366f1", "w-1/2"],
 ];
 </script>
+
 <template>
   <div
     class="min-h-screen min-w-full h-full relative bg-[rgb(10,10,10)] text-slate-200/95"
@@ -69,16 +88,18 @@ const proficiencies = [
     <div class="absolute w-full h-50vh z-10 landing-color-wrapper" />
 
     <Header />
-
     <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5">
       <section
         id="hello"
         class="min-h-screen flex items-center flex-col justify-center relative z-20"
       >
-        <h1 class="text-5xl <md:text-4xl font-bold mb-6 hello">Hello👋</h1>
-        <p class="text-3xl <md:text-2xl font-normal text-slate-400 text-center">
-          {{ infoAboutMe }}
-        </p>
+        <h1 id="helloTitle" class="text-5xl <md:text-4xl font-bold mb-6 hello">
+          Loading
+        </h1>
+        <p
+          id="infoAboutMe"
+          class="text-3xl <md:text-2xl font-normal text-slate-400 text-center"
+        />
       </section>
 
       <section>
