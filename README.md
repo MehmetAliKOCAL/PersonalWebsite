@@ -1,4 +1,4 @@
-### [Live Preview](https://gwyndev.netlify.app)
+### [Live Preview](https://gwyndev.com)
 
 A portfolio website to introduce yourself to the web, made with Nuxt 3 & TailwindCSS. For further instructions about Nuxt, view [docs](https://nuxt.com/docs/getting-started/introduction).
 
