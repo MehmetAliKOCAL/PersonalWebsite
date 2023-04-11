@@ -1,8 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["nuxt-windicss", "@pinia/nuxt", "@vueuse/nuxt"],
-  plugins: [{ src: "~/plugins/aos.client", mode: "client" }],
-  
+  modules: [
+    "nuxt-windicss",
+    "@pinia/nuxt",
+    "@vueuse/nuxt"
+  ],
+
+  plugins: [
+    { src: "~/plugins/aos.client", mode: "client" },
+  ],
+
+  build: {
+    transpile: ['gsap'],
+  },
+
   runtimeConfig:{
     STEAM_WEB_API_KEY: process.env.STEAM_WEB_API_KEY,
     STEAM_ID: process.env.STEAM_ID,
@@ -33,5 +44,6 @@ export default defineNuxtConfig({
       ],
       link:[{rel:'icon',type:'image/png',href:'/favicon.png'}]
     }
-  }
+  },
+
 });
