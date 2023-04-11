@@ -17,9 +17,9 @@ var isHovering = ref(null);
 
 <template>
   <div
-    class="w-full bg-gradient-to-r from-blue-800 via-sky-400 to-blue-800 h-[1px] mt-40 relative"
+    class="w-full bg-gradient-to-r from-blue-800 via-sky-400 to-blue-800 h-[1px] relative"
   />
-  <footer class="bg-[rgb(6,6,6)] py-10 font-mono relative bg-opacity-5 z-10">
+  <footer class="bg-[rgb(6,6,6)] py-10 font-mono relative z-10">
     <h4 class="text-xl text-center mb-10">~ Get In Touch</h4>
     <div class="flex justify-around px-5">
       <div class="flex flex-col">
