@@ -115,18 +115,21 @@ const proficiencies = [
       id="hello"
       class="min-h-screen flex items-center flex-col justify-center relative z-20"
     >
-      <h1 id="helloTitle" class="text-5xl <md:text-4xl font-bold mb-6 hello">
-        Loading
+      <h1
+        id="helloTitle"
+        class="text-4xl <md:text-3xl font-bold mb-6 hello text-center"
+      >
+        Cute little gnomes are loading the page, please be patient 🧙🏼‍♂️🧸
       </h1>
       <p
         id="infoAboutMe"
-        class="text-3xl <md:text-2xl font-normal text-slate-400 text-center"
+        class="text-2xl <md:text-xl font-normal text-slate-400 text-center"
       />
     </section>
 
     <section>
       <h1
-        class="text-5xl <md:text-4xl font-bold mb-6"
+        class="text-4xl <md:text-3xl font-bold mb-6"
         data-aos="fade-left"
         data-aos-duration="900"
       >
@@ -163,7 +166,7 @@ const proficiencies = [
 
     <section class="mt-25">
       <h1
-        class="text-5xl <md:text-4xl font-bold mb-6"
+        class="text-4xl <md:text-3xl font-bold mb-6"
         data-aos="fade-right"
         data-aos-duration="900"
       >
@@ -177,7 +180,7 @@ const proficiencies = [
         Currently Working On 👨🏻‍💻🌱
       </h1>
       <p
-        class="text-3xl <md:text-2xl font-normal text-slate-400"
+        class="text-2xl <md:text-xl font-normal text-slate-400"
         data-aos="fade-right"
         data-aos-duration="550"
       >
@@ -194,7 +197,7 @@ const proficiencies = [
 
     <section class="mt-25">
       <h1
-        class="text-5xl <md:text-4xl font-bold mb-6"
+        class="text-4xl <md:text-3xl font-bold mb-6"
         data-aos="fade-right"
         data-aos-duration="900"
       >
@@ -209,7 +212,7 @@ const proficiencies = [
       </h1>
       <p
         v-for="project in previousProjects"
-        class="text-3xl <md:text-2xl font-normal text-slate-400 mb-2"
+        class="text-2xl <md:text-xl font-normal text-slate-400 mb-2"
         data-aos="fade-right"
         data-aos-duration="550"
         :data-aos-delay="increaseDelay()"
@@ -235,7 +238,7 @@ const proficiencies = [
 
     <section class="mt-25">
       <h1
-        class="text-5xl <md:text-4xl font-bold mb-6"
+        class="text-4xl <md:text-3xl font-bold mb-6"
         data-aos="fade-left"
         data-aos-duration="1100"
       >
@@ -260,7 +263,7 @@ const proficiencies = [
         >
           <div
             v-if="item.img_icon_url == ''"
-            class="w-full text-2xl flex relative rounded-md"
+            class="w-full text-2xl <md:text-xl flex relative rounded-md"
           >
             <img
               class="w-full"
@@ -313,14 +316,14 @@ const proficiencies = [
           </div>
         </div>
       </div>
-      <div v-else class="text-3xl <md:text-2xl font-normal text-slate-400">
+      <div v-else class="text-2xl <md:text-xl font-normal text-slate-400">
         It seems like I haven't played any video games in the last 2 weeks. 🥸
       </div>
     </section>
 
     <section class="mt-25">
       <h1
-        class="text-5xl <md:text-4xl font-bold mb-6"
+        class="text-4xl <md:text-3xl font-bold mb-6"
         data-aos="fade-left"
         data-aos-duration="800"
       >
@@ -387,7 +390,7 @@ const proficiencies = [
     >
       <h1
         id="currentlyListening"
-        class="text-5xl <md:text-4xl font-bold mb-6 w-full"
+        class="text-4xl <md:text-3xl font-bold mb-6 w-full"
         data-aos="fade-right"
         data-aos-duration="1000"
       >
@@ -428,7 +431,7 @@ const proficiencies = [
 
     <section class="mt-25 flex flex-wrap gap-4">
       <h1
-        class="text-5xl <md:text-4xl font-bold mb-6 w-full"
+        class="text-4xl <md:text-3xl font-bold mb-6 w-full"
         data-aos="fade-left"
         data-aos-duration="1100"
       >
@@ -480,7 +483,7 @@ const proficiencies = [
 
     <section class="mt-25 mb-40 flex flex-wrap gap-4">
       <h1
-        class="text-5xl <md:text-4xl font-bold mb-6 w-full"
+        class="text-4xl <md:text-3xl font-bold mb-6 w-full"
         data-aos="fade-left"
         data-aos-duration="1100"
       >
