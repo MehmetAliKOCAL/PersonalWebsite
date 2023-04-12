@@ -3,8 +3,8 @@ let mouseHoverID = ref(null);
 let isMobileMenuOpened = ref(false);
 const headerTabs = [
   { mouseHoverID: 1, href: "/#hello", text: "Hello!" },
-  { mouseHoverID: 2, href: "/#proficiencies", text: "My Proficiencies" },
-  { mouseHoverID: 3, href: "/#currently", text: "My Works" },
+  { mouseHoverID: 2, href: "/#proficiencies", text: "Proficiencies" },
+  { mouseHoverID: 3, href: "/#currently", text: "Projects" },
   { mouseHoverID: 4, href: "/#recentGames", text: "Games Played" },
   { mouseHoverID: 5, href: "/#recentTracks", text: "Tracks Listened" },
 ];
@@ -17,7 +17,7 @@ const headerTabs = [
     <div
       class="flex py-4 px-60 <2xl:px-40 <xl:px-20 <lg:px-5 items-center justify-between"
     >
-      <NuxtLink to="/">
+      <NuxtLink to="/#hello">
         <img src="/favicon.png" width="40" height="40" alt="GwynDev Logo"
       /></NuxtLink>
 
