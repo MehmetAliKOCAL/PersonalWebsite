@@ -1,6 +1,8 @@
 <script setup>
+import { useGlobalVariablesStore } from "~~/store/globalVariables";
 let mouseHoverID = ref(null);
-let isMobileMenuOpened = ref(false);
+let stateCheck = useGlobalVariablesStore();
+
 const headerTabs = [
   { mouseHoverID: 1, href: "/#hello", text: "Hello!" },
   { mouseHoverID: 2, href: "/#proficiencies", text: "Proficiencies" },
@@ -36,16 +38,25 @@ const headerTabs = [
       </nav>
 
       <div class="md:hidden">
-        <IconsMenuIcon @click="isMobileMenuOpened = !isMobileMenuOpened" />
+        <IconsMenuIcon
+          class="hover:cursor-pointer"
+          @click="
+            stateCheck.isMobileMenuActive = !stateCheck.isMobileMenuActive
+          "
+        />
         <nav
           :class="[
-            isMobileMenuOpened ? 'visible opacity-100' : 'invisible opacity-0',
+            stateCheck.isMobileMenuActive
+              ? 'visible opacity-100'
+              : 'invisible opacity-0',
           ]"
           class="absolute left-0 bg-[rgb(6,6,6)] w-full h-[calc(100vh-40px)] transition-all duration-300 flex flex-col justify-center items-center"
         >
           <NuxtLink
             v-for="tab in headerTabs"
-            @click="isMobileMenuOpened = !isMobileMenuOpened"
+            @click="
+              stateCheck.isMobileMenuActive = !stateCheck.isMobileMenuActive
+            "
             :to="tab.href"
             class="text-2xl font-semibold mb-4 hover:text-sky-400 transition-colors duration-300"
           >
