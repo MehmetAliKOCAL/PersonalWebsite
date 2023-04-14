@@ -1,24 +1,25 @@
 <script setup>
 import { gsap } from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
+import { useElementVisibility } from "@vueuse/core";
+import { useRecentTracksStore, useTopTracksStore } from "~/store/songInfo";
 import {
   useRecentGamesStore,
   useMostPlayedGamesStore,
 } from "~~/store/steamInfo";
-import { useRecentTracksStore, useTopTracksStore } from "~/store/songInfo";
-import { useElementVisibility } from "@vueuse/core";
+
 if (process.client) gsap.registerPlugin(TextPlugin);
 const recentGames = useRecentGamesStore();
 const topGames = useMostPlayedGamesStore();
 const recentTracks = useRecentTracksStore();
 const topTracks = useTopTracksStore();
 
-var recentlyPlayedGames = reactive(await recentGames.getRecentlyPlayedGames());
 var mostPlayedGames = reactive(await topGames.getMostPlayedGames());
+var recentlyPlayedGames = reactive(await recentGames.getRecentlyPlayedGames());
+var mostListenedTracks = reactive(await topTracks.getMostListenedSongs());
 var recentlyListenedTracks = reactive(
   await recentTracks.getRecentlyListenedSongs()
 );
-var mostListenedTracks = reactive(await topTracks.getMostListenedSongs());
 
 var isHovering = ref(null);
 const target = ref(null);
@@ -41,7 +42,6 @@ const age = Math.abs(
   new Date(Date.now() - new Date("08/25/2000").getTime()).getUTCFullYear() -
     1970
 );
-
 const infoAboutMe = `I'm Mehmet, a ${age} years old associate degree computer programming student. I enjoy programming and 3D modeling. I am currently studying Blender, C#, Vue.js, and Nuxt.js. Also, I love video games. I try to code games in Unity3D for fun in my spare time.`;
 
 onMounted(() => {
@@ -87,22 +87,78 @@ const previousProjects = [
 ];
 
 const proficiencies = [
-  // Tailwind.css colors are used
-  // Check https://windicss.org/utilities/general/colors for colors
-
-  // Name | First Color | Second Color | Proficiency Level
-  ["HTML5", "#c2410c", "#f97316", "w-full"],
-  ["CSS3", "#2563eb", "#06b6d4", "w-full"],
-  ["Tailwind CSS", "#0e7490", "#06b6d4", "w-full"],
-  ["JavaScript", "#f59e0b", "#fbbf24", "w-7/10"],
-  ["Vue.JS", "#059669", "#334155", "w-6/10"],
-  ["Nuxt.JS", "#10b981", "#2dd4bf", "w-6/10"],
-  ["C#", "#7c3aed", "#d946ef", "w-1/2"],
-  ["MySQL", "#2563eb", "#475569", "w-7/10"],
-  ["Unity3D", "#000", "#374151", "w-2/5"],
-  ["Blender", "#ea580c", "#fb923c", "w-1/10"],
-  ["Adobe Photoshop", "#1E293B", "#0ea5e9", "w-1/2"],
-  ["Adobe After Effects", "#1e40af", "#6366f1", "w-1/2"],
+  {
+    name: "HTML5",
+    firstColor: "#c2410c",
+    secondColor: "#f97316",
+    proficiencyLevel: "w-full",
+  },
+  {
+    name: "CSS3",
+    firstColor: "#2563eb",
+    secondColor: "#06b6d4",
+    proficiencyLevel: "w-8/10",
+  },
+  {
+    name: "Tailwind CSS",
+    firstColor: "#0e7490",
+    secondColor: "#06b6d4",
+    proficiencyLevel: "w-8/10",
+  },
+  {
+    name: "JavaScript",
+    firstColor: "#f59e0b",
+    secondColor: "#fbbf24",
+    proficiencyLevel: "w-7/10",
+  },
+  {
+    name: "Vue.JS",
+    firstColor: "#059669",
+    secondColor: "#334155",
+    proficiencyLevel: "w-6/10",
+  },
+  {
+    name: "Nuxt.JS",
+    firstColor: "#10b981",
+    secondColor: "#2dd4bf",
+    proficiencyLevel: "w-6/10",
+  },
+  {
+    name: "C#",
+    firstColor: "#7c3aed",
+    secondColor: "#d946ef",
+    proficiencyLevel: "w-5/10",
+  },
+  {
+    name: "MySQL",
+    firstColor: "#2563eb",
+    secondColor: "#475569",
+    proficiencyLevel: "w-7/10",
+  },
+  {
+    name: "Unity3D",
+    firstColor: "#000",
+    secondColor: "#374151",
+    proficiencyLevel: "w-4/10",
+  },
+  {
+    name: "Blender",
+    firstColor: "#ea580c",
+    secondColor: "#fb923c",
+    proficiencyLevel: "w-2/10",
+  },
+  {
+    name: "Adobe Photoshop",
+    firstColor: "#1E293B",
+    secondColor: "#0ea5e9",
+    proficiencyLevel: "w-5/10",
+  },
+  {
+    name: "Adobe After Effects",
+    firstColor: "#1e40af",
+    secondColor: "#6366f1",
+    proficiencyLevel: "w-5/10",
+  },
 ];
 </script>
 
@@ -145,18 +201,19 @@ const proficiencies = [
       <div ref="target" class="flex w-full flex-wrap justify-between gap-x-4">
         <div
           v-for="item in proficiencies"
+          :key="item.name"
           data-aos="fade-right"
           :data-aos-delay="`${increaseDelay()}`"
           class="w-[calc(50%-1rem)] <lg:w-full transition-all duration-300"
         >
-          <h2 class="font-semibold text-2xl <md:text-xl">{{ item[0] }}</h2>
+          <h2 class="font-semibold text-2xl <md:text-xl">{{ item.name }}</h2>
           <div class="bg-slate-900 rounded-md">
             <div
               class="py-5 rounded-md my-3 transition-all duration-2000"
-              :class="[targetIsVisible ? `${item[3]}` : 'w-0']"
+              :class="[targetIsVisible ? `${item.proficiencyLevel}` : 'w-0']"
               :style="[
-                `box-shadow: 20px 0 60px ${item[2]}, -20px 0 60px #000;
-                    background:linear-gradient(to right,${item[1]},${item[2]})`,
+                `box-shadow: 20px 0 60px ${item.secondColor}, -20px 0 60px #000;
+                    background:linear-gradient(to right,${item.firstColor},${item.secondColor})`,
               ]"
             />
           </div>
@@ -212,6 +269,7 @@ const proficiencies = [
       </h1>
       <p
         v-for="project in previousProjects"
+        :key="project.name"
         class="text-2xl <md:text-xl font-normal text-slate-400 mb-2"
         data-aos="fade-right"
         data-aos-duration="550"
@@ -258,6 +316,7 @@ const proficiencies = [
         <div
           class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full transition-all duration-300 border-1 border-transparent hover:border-sky-400 rounded-md"
           v-for="item in recentlyPlayedGames"
+          :key="item.name"
           :data-aos="`${animDirection(recentlyPlayedGames.indexOf(item))}`"
           :data-aos-delay="`${increaseDelay()}`"
         >
@@ -343,6 +402,7 @@ const proficiencies = [
         <div
           class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full transition-all duration-300 border-1 border-transparent hover:border-sky-400 rounded-md"
           v-for="item in mostPlayedGames"
+          :key="item.name"
           :data-aos="`${animDirection(mostPlayedGames.indexOf(item))}`"
           :data-aos-delay="`${increaseDelay()}`"
         >
@@ -451,6 +511,7 @@ const proficiencies = [
         v-for="song in recentlyListenedTracks.filter((song) => {
           return !song.hasOwnProperty('@attr');
         })"
+        :key="song.name"
       >
         <a
           class="p-4 md:pr-14 flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:opacity-80 transition-all duration-300 rounded-md"
@@ -501,6 +562,7 @@ const proficiencies = [
         data-aos="fade-right"
         :data-aos-delay="`${increaseDelay()}`"
         v-for="song in mostListenedTracks"
+        :key="song.name"
       >
         <a
           class="p-4 md:pr-14 flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:opacity-80 transition-all duration-300 rounded-md"
