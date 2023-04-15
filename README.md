@@ -1,20 +1,20 @@
 ### [Live Preview](https://gwyndev.com)
 
-A portfolio website to introduce yourself to the web, made with Nuxt 3 & TailwindCSS. For further instructions about Nuxt, view [docs](https://nuxt.com/docs/getting-started/introduction).
+A personal website that you can share your projects and latest activities, made with Nuxt 3 & TailwindCSS. For further instructions about Nuxt, view [docs](https://nuxt.com/docs/getting-started/introduction).
 
 # Setup
 
 ### 1. Download the repository:
 
 ```bash
-git clone https://github.com/MehmetAliKOCAL/PortfolioWebsite
+git clone https://github.com/MehmetAliKOCAL/PersonalWebsite
 ```
 
 ### 2. Install the dependencies:
 
 ```bash
 # Open the folder
-cd PortfolioWebsite
+cd PersonalWebsite
 
 # yarn
 yarn install
