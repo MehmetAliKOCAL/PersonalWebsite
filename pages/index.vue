@@ -187,8 +187,10 @@ const proficiencies = [
 </script>
 
 <template>
-  <div class="<md:hidden absolute w-full h-50vh z-0 landing-color" />
-  <div class="<md:hidden absolute w-full h-50vh z-10 landing-color-wrapper" />
+  <div class="<md:hidden absolute w-full h-50vh z-0 landing-section-color" />
+  <div
+    class="<md:hidden absolute w-full h-50vh z-10 landing-section-color-wrapper"
+  />
 
   <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5">
     <section
@@ -351,8 +353,11 @@ const proficiencies = [
             v-if="item.img_icon_url == ''"
             class="w-full text-2xl <md:text-xl flex relative rounded-md"
           >
-            <img
+            <nuxt-img
+              format="webp"
+              quality="70"
               class="w-full"
+              sizes="sm:100vw"
               src="https://steamcdn-a.akamaihd.net/steam/apps/753/header.jpg"
               alt="Steam Logo"
             />
@@ -367,7 +372,10 @@ const proficiencies = [
             v-else
             class="relative inline-flex overflow-hidden w-full rounded-md"
           >
-            <img
+            <nuxt-img
+              format="webp"
+              quality="70"
+              sizes="sm:100vw"
               class="transform transition-all duration-300 w-full"
               :class="{
                 'scale-110 filter blur-[1px]':
@@ -431,8 +439,11 @@ const proficiencies = [
           :data-aos-delay="`${increaseDelay()}`"
         >
           <div class="relative inline-flex overflow-hidden w-full rounded-md">
-            <img
-              class="transform transition-all duration-300 w-full filter"
+            <nuxt-img
+              format="webp"
+              quality="70"
+              sizes="sm:100vw"
+              class="transform transition-all duration-300 filter w-full"
               :class="{
                 'scale-110 blur-[1px]':
                   isHovering == mostPlayedGames?.api.indexOf(item) + 6,
@@ -492,13 +503,17 @@ const proficiencies = [
         data-aos="fade-right"
         data-aos-duration="700"
       >
-        <img
-          class="inline mr-5 w-20 rounded-sm"
-          :src="[
+        <nuxt-img
+          format="webp"
+          quality="50"
+          width="80"
+          height="80"
+          class="inline mr-5 rounded-sm"
+          :src="
             recentlyListenedTracks?.api[0].image[2]['#text'] != ''
               ? `${recentlyListenedTracks?.api[0].image[2]['#text']}`
-              : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg',
-          ]"
+              : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg'
+          "
           :alt="`${recentlyListenedTracks?.api[0].name}`"
         />
         <div>
@@ -542,13 +557,17 @@ const proficiencies = [
           :href="`${song.url}`"
           target="_blank"
         >
-          <img
-            class="inline mr-5 w-20 rounded-sm"
-            :src="[
+          <nuxt-img
+            format="webp"
+            quality="50"
+            width="80"
+            height="80"
+            class="inline mr-5 rounded-sm"
+            :src="
               song.image[2]['#text'] != ''
                 ? `${song.image[2]['#text']}`
-                : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg',
-            ]"
+                : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg'
+            "
             :alt="`${song.name}`"
           />
           <div>
@@ -593,13 +612,17 @@ const proficiencies = [
           :href="`${song.url}`"
           target="_blank"
         >
-          <img
-            class="inline mr-5 w-20 rounded-sm"
-            :src="[
+          <nuxt-img
+            format="webp"
+            quality="50"
+            width="80"
+            height="80"
+            class="inline mr-5 rounded-sm"
+            :src="
               song.image[2]['#text'] != ''
                 ? `${song.image[2]['#text']}`
-                : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg',
-            ]"
+                : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg'
+            "
             :alt="`${song.name}`"
           />
           <div>

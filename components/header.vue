@@ -20,7 +20,14 @@ const headerTabs = [
       class="flex py-4 px-60 <2xl:px-40 <xl:px-20 <lg:px-5 items-center justify-between"
     >
       <NuxtLink to="/#hello">
-        <img src="/favicon.png" width="40" height="40" alt="GwynDev Logo"
+        <nuxt-img
+          loading="lazy"
+          format="webp"
+          quality="70"
+          src="/favicon.png"
+          width="40"
+          height="40"
+          alt="GwynDev Logo"
       /></NuxtLink>
 
       <nav class="<md:hidden flex flex-wrap gap-x-10 gap-y-4">
