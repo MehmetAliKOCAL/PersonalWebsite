@@ -2,24 +2,48 @@
 import { gsap } from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
 import { useElementVisibility } from "@vueuse/core";
-import { useRecentTracksStore, useTopTracksStore } from "~/store/songInfo";
-import {
-  useRecentGamesStore,
-  useMostPlayedGamesStore,
-} from "~~/store/steamInfo";
+
+const { data: mostPlayedGames } = useLazyAsyncData("mostPlayedGames", () =>
+  $fetch("/api/games/mostPlayedGames")
+);
+const { data: recentlyPlayedGames } = useLazyAsyncData(
+  "recentlyPlayedGames",
+  () => $fetch("/api/games/recentlyPlayedGames")
+);
+const { data: mostListenedTracks } = useLazyAsyncData(
+  "mostListenedTracks",
+  () => $fetch("/api/songs/topTracks")
+);
+const { data: recentlyListenedTracks } = useLazyAsyncData(
+  "recentlyListenedTracks",
+  () => $fetch("/api/songs/recentTracks/")
+);
+
+function calculateLastTimePlayed(seconds) {
+  const resultInDays = Math.round((Date.now() / 1000 - seconds) / 60 / 60 / 24);
+  if (resultInDays < 1) return "Today";
+  else if (resultInDays < 2) return "Yesterday";
+  else if (resultInDays > 365)
+    return (resultInDays / 365).toFixed(0) + " years ago";
+  else return resultInDays + " days ago";
+}
+
+function calculatePlayTime(minutes, shouldBeRounded) {
+  if (minutes < 2) return minutes + " minute";
+  else if (minutes < 60) return minutes + " minutes";
+  else if (minutes / 60 < 1.2) return "1 hour";
+  else {
+    if (
+      (minutes / 60).toFixed(1) % 1 < 0.2 ||
+      (minutes / 60).toFixed(1) % 1 >= 0.8 ||
+      shouldBeRounded == true
+    )
+      return Math.round(minutes / 60) + " hours";
+    else return (minutes / 60).toFixed(1) + " hours";
+  }
+}
 
 if (process.client) gsap.registerPlugin(TextPlugin);
-const recentGames = useRecentGamesStore();
-const topGames = useMostPlayedGamesStore();
-const recentTracks = useRecentTracksStore();
-const topTracks = useTopTracksStore();
-
-var mostPlayedGames = reactive(await topGames.getMostPlayedGames());
-var recentlyPlayedGames = reactive(await recentGames.getRecentlyPlayedGames());
-var mostListenedTracks = reactive(await topTracks.getMostListenedSongs());
-var recentlyListenedTracks = reactive(
-  await recentTracks.getRecentlyListenedSongs()
-);
 
 var isHovering = ref(null);
 const target = ref(null);
@@ -288,7 +312,10 @@ const proficiencies = [
           {{ " " + project.name }}
         </a>
         {{ ", " + project.summary + " - " }}
-        <NuxtLink to="/details" class="text-cyan-500 font-medium">
+        <NuxtLink
+          :to="'/projectDetails/' + previousProjects.indexOf(project)"
+          class="text-cyan-500 font-medium"
+        >
           see details
         </NuxtLink>
       </p>
@@ -311,13 +338,13 @@ const proficiencies = [
       </h1>
       <div
         class="flex flex-wrap gap-x-3 gap-y-2"
-        v-if="recentlyPlayedGames != null"
+        v-if="recentlyPlayedGames?.api != null"
       >
         <div
           class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full transition-all duration-300 border-1 border-transparent hover:border-sky-400 rounded-md"
-          v-for="item in recentlyPlayedGames"
+          v-for="item in recentlyPlayedGames?.api"
           :key="item.name"
-          :data-aos="`${animDirection(recentlyPlayedGames.indexOf(item))}`"
+          :data-aos="`${animDirection(recentlyPlayedGames?.api.indexOf(item))}`"
           :data-aos-delay="`${increaseDelay()}`"
         >
           <div
@@ -344,13 +371,13 @@ const proficiencies = [
               class="transform transition-all duration-300 w-full"
               :class="{
                 'scale-110 filter blur-[1px]':
-                  isHovering == recentlyPlayedGames.indexOf(item),
+                  isHovering == recentlyPlayedGames?.api.indexOf(item),
               }"
               :src="`https://steamcdn-a.akamaihd.net/steam/apps/${item.appid}/header.jpg`"
               :alt="item.name"
             />
             <a
-              @mouseenter="isHovering = recentlyPlayedGames.indexOf(item)"
+              @mouseenter="isHovering = recentlyPlayedGames?.api.indexOf(item)"
               @mouseleave="isHovering = null"
               class="absolute w-full h-full flex flex-col justify-center items-center bg-black/70 text-white hover:bg-black/80 active:bg-black/85 transition-all duration-300 cursor-pointer"
               :href="`https://store.steampowered.com/app/${item.appid}/`"
@@ -361,15 +388,12 @@ const proficiencies = [
               </h2>
               <p class="text-lg <md:text-base font-semibold mt-2 -mb-2">
                 {{
-                  recentGames.calculatePlayTime(item.playtime_2weeks, false) +
+                  calculatePlayTime(item.playtime_2weeks, false) +
                   " in last 2 weeks"
                 }}
               </p>
               <p class="text-lg <md:text-base font-semibold">
-                {{
-                  recentGames.calculatePlayTime(item.playtime_forever, false) +
-                  " total"
-                }}
+                {{ calculatePlayTime(item.playtime_forever, false) + " total" }}
               </p>
             </a>
           </div>
@@ -397,13 +421,13 @@ const proficiencies = [
       </h1>
       <div
         class="flex flex-wrap gap-2 justify-between"
-        v-if="mostPlayedGames != null"
+        v-if="mostPlayedGames?.api != null"
       >
         <div
           class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full transition-all duration-300 border-1 border-transparent hover:border-sky-400 rounded-md"
-          v-for="item in mostPlayedGames"
+          v-for="item in mostPlayedGames?.api"
           :key="item.name"
-          :data-aos="`${animDirection(mostPlayedGames.indexOf(item))}`"
+          :data-aos="`${animDirection(mostPlayedGames?.api.indexOf(item))}`"
           :data-aos-delay="`${increaseDelay()}`"
         >
           <div class="relative inline-flex overflow-hidden w-full rounded-md">
@@ -411,13 +435,13 @@ const proficiencies = [
               class="transform transition-all duration-300 w-full filter"
               :class="{
                 'scale-110 blur-[1px]':
-                  isHovering == mostPlayedGames.indexOf(item) + 6,
+                  isHovering == mostPlayedGames?.api.indexOf(item) + 6,
               }"
               :src="`https://steamcdn-a.akamaihd.net/steam/apps/${item.appid}/header.jpg`"
               :alt="item.name"
             />
             <a
-              @mouseenter="isHovering = mostPlayedGames.indexOf(item) + 6"
+              @mouseenter="isHovering = mostPlayedGames?.api.indexOf(item) + 6"
               @mouseleave="isHovering = null"
               class="absolute w-full h-full flex flex-col justify-center items-center bg-black/70 text-white hover:bg-black/80 active:bg-black/85 transition-all duration-300 cursor-pointer"
               :href="`https://store.steampowered.com/app/${item.appid}/`"
@@ -429,13 +453,13 @@ const proficiencies = [
               <p class="text-lg <md:text-base font-semibold mt-2 -mb-2">
                 {{
                   "Total playtime: " +
-                  recentGames.calculatePlayTime(item.playtime_forever, true)
+                  calculatePlayTime(item.playtime_forever, true)
                 }}
               </p>
               <p class="text-lg <md:text-base font-semibold">
                 {{
                   "Last played: " +
-                  topGames.calculateLastTimePlayed(item.rtime_last_played)
+                  calculateLastTimePlayed(item.rtime_last_played)
                 }}
               </p>
             </a>
@@ -446,7 +470,7 @@ const proficiencies = [
 
     <section
       class="mt-25"
-      v-if="recentlyListenedTracks[0].hasOwnProperty('@attr')"
+      v-if="recentlyListenedTracks?.api[0].hasOwnProperty('@attr')"
     >
       <h1
         id="currentlyListening"
@@ -463,7 +487,7 @@ const proficiencies = [
       </h1>
       <a
         class="p-4 pr-14 w-fit rounded-md flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:(from-gray-800/80 to-gray-900/80)"
-        :href="`${recentlyListenedTracks[0].url}`"
+        :href="`${recentlyListenedTracks?.api[0].url}`"
         target="_blank"
         data-aos="fade-right"
         data-aos-duration="700"
@@ -471,20 +495,20 @@ const proficiencies = [
         <img
           class="inline mr-5 w-20 rounded-sm"
           :src="[
-            recentlyListenedTracks[0].image[2]['#text'] != ''
-              ? `${recentlyListenedTracks[0].image[2]['#text']}`
+            recentlyListenedTracks?.api[0].image[2]['#text'] != ''
+              ? `${recentlyListenedTracks?.api[0].image[2]['#text']}`
               : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg',
           ]"
-          :alt="`${recentlyListenedTracks[0].name}`"
+          :alt="`${recentlyListenedTracks?.api[0].name}`"
         />
         <div>
           <p class="text-slate-300/80 font-light text-lg">
-            {{ recentlyListenedTracks[0].artist["#text"] }}
+            {{ recentlyListenedTracks?.api[0].artist["#text"] }}
           </p>
           <p class="text-slate-200 font-bold text-xl">
-            {{ recentlyListenedTracks[0].name }}
+            {{ recentlyListenedTracks?.api[0].name }}
           </p>
-          <p>{{ recentlyListenedTracks[0].album["#text"] }}</p>
+          <p>{{ recentlyListenedTracks?.api[0].album["#text"] }}</p>
         </div>
       </a>
     </section>
@@ -508,7 +532,7 @@ const proficiencies = [
         class="w-fit <sm:w-full sm:(flex flex-wrap)"
         data-aos="fade-right"
         :data-aos-delay="`${increaseDelay()}`"
-        v-for="song in recentlyListenedTracks.filter((song) => {
+        v-for="song in recentlyListenedTracks?.api.filter((song) => {
           return !song.hasOwnProperty('@attr');
         })"
         :key="song.name"
@@ -561,7 +585,7 @@ const proficiencies = [
         class="w-fit <sm:w-full sm:(flex flex-wrap)"
         data-aos="fade-right"
         :data-aos-delay="`${increaseDelay()}`"
-        v-for="song in mostListenedTracks"
+        v-for="song in mostListenedTracks?.api"
         :key="song.name"
       >
         <a
@@ -599,22 +623,3 @@ const proficiencies = [
     </section>
   </div>
 </template>
-
-<style>
-.landing-color {
-  background-image: radial-gradient(
-    ellipse at center top,
-    #38bdf8 10%,
-    #1e40af 50%
-  );
-}
-
-.landing-color-wrapper {
-  background-image: radial-gradient(
-    ellipse at center top,
-    transparent -80%,
-    rgb(10, 10, 10) 70%,
-    rgb(10, 10, 10) 100%
-  );
-}
-</style>
