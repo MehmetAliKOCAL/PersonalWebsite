@@ -30,6 +30,9 @@ export default defineNuxtConfig({
       charset:'utf-8',
       meta:[
         {name:'description',content:'Mehmet is a front-end web developer, student, and video game lover. He develops websites or tries to make games in his spare time. Click to learn more!'},
+        {name:'keywords',content:'mehmet ali koçal, mehmet ali, gwyndev, gwyn'},
+        {name:'author',content:'Mehmet Ali KOÇAL'},
+        {name:'application-name',content:'GwynDev Personal Website'},
         {property:'og:url',content:'https://gwyndev.com'},
         {property:'og:type',content:'website'},
         {property:'og:title',content:'Mehmet Ali KOÇAL'},
