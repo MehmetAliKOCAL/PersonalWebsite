@@ -2,8 +2,6 @@
 export default defineNuxtConfig({
   modules: ["nuxt-windicss", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/image-edge"],
 
-  plugins: [{ src: "~/plugins/aos.client", mode: "client" }],
-
   build: {
     transpile: ["gsap"],
   },

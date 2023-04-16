@@ -19,8 +19,7 @@
     "@pinia/nuxt": "^0.4.7",
     "aos": "^2.3.4",
     "gsap": "^3.11.5",
-    "pinia": "^2.0.32",
-    "vue-gtag": "^2.0.1"
+    "pinia": "^2.0.32"
   },
   "overrides": {
     "vue": "latest"
