@@ -16,6 +16,7 @@
     "nuxt-windicss": "^2.6.0"
   },
   "dependencies": {
+    "@kevinmarrec/nuxt-pwa": "^0.17.0",
     "@pinia/nuxt": "^0.4.7",
     "aos": "^2.3.4",
     "gsap": "^3.11.5",

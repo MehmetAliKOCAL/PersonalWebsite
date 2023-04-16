@@ -1,11 +1,5 @@
 <img src="https://i.hizliresim.com/8afr6fj.png"/>
 
-<h2 align='center'>
-[Live Preview](https://gwyndev.com)
-</h2>
-
-A personal website that you can share your projects and latest activities, made with Nuxt 3 & TailwindCSS. For further instructions about Nuxt, view [docs](https://nuxt.com/docs/getting-started/introduction).
-
 <p align="center" >
 <img src="https://shields.io/badge/-WINDICSS-blue?style=for-the-badge&logo=windicss&logoColor=%23e8e8e8&logoWidth=30&labelColor=%231a1b1b&color=%232b2b2b"/> <img src="https://shields.io/badge/-VUE-blue?style=for-the-badge&logo=vuedotjs&logoColor=%23e8e8e8&logoWidth=30&labelColor=%231a1b1b&color=%232b2b2b"/> <img src="https://shields.io/badge/-NUXT-blue?style=for-the-badge&logo=nuxtdotjs&logoColor=%23e8e8e8&logoWidth=30&labelColor=%231a1b1b&color=%232b2b2b"/> <img src="https://shields.io/badge/-VERCEL-blue?style=for-the-badge&logo=vercel&logoColor=%23e8e8e8&logoWidth=30&labelColor=%231a1b1b&color=%232b2b2b"/>
 </p>
@@ -13,6 +7,10 @@ A personal website that you can share your projects and latest activities, made 
 <p align="center">
 <img src="/assets/readmeBanner.svg"/>
 </p>
+
+### [Live Preview](https://gwyndev.com)
+
+A personal website with a pwa that you can share your projects and latest activities, made with Nuxt 3 & TailwindCSS. For further instructions about Nuxt, view [docs](https://nuxt.com/docs/getting-started/introduction).
 
 # Setup
 

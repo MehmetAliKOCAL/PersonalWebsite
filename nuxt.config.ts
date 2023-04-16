@@ -1,9 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["nuxt-windicss", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/image-edge"],
+  modules: ["nuxt-windicss", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/image-edge", '@kevinmarrec/nuxt-pwa'],
 
   build: {
     transpile: ["gsap"],
+  },
+
+  css: ["@/assets/style/main.css"],
+
+  image: {
+    domains: ['steamcdn-a.akamaihd.net', 'lastfm.freetls.fastly.net']
   },
 
   runtimeConfig: {
@@ -12,8 +18,6 @@ export default defineNuxtConfig({
     LASTFM_USERNAME: process.env.LASTFM_USERNAME,
     LASTFM_WEB_API_KEY: process.env.LASTFM_WEB_API_KEY,
   },
-
-  css: ["@/assets/style/main.css"],
 
   app: {
     head: {
@@ -64,7 +68,32 @@ export default defineNuxtConfig({
     },
   },
 
-  image: {
-    domains: ['steamcdn-a.akamaihd.net', 'lastfm.freetls.fastly.net']
+  pwa: {
+    workbox: {
+      enabled: true
+    },
+    icon:{
+      fileName:'favicon.png'
+    },
+    meta:{
+      name:'GwynDev',
+      author:'Mehmet Ali KOÇAL',
+      description:'Mehmet is a front-end web developer, student, and video game lover. He develops websites or tries to make games in his spare time. Click to learn more!',
+      theme_color:'#0A0A0A',
+      lang:'en',
+      ogTitle:'Mehmet Ali KOÇAL',
+      ogDescription:'Mehmet is a front-end web developer, student, and video game lover. He develops websites or tries to make games in his spare time. Click to learn more!',
+      ogHost:'gwyndev.com',
+      ogUrl:'https://gwyndev.com/',
+      twitterCard:'summary_large_image',
+    },
+    manifest:{
+      name:'GwynDev',
+      short_name:'GwynDev',
+      lang:'en',
+      description:'Mehmet is a front-end web developer, student, and video game lover. He develops websites or tries to make games in his spare time. Click to learn more!',
+      start_url:'/',
+      display:'fullscreen',
+    }
   }
 });
