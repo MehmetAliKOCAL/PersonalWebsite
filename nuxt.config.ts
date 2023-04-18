@@ -2,10 +2,6 @@
 export default defineNuxtConfig({
   modules: ["nuxt-windicss", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/image-edge", '@kevinmarrec/nuxt-pwa'],
 
-  build: {
-    transpile: ["gsap"],
-  },
-
   css: ["@/assets/style/main.css"],
 
   image: {
