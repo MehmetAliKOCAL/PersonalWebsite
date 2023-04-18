@@ -4,7 +4,8 @@
 
 <h2 align="center">
 
-<summary><h2 style="display: inline-block;">PageSpeed Insights Score</h2></summary>
+PageSpeed Insights Score
+
 </h2>
 
 <p align="center">
@@ -12,7 +13,9 @@
 </p>
 
 <p align="center" >
+
 <img src="https://shields.io/badge/-WINDICSS-blue?style=for-the-badge&logo=windicss&logoColor=%23e8e8e8&logoWidth=30&labelColor=%231a1b1b&color=%232b2b2b"/> <img src="https://shields.io/badge/-VUE-blue?style=for-the-badge&logo=vuedotjs&logoColor=%23e8e8e8&logoWidth=30&labelColor=%231a1b1b&color=%232b2b2b"/> <img src="https://shields.io/badge/-NUXT-blue?style=for-the-badge&logo=nuxtdotjs&logoColor=%23e8e8e8&logoWidth=30&labelColor=%231a1b1b&color=%232b2b2b"/> <img src="https://shields.io/badge/-VERCEL-blue?style=for-the-badge&logo=vercel&logoColor=%23e8e8e8&logoWidth=30&labelColor=%231a1b1b&color=%232b2b2b"/>
+
 </p>
 
 ### [Live Preview](https://gwyndev.com)

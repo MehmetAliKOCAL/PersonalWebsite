@@ -5,16 +5,15 @@ const globalVariables = useGlobalVariablesStore();
 const { lang } = storeToRefs(globalVariables);
 const eMail = "root.gwyn@hotmail.com";
 const socials = [
-  ["Github", "https://github.com/MehmetAliKOCAL", "github"],
-  ["LinkedIn", "https://www.linkedin.com/in/gwyndev/", "linkedin"],
-  ["Discord", "https://discordapp.com/users/554061262229864458", "discord"],
-  ["Reddit", "https://www.reddit.com/user/Primary_Ad5726", "<IconsReddit/>"],
-  [
-    "YouTube",
-    "https://www.youtube.com/channel/UCqsbqOqrLaKWaJ-1fB1RqyQ",
-    "<IconsYoutube/>",
-  ],
-  ["LastFM", "https://www.last.fm/user/GwynDev", "<IconsLastfm/>"],
+  { name: "LinkedIn", link: "https://www.linkedin.com/in/gwyndev/" },
+  { name: "GitHub", link: "https://github.com/MehmetAliKOCAL" },
+  { name: "Discord", link: "https://discordapp.com/users/554061262229864458" },
+  { name: "Reddit", link: "https://www.reddit.com/user/Primary_Ad5726" },
+  { name: "LastFM", link: "https://www.last.fm/user/GwynDev" },
+  {
+    name: "YouTube",
+    link: "https://www.youtube.com/channel/UCqsbqOqrLaKWaJ-1fB1RqyQ",
+  },
 ];
 var isHovering = ref(null);
 </script>
@@ -23,45 +22,67 @@ var isHovering = ref(null);
   <div
     class="w-full bg-gradient-to-r from-blue-800 via-sky-400 to-blue-800 h-[1px] relative"
   />
-  <footer class="bg-[rgb(6,6,6)] py-10 font-mono relative z-10">
-    <h4 class="text-xl text-center mb-10">{{ lang.footerGetInTouch }}</h4>
-    <div class="flex justify-around px-5">
+  <footer
+    class="bg-[rgb(6,6,6)] py-10 font-mono relative z-10 mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5"
+  >
+    <h4 class="text-xl text-center mb-10">{{ lang.footerGetInTouchTitle }}</h4>
+    <div class="flex flex-col justify-center">
       <div class="flex flex-col">
-        <h5 class="border-b-2 border-sky-500 mb-2 font-semibold w-fit text-lg">
-          {{ lang.footerSocials }}
-        </h5>
-        <nav class="flex flex-col w-full gap-x-1 justify-center">
-          <NuxtLink :to="site[1]" target="_blank" v-for="site in socials">
+        <h2
+          class="border-b-2 border-sky-500 mb-4 font-semibold w-fit mx-auto text-lg"
+        >
+          {{ lang.footerSocialsTitle }}
+        </h2>
+        <nav class="flex flex-row flex-wrap w-full gap-x-6 justify-center">
+          <NuxtLink
+            v-for="social in socials"
+            :key="social.name"
+            :to="social.link"
+            target="_blank"
+          >
             <div
-              @mouseenter="isHovering = site[0]"
+              @mouseenter="isHovering = social.name"
               @mouseleave="isHovering = null"
               class="flex items-center"
             >
               <IconRenderer
-                :iconName="site[0].toLowerCase()"
-                class="w-8 mr-2"
+                :iconName="social.name.toLowerCase()"
+                class="w-8 mr-1"
               />
               <p
                 class="transition-colors duration-300"
-                :class="{ 'text-sky-600': isHovering == site[0] }"
+                :class="{ 'text-sky-500': isHovering == social.name }"
               >
-                {{ site[0] }}
+                {{ social.name }}
               </p>
             </div></NuxtLink
           >
         </nav>
       </div>
-      <div>
-        <h5 class="border-b-2 border-sky-500 mb-2 font-semibold w-fit text-lg">
-          {{ lang.footerContact }}
+      <div class="w-fit mx-auto mt-10">
+        <h5
+          class="border-b-2 border-sky-500 mb-4 font-semibold w-fit mx-auto text-lg"
+        >
+          {{ lang.footerContactTitle }}
         </h5>
         <a
           :href="`mailto:${eMail}`"
-          class="hover:text-sky-600 transition-colors duration-300 text-md"
+          class="hover:text-sky-500 transition-colors duration-300 text-md"
         >
           {{ lang.footerMailMe }} <IconsClick />
         </a>
       </div>
     </div>
   </footer>
+  <div
+    class="bg-[rgb(6,6,6)] py-4 border-t-1 border-gray-900 flex items-center justify-center inline-block"
+  >
+    <NuxtLink
+      to="https://github.com/MehmetAliKOCAL/PersonalWebsite"
+      target="_blank"
+      class="text-gray-500 hover:text-sky-500 transition-all duration-300 text-center text-lg mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5"
+    >
+      {{ lang.footerOpenSource }}</NuxtLink
+    >
+  </div>
 </template>

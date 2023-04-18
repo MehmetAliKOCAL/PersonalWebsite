@@ -12,7 +12,6 @@ const texts = {
   infoAboutMe4: "Also, I love video games.",
   infoAboutMe5: "I try to code games in Unity3D for fun in my spare time.",
   currentlyWorkingOnTitle: "Currently Working On 👨🏻‍💻🌱",
-  checkIt: "check it!",
   previousProjectsTitle: "Previous Projects 👨🏻‍💻🌳",
   seeDetails: "see details",
   proficiencies: "Proficiencies ✨",
@@ -41,14 +40,21 @@ const texts = {
   headerProjects: "Projects",
   headerGamesPlayed: "Games Played",
   headerTracksListened: "Tracks Listened",
-  footerGetInTouch: "~ Get In Touch",
-  footerSocials: "Socials",
-  footerContact: "Contact",
+  footerGetInTouchTitle: "~ Get In Touch",
+  footerSocialsTitle: "Socials",
+  footerContactTitle: "Contact",
   footerMailMe: "Mail Me ",
+  footerOpenSource: "This website is open-source!",
   buttonHomepage: "Homepage",
   pageUnderConstruction: "Sorry, this page is under construction.🥸",
-  currentlyWorkingOn:
-    "Front-end of an internship tracking app that will be used by a university",
+  currentlyWorkingOn: {
+    role: "Front-end of",
+    name: "Internship Tracking App",
+    link: "https://stajtakip.vercel.app/",
+    emoji: "🧑🏻‍🏫",
+    summary:
+      "an internship tracking and management app that will be used by a university",
+  },
   previousProjects: [
     {
       role: "Made",

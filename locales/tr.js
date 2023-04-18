@@ -13,7 +13,6 @@ const texts = {
   infoAboutMe5:
     "Boş zamanlarımda hobi olarak Unity ile oyun yapmaya çalışıyorum.",
   currentlyWorkingOnTitle: "Şu An Üzerinde Çalıştığım Proje 👨🏻‍💻🌱",
-  checkIt: "projeyi incele!",
   previousProjectsTitle: "Tamamladığım Projeler 👨🏻‍💻🌳",
   seeDetails: "detayları gör",
   proficiencies: "Kullandığım Araçlar ✨",
@@ -41,14 +40,21 @@ const texts = {
   headerProjects: "Projelerim",
   headerGamesPlayed: "Oynadığım Oyunlar",
   headerTracksListened: "Dinlediğim Parçalar",
-  footerGetInTouch: "~ Benimle Bağlantı Kur",
-  footerSocials: "Sosyal Hesaplarım",
-  footerContact: "İletişim",
+  footerGetInTouchTitle: "~ Bağlantı Kur",
+  footerSocialsTitle: "Sosyal",
+  footerContactTitle: "İletişim",
   footerMailMe: "E-Posta Gönder",
+  footerOpenSource: "Bu site açık kaynaklı!",
   buttonHomepage: "Ana Sayfa",
   pageUnderConstruction: "Üzgünüm, bu sayfa henüz yapım aşamasında.🥸",
-  currentlyWorkingOn:
-    "Bir üniversitenin kullanacağı staj süreci takip ve yönetim uygulamasının ön yüzü",
+  currentlyWorkingOn: {
+    role: "Site Ön Yüzü - ",
+    name: "Staj Takip Uygulaması",
+    link: "https://stajtakip.vercel.app/",
+    emoji: "🧑🏻‍🏫",
+    summary:
+      "bir üniversite tarafından öğrenci stajlarını yönetmek ve takip etmek için kullanılacak bir internet sitesi",
+  },
   previousProjects: [
     {
       role: "Mod - ",

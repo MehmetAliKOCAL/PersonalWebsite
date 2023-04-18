@@ -49,7 +49,7 @@ const headerTabs = [
           v-for="tab in headerTabs"
           @mouseenter="mouseHoverID = tab.mouseHoverID"
           @mouseleave="mouseHoverID = null"
-          class="hover:text-sky-400 transition-colors duration-300 text-shadow-xl"
+          class="hover:text-sky-500 transition-colors duration-300 text-shadow-xl"
           :to="tab.href"
           >{{ tab.text }}
           <hr
@@ -72,7 +72,7 @@ const headerTabs = [
               ? 'opacity-0 invisible'
               : 'opacity-100 visible',
           ]"
-          class="transition-all duration-300 absolute px-5 rounded-md py-4 bg-[rgb(25,25,25)] transform translate-x-[-35%] mt-3 space-y-3"
+          class="transition-all duration-300 absolute px-5 rounded-md py-4 bg-[rgb(25,25,25)] transform translate-x-[-35%] space-y-3 mt-5"
         >
           <button
             @click="globalVariables.setLanguage('en')"
