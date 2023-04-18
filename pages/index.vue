@@ -1,7 +1,14 @@
 <script setup>
-import { gsap } from "gsap";
-import { TextPlugin } from "gsap/TextPlugin";
 import { useElementVisibility } from "@vueuse/core";
+import { useGlobalVariablesStore } from "~/store/globalVariables.js";
+import { storeToRefs } from "pinia";
+const globalVariables = useGlobalVariablesStore();
+const { lang } = storeToRefs(globalVariables);
+
+let reRender = ref(0);
+watch(lang, () => {
+  reRender.value++;
+});
 
 const { data: mostPlayedGames } = useLazyAsyncData("mostPlayedGames", () =>
   $fetch("/api/games/mostPlayedGames")
@@ -21,29 +28,27 @@ const { data: recentlyListenedTracks } = useLazyAsyncData(
 
 function calculateLastTimePlayed(seconds) {
   const resultInDays = Math.round((Date.now() / 1000 - seconds) / 60 / 60 / 24);
-  if (resultInDays < 1) return "Today";
-  else if (resultInDays < 2) return "Yesterday";
+  if (resultInDays < 1) return lang.value.today;
+  else if (resultInDays < 2) return lang.value.yesterday;
   else if (resultInDays > 365)
-    return (resultInDays / 365).toFixed(0) + " years ago";
-  else return resultInDays + " days ago";
+    return (resultInDays / 365).toFixed(0) + ` ${lang.value.yearsAgo}`;
+  else return resultInDays + ` ${lang.value.daysAgo}`;
 }
 
 function calculatePlayTime(minutes, shouldBeRounded) {
-  if (minutes < 2) return minutes + " minute";
-  else if (minutes < 60) return minutes + " minutes";
-  else if (minutes / 60 < 1.2) return "1 hour";
+  if (minutes < 2) return `${minutes} ${lang.value.minute}`;
+  else if (minutes < 60) return minutes + ` ${lang.value.minutes}`;
+  else if (minutes / 60 < 1.2) return lang.value.oneHour;
   else {
     if (
       (minutes / 60).toFixed(1) % 1 < 0.2 ||
       (minutes / 60).toFixed(1) % 1 >= 0.8 ||
       shouldBeRounded == true
     )
-      return Math.round(minutes / 60) + " hours";
-    else return (minutes / 60).toFixed(1) + " hours";
+      return `${Math.round(minutes / 60)} ${lang.value.hours}`;
+    else return `${(minutes / 60).toFixed(1)} ${lang.value.hours}`;
   }
 }
-
-if (process.client) gsap.registerPlugin(TextPlugin);
 
 var isHovering = ref(null);
 const target = ref(null);
@@ -61,54 +66,6 @@ function animDirection(itemIndex) {
   if (itemIndex < 3) return "fade-right";
   else return "fade-left";
 }
-
-const age = Math.abs(
-  new Date(Date.now() - new Date("08/25/2000").getTime()).getUTCFullYear() -
-    1970
-);
-const infoAboutMe = `I'm Mehmet, a ${age} years old associate degree computer programming student. I enjoy programming and 3D modeling. I am currently studying Blender, C#, Vue.js, and Nuxt.js. Also, I love video games. I try to code games in Unity3D for fun in my spare time.`;
-
-onMounted(() => {
-  if (process.client) {
-    gsap.to("#infoAboutMe", {
-      delay: 0.7,
-      duration: 7,
-      text: infoAboutMe,
-      ease: "none",
-    });
-    gsap.to("#helloTitle", {
-      duration: 0.7,
-      text: "Hello👋",
-      ease: "none",
-    });
-  }
-});
-
-const currentlyWorkingOn = "An internship tracking website for a university,";
-
-const previousProjects = [
-  {
-    role: "Made",
-    name: "Volcanoids Turkish Localization",
-    link: "https://steamcommunity.com/sharedfiles/filedetails/?id=2952920316",
-    emoji: "⚙️",
-    summary: "a localization mod for the Volcanoids game",
-  },
-  {
-    role: "Made",
-    name: "GwynDev",
-    link: "https://gwyndev.com/",
-    emoji: "📌",
-    summary: "to show off things about me",
-  },
-  {
-    role: "Developed the front-end of",
-    name: "AhniWeb",
-    link: "https://ahni-web.vercel.app/",
-    emoji: "🎓",
-    summary: "the graduates' meeting website of a high school",
-  },
-];
 
 const proficiencies = [
   {
@@ -192,24 +149,115 @@ const proficiencies = [
     class="<md:hidden absolute w-full h-50vh z-10 landing-section-color-wrapper"
   />
 
-  <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5">
-    <section
-      id="hello"
-      class="min-h-screen flex items-center flex-col justify-center relative z-20"
-    >
-      <h1
-        id="helloTitle"
-        class="text-4xl <md:text-3xl font-bold mb-6 hello text-center"
-      >
-        Cute little gnomes are loading the page, please be patient 🧙🏼‍♂️🧸
-      </h1>
-      <p
-        id="infoAboutMe"
-        class="text-2xl <md:text-xl font-normal text-slate-400 text-center"
+  <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5 relative z-20">
+    <section id="hello" class="pt-60">
+      <div class="flex text-4xl <md:text-3xl font-bold mb-6">
+        <NuxtLink
+          to="#hello"
+          class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300"
+        >
+          #
+        </NuxtLink>
+        <GlitchText
+          :key="reRender"
+          :id="'helloTitle'"
+          :messages="[lang.hello]"
+          :time="4200"
+          :default="lang.loading"
+        />
+      </div>
+      <GlitchText
+        :key="reRender"
+        class="text-2xl <md:text-xl font-normal text-slate-400"
+        :id="'infoAboutMe'"
+        :messages="[
+          lang.infoAboutMe1,
+          lang.infoAboutMe2,
+          lang.infoAboutMe3,
+          lang.infoAboutMe4,
+          lang.infoAboutMe5,
+        ]"
+        :time="2000"
       />
     </section>
 
-    <section>
+    <section class="mt-25">
+      <h1
+        class="text-4xl <md:text-3xl font-bold mb-6"
+        data-aos="fade-right"
+        data-aos-duration="900"
+      >
+        <NuxtLink
+          id="currently"
+          to="#currently"
+          class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
+        >
+          #
+        </NuxtLink>
+        {{ lang.currentlyWorkingOnTitle }}
+      </h1>
+      <p
+        class="text-2xl <md:text-xl font-normal text-slate-400"
+        data-aos="fade-right"
+        data-aos-duration="550"
+      >
+        {{ lang.currentlyWorkingOn + "," }}
+        <a
+          href="https://stajtakip.vercel.app/"
+          target="_blank"
+          class="text-cyan-500 font-medium"
+        >
+          {{ lang.checkIt }}
+        </a>
+      </p>
+    </section>
+
+    <section class="mt-25">
+      <h1
+        class="text-4xl <md:text-3xl font-bold mb-6"
+        data-aos="fade-right"
+        data-aos-duration="900"
+      >
+        <a
+          id="previousProjects"
+          class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
+          href="#previousProjects"
+        >
+          #
+        </a>
+        {{ lang.previousProjectsTitle }}
+      </h1>
+      <p
+        v-for="project in lang.previousProjects"
+        :key="project.name"
+        class="text-2xl <md:text-xl font-normal text-slate-400 mb-2"
+        data-aos="fade-right"
+        data-aos-duration="550"
+        :data-aos-delay="increaseDelay()"
+      >
+        {{ project.emoji + " " + project.role }}
+        <a
+          :href="project.link"
+          class="inline font-bold text-slate-200"
+          target="_blank"
+          :class="{
+            'pointer-events-none':
+              project.link == '' || project.hasOwnProperty('link') == false,
+          }"
+        >
+          {{ " " + project.name }}
+        </a>
+        {{ ", " + project.summary + " - " }}
+        <NuxtLink
+          :to="'/projectDetails/' + lang.previousProjects.indexOf(project)"
+          class="text-cyan-500 font-medium"
+        >
+          {{ lang.seeDetails }}
+        </NuxtLink>
+      </p>
+    </section>
+
+    <section class="mt-25">
       <h1
         class="text-4xl <md:text-3xl font-bold mb-6"
         data-aos="fade-left"
@@ -222,7 +270,7 @@ const proficiencies = [
         >
           #
         </a>
-        Proficiencies ✨
+        {{ lang.proficiencies }}
       </h1>
       <div ref="target" class="flex w-full flex-wrap justify-between gap-x-4">
         <div
@@ -250,82 +298,6 @@ const proficiencies = [
     <section class="mt-25">
       <h1
         class="text-4xl <md:text-3xl font-bold mb-6"
-        data-aos="fade-right"
-        data-aos-duration="900"
-      >
-        <a
-          id="currently"
-          class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
-          href="#currently"
-        >
-          #
-        </a>
-        Currently Working On 👨🏻‍💻🌱
-      </h1>
-      <p
-        class="text-2xl <md:text-xl font-normal text-slate-400"
-        data-aos="fade-right"
-        data-aos-duration="550"
-      >
-        {{ currentlyWorkingOn }}
-        <a
-          href="https://stajtakip.vercel.app/"
-          target="_blank"
-          class="text-cyan-500 font-medium"
-        >
-          check it!
-        </a>
-      </p>
-    </section>
-
-    <section class="mt-25">
-      <h1
-        class="text-4xl <md:text-3xl font-bold mb-6"
-        data-aos="fade-right"
-        data-aos-duration="900"
-      >
-        <a
-          id="previousProjects"
-          class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
-          href="#previousProjects"
-        >
-          #
-        </a>
-        Previous Projects 👨🏻‍💻🌳
-      </h1>
-      <p
-        v-for="project in previousProjects"
-        :key="project.name"
-        class="text-2xl <md:text-xl font-normal text-slate-400 mb-2"
-        data-aos="fade-right"
-        data-aos-duration="550"
-        :data-aos-delay="increaseDelay()"
-      >
-        {{ project.emoji + " " + project.role }}
-        <a
-          :href="project.link"
-          class="inline font-bold text-slate-200"
-          target="_blank"
-          :class="{
-            'pointer-events-none':
-              project.link == '' || project.hasOwnProperty('link') == false,
-          }"
-        >
-          {{ " " + project.name }}
-        </a>
-        {{ ", " + project.summary + " - " }}
-        <NuxtLink
-          :to="'/projectDetails/' + previousProjects.indexOf(project)"
-          class="text-cyan-500 font-medium"
-        >
-          see details
-        </NuxtLink>
-      </p>
-    </section>
-
-    <section class="mt-25">
-      <h1
-        class="text-4xl <md:text-3xl font-bold mb-6"
         data-aos="fade-left"
         data-aos-duration="1100"
       >
@@ -336,7 +308,7 @@ const proficiencies = [
         >
           #
         </a>
-        Recently Played Games 🎮
+        {{ lang.recentlyPlayedGames }}
       </h1>
       <div
         class="flex flex-wrap gap-x-3 gap-y-2"
@@ -364,7 +336,7 @@ const proficiencies = [
             <h2
               class="absolute w-full h-full bg-black/60 flex justify-center items-center text-center transition duration-300 hover:bg-black/90"
             >
-              This game is not available on Steam.
+              {{ lang.gameNotAvailable }}
             </h2>
           </div>
 
@@ -397,18 +369,21 @@ const proficiencies = [
               <p class="text-lg <md:text-base font-semibold mt-2 -mb-2">
                 {{
                   calculatePlayTime(item.playtime_2weeks, false) +
-                  " in last 2 weeks"
+                  ` ${lang.inLastTwoWeeks}`
                 }}
               </p>
               <p class="text-lg <md:text-base font-semibold">
-                {{ calculatePlayTime(item.playtime_forever, false) + " total" }}
+                {{
+                  calculatePlayTime(item.playtime_forever, false) +
+                  ` ${lang.total}`
+                }}
               </p>
             </a>
           </div>
         </div>
       </div>
       <div v-else class="text-2xl <md:text-xl font-normal text-slate-400">
-        It seems like I haven't played any video games in the last 2 weeks. 🥸
+        {{ lang.noGamesPlayed }}
       </div>
     </section>
 
@@ -425,7 +400,7 @@ const proficiencies = [
         >
           #
         </a>
-        Most Played Games 🎮🔝
+        {{ lang.mostPlayedGames }}
       </h1>
       <div
         class="flex flex-wrap gap-2 justify-between"
@@ -463,13 +438,13 @@ const proficiencies = [
               </h2>
               <p class="text-lg <md:text-base font-semibold mt-2 -mb-2">
                 {{
-                  "Total playtime: " +
+                  `${lang.totalPlaytime}: ` +
                   calculatePlayTime(item.playtime_forever, true)
                 }}
               </p>
               <p class="text-lg <md:text-base font-semibold">
                 {{
-                  "Last played: " +
+                  `${lang.lastPlayed}: ` +
                   calculateLastTimePlayed(item.rtime_last_played)
                 }}
               </p>
@@ -494,7 +469,7 @@ const proficiencies = [
           class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
           >♪</a
         >
-        Currently Listening 🎧
+        {{ lang.currentlyListening }}
       </h1>
       <a
         class="p-4 pr-14 w-fit rounded-md flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:(from-gray-800/80 to-gray-900/80)"
@@ -541,7 +516,7 @@ const proficiencies = [
         >
           #
         </a>
-        Recently Listened Tracks 📻
+        {{ lang.recentlyListenedTracks }}
       </h1>
       <div
         class="w-fit <sm:w-full sm:(flex flex-wrap)"
@@ -598,7 +573,7 @@ const proficiencies = [
         >
           #
         </a>
-        Most Listened Tracks 🍒🔝
+        {{ lang.mostListenedTracks }}
       </h1>
       <div
         class="w-fit <sm:w-full sm:(flex flex-wrap)"

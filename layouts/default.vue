@@ -1,12 +1,19 @@
 <script setup>
-import { useGlobalVariablesStore } from "~~/store/globalVariables";
-const stateCheck = useGlobalVariablesStore();
+import { useGlobalVariablesStore } from "~/store/globalVariables.js";
+import { storeToRefs } from "pinia";
+const globalVariables = useGlobalVariablesStore();
+const { lang } = storeToRefs(globalVariables);
+
+let reRender = ref(0);
+watch(lang, () => {
+  reRender.value++;
+});
 
 watchEffect(() => {
   if (process.client) {
     const html = document.getElementsByTagName("html")[0];
 
-    if (stateCheck.isMobileMenuActive) html.style.overflowY = "hidden";
+    if (globalVariables.isMobileMenuActive) html.style.overflowY = "hidden";
     else html.style.overflowY = "visible";
   }
 });
@@ -16,8 +23,8 @@ watchEffect(() => {
     class="transition-all duration-300 min-h-screen min-w-full h-full relative bg-[rgb(10,10,10)] text-slate-200/95"
   >
     <NuxtLoadingIndicator :color="'#0ea5e9'" />
-    <Header />
+    <Header :key="reRender" />
     <slot />
-    <Footer />
+    <Footer :key="reRender" />
   </div>
 </template>

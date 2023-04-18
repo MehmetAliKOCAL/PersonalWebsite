@@ -1,4 +1,9 @@
 <script setup>
+import { useGlobalVariablesStore } from "~/store/globalVariables.js";
+import { storeToRefs } from "pinia";
+const globalVariables = useGlobalVariablesStore();
+const { lang } = storeToRefs(globalVariables);
+
 const projects = [
   {
     title: "Volcanoids Mod",
@@ -40,12 +45,12 @@ const project = projects[useRoute().params.id];
     <p class="text-2xl <md:text-xl font-normal text-slate-400">
       {{ project.content }}
     </p> -->
-    <p>Sorry, this page is under construction.🥸</p>
+    <p>{{ lang.pageUnderConstruction }}</p>
     <NuxtLink
       to="/"
       class="bg-black py-3 px-10 mt-10 rounded-md border-sky-400 border-1 transition-all duration-300 hoverShadow"
     >
-      Homepage
+      {{ lang.buttonHomepage }}
     </NuxtLink>
   </div>
 </template>

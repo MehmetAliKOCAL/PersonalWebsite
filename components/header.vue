@@ -1,14 +1,28 @@
 <script setup>
-import { useGlobalVariablesStore } from "~~/store/globalVariables";
+import { useGlobalVariablesStore } from "~/store/globalVariables.js";
+import { storeToRefs } from "pinia";
+const globalVariables = useGlobalVariablesStore();
+const { lang } = storeToRefs(globalVariables);
 let mouseHoverID = ref(null);
-let stateCheck = useGlobalVariablesStore();
 
 const headerTabs = [
-  { mouseHoverID: 1, href: "/#hello", text: "Hello!" },
-  { mouseHoverID: 2, href: "/#proficiencies", text: "Proficiencies" },
-  { mouseHoverID: 3, href: "/#currently", text: "Projects" },
-  { mouseHoverID: 4, href: "/#recentGames", text: "Games Played" },
-  { mouseHoverID: 5, href: "/#recentTracks", text: "Tracks Listened" },
+  { mouseHoverID: 1, href: "/#hello", text: lang.value.headerHello },
+  {
+    mouseHoverID: 2,
+    href: "/#proficiencies",
+    text: lang.value.headerProficiencies,
+  },
+  { mouseHoverID: 3, href: "/#currently", text: lang.value.headerProjects },
+  {
+    mouseHoverID: 4,
+    href: "/#recentGames",
+    text: lang.value.headerGamesPlayed,
+  },
+  {
+    mouseHoverID: 5,
+    href: "/#recentTracks",
+    text: lang.value.headerTracksListened,
+  },
 ];
 </script>
 
@@ -30,7 +44,7 @@ const headerTabs = [
           alt="GwynDev Logo"
       /></NuxtLink>
 
-      <nav class="<md:hidden flex flex-wrap gap-x-10 gap-y-4">
+      <nav class="<md:hidden flex flex-wrap gap-x-5 gap-y-4">
         <NuxtLink
           v-for="tab in headerTabs"
           @mouseenter="mouseHoverID = tab.mouseHoverID"
@@ -44,16 +58,48 @@ const headerTabs = [
         /></NuxtLink>
       </nav>
 
+      <div
+        @mouseenter="mouseHoverID = 'lang'"
+        @mouseleave="mouseHoverID = null"
+      >
+        <div class="flex justify-center items-center">
+          <IconsLanguages />
+          <IconsArrowDown />
+        </div>
+        <div
+          :class="[
+            mouseHoverID != 'lang'
+              ? 'opacity-0 invisible'
+              : 'opacity-100 visible',
+          ]"
+          class="transition-all duration-300 absolute px-5 rounded-md py-4 bg-[rgb(25,25,25)] transform translate-x-[-35%] mt-3 space-y-3"
+        >
+          <button
+            @click="globalVariables.setLanguage('en')"
+            class="transition-colors duration-300 hover:text-sky-500 cursor-pointer font-semibold text-gray-400 block"
+          >
+            English
+          </button>
+          <button
+            @click="globalVariables.setLanguage('tr')"
+            class="transition-colors duration-300 hover:text-sky-500 cursor-pointer font-semibold text-gray-400 block"
+          >
+            Türkçe
+          </button>
+        </div>
+      </div>
+
       <div class="md:hidden">
         <IconsMenuIcon
           class="hover:cursor-pointer"
           @click="
-            stateCheck.isMobileMenuActive = !stateCheck.isMobileMenuActive
+            globalVariables.isMobileMenuActive =
+              !globalVariables.isMobileMenuActive
           "
         />
         <nav
           :class="[
-            stateCheck.isMobileMenuActive
+            globalVariables.isMobileMenuActive
               ? 'visible opacity-100'
               : 'invisible opacity-0',
           ]"
@@ -62,7 +108,8 @@ const headerTabs = [
           <NuxtLink
             v-for="tab in headerTabs"
             @click="
-              stateCheck.isMobileMenuActive = !stateCheck.isMobileMenuActive
+              globalVariables.isMobileMenuActive =
+                !globalVariables.isMobileMenuActive
             "
             :to="tab.href"
             class="text-2xl font-semibold mb-4 hover:text-sky-400 transition-colors duration-300"

@@ -1,4 +1,8 @@
 <script setup>
+import { useGlobalVariablesStore } from "~/store/globalVariables.js";
+import { storeToRefs } from "pinia";
+const globalVariables = useGlobalVariablesStore();
+const { lang } = storeToRefs(globalVariables);
 const eMail = "root.gwyn@hotmail.com";
 const socials = [
   ["Github", "https://github.com/MehmetAliKOCAL", "github"],
@@ -20,11 +24,11 @@ var isHovering = ref(null);
     class="w-full bg-gradient-to-r from-blue-800 via-sky-400 to-blue-800 h-[1px] relative"
   />
   <footer class="bg-[rgb(6,6,6)] py-10 font-mono relative z-10">
-    <h4 class="text-xl text-center mb-10">~ Get In Touch</h4>
+    <h4 class="text-xl text-center mb-10">{{ lang.footerGetInTouch }}</h4>
     <div class="flex justify-around px-5">
       <div class="flex flex-col">
         <h5 class="border-b-2 border-sky-500 mb-2 font-semibold w-fit text-lg">
-          Socials
+          {{ lang.footerSocials }}
         </h5>
         <nav class="flex flex-col w-full gap-x-1 justify-center">
           <NuxtLink :to="site[1]" target="_blank" v-for="site in socials">
@@ -49,13 +53,13 @@ var isHovering = ref(null);
       </div>
       <div>
         <h5 class="border-b-2 border-sky-500 mb-2 font-semibold w-fit text-lg">
-          Contact
+          {{ lang.footerContact }}
         </h5>
         <a
           :href="`mailto:${eMail}`"
           class="hover:text-sky-600 transition-colors duration-300 text-md"
         >
-          Mail Me <IconsClick />
+          {{ lang.footerMailMe }} <IconsClick />
         </a>
       </div>
     </div>
