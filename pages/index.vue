@@ -632,7 +632,7 @@ const proficiencies = [
                   class="pt-[1px] border-t-2 border-slate-500/80 w-6 mr-4"
                 ></div>
                 <p class="text-gray-500/80 font-semibold">
-                  {{ song.playcount + " Listens" }}
+                  {{ song.playcount + ` ${lang.listens}` }}
                 </p>
               </div>
             </div>

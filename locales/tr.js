@@ -35,6 +35,7 @@ const texts = {
   minutes: "dakika",
   oneHour: "1 saat",
   hours: "saat",
+  listens: "Dinleme",
   headerHello: "Merhaba!",
   headerProficiencies: "Araçlarım",
   headerProjects: "Projelerim",

@@ -35,6 +35,7 @@ const texts = {
   minutes: "minutes",
   oneHour: "1 hour",
   hours: "hours",
+  listens: "Listens",
   headerHello: "Hello!",
   headerProficiencies: "Proficiencies",
   headerProjects: "Projects",
