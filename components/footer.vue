@@ -25,7 +25,7 @@ var isHovering = ref(null);
   <footer
     class="bg-[rgb(6,6,6)] py-10 font-mono relative z-10 mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5"
   >
-    <h4 class="text-xl text-center mb-10">{{ lang.footerGetInTouchTitle }}</h4>
+    <h1 class="text-xl text-center mb-10">{{ lang.footerGetInTouchTitle }}</h1>
     <div class="flex flex-col justify-center">
       <div class="flex flex-col">
         <h2
@@ -60,11 +60,11 @@ var isHovering = ref(null);
         </nav>
       </div>
       <div class="w-fit mx-auto mt-10">
-        <h5
+        <h2
           class="border-b-2 border-sky-500 mb-4 font-semibold w-fit mx-auto text-lg"
         >
           {{ lang.footerContactTitle }}
-        </h5>
+        </h2>
         <a
           :href="`mailto:${eMail}`"
           class="hover:text-sky-500 transition-colors duration-300 text-md"
@@ -80,7 +80,7 @@ var isHovering = ref(null);
     <NuxtLink
       to="https://github.com/MehmetAliKOCAL/PersonalWebsite"
       target="_blank"
-      class="text-gray-500 hover:text-sky-500 transition-all duration-300 text-center text-lg mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5"
+      class="text-gray-400 hover:text-sky-500 transition-all duration-300 text-center text-lg mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5"
     >
       {{ lang.footerOpenSource }}</NuxtLink
     >
