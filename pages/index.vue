@@ -172,7 +172,7 @@ const proficiencies = [
         <GlitchText
           :key="reRender"
           :id="'infoAboutMe'"
-          class="text-2xl <md:text-xl font-normal text-slate-400 min-h-24 <md:min-h-18"
+          class="text-2xl <md:text-xl font-normal text-slate-400 min-h-24"
           :time="2000"
           :messages="[
             lang.infoAboutMe1,
