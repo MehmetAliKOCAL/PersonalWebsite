@@ -17,6 +17,9 @@ watchEffect(() => {
     else html.style.overflowY = "visible";
   }
 });
+
+if (process.client)
+  globalVariables.setLanguage(localStorage.getItem("lang") || "en");
 </script>
 <template>
   <div

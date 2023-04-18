@@ -66,7 +66,7 @@ export default defineNuxtConfig({
 
   pwa: {
     workbox: {
-      enabled: true
+      enabled: false
     },
     icon:{
       fileName:'favicon.png'

@@ -9,9 +9,10 @@ export const useGlobalVariablesStore = defineStore("globalVariables", {
   }),
   actions: {
     setLanguage(language) {
-      if (language == "tr") {
-        this.lang = tr;
-      } else this.lang = en;
+      if (language == "tr") this.lang = tr;
+      else this.lang = en;
+
+      localStorage.setItem("lang", language);
     },
   },
 });
