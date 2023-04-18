@@ -1,11 +1,14 @@
+<p align="center">
 <img src="https://i.hizliresim.com/8afr6fj.png"/>
+</p>
 
 <h2 align="center">
-PageSpeed Insights Score
+
+<summary><h2 style="display: inline-block;">PageSpeed Insights Score</h2></summary>
 </h2>
 
 <p align="center">
-<img src="/assets/readmeBanner.svg"/>
+<img width="700px" src="/assets/readmeBanner.svg"/>
 </p>
 
 <p align="center" >
@@ -14,17 +17,17 @@ PageSpeed Insights Score
 
 ### [Live Preview](https://gwyndev.com)
 
-A personal website with a pwa that you can share your projects and latest activities, made with Nuxt 3 & TailwindCSS. For further instructions about Nuxt, view [docs](https://nuxt.com/docs/getting-started/introduction).
+A multilingual personal website with a progressive web app that you can share your projects and latest activities, made with Nuxt 3 & WindiCSS. For further instructions about Nuxt, view [docs](https://nuxt.com/docs/getting-started/introduction).
 
 # Setup
 
-### 1. Download the repository:
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/MehmetAliKOCAL/PersonalWebsite
 ```
 
-### 2. Install the dependencies:
+### 2. Install the dependencies
 
 ```bash
 # Open the folder
@@ -40,7 +43,7 @@ npm install
 pnpm install
 ```
 
-### 3. Create environment variables:
+### 3. Create environment variables
 
 To get the project up and running, you need to use environment variables. Create a .env file in the root directory of the project where app.vue is located, then add these variables inside of the file:
 
@@ -61,7 +64,7 @@ Now your .env file should look like this:
 
 # Run the Development Server
 
-### Start the development server on http://localhost:3000
+Start the development server on http://localhost:3000
 
 ```bash
 npm run dev
@@ -69,16 +72,16 @@ npm run dev
 
 # Production
 
-### Build the application for production:
+### 1. Build the application for production
 
 ```bash
 npm run build
 ```
 
-### Locally preview production build:
+### 2. Locally preview production build
 
 ```bash
 npm run preview
 ```
 
-Check out the [Nuxt deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Check out the [Nuxt deployment documentation](https://nuxt.com/docs/getting-started/deployment) for deployment instructions.
