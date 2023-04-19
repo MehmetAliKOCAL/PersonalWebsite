@@ -50,11 +50,11 @@ function calculatePlayTime(minutes, shouldBeRounded) {
   }
 }
 
-var isHovering = ref(null);
+let isHovering = ref(null);
 const target = ref(null);
 const targetIsVisible = useElementVisibility(target);
 
-var animationDelay = 0;
+let animationDelay = 0;
 function increaseDelay() {
   if (animationDelay == 300) {
     animationDelay = 0;

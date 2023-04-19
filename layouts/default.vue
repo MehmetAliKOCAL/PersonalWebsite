@@ -19,7 +19,9 @@ watchEffect(() => {
 });
 
 if (process.client)
-  globalVariables.setLanguage(localStorage.getItem("lang") || "en");
+  globalVariables.setLanguage(
+    localStorage.getItem("lang") || navigator.language.split("-")[0]
+  );
 </script>
 <template>
   <div

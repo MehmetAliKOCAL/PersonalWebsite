@@ -3,6 +3,8 @@ import { useGlobalVariablesStore } from "~/store/globalVariables.js";
 import { storeToRefs } from "pinia";
 const globalVariables = useGlobalVariablesStore();
 const { lang } = storeToRefs(globalVariables);
+let isHovering = ref(null);
+
 const eMail = "root.gwyn@hotmail.com";
 const socials = [
   { name: "LinkedIn", link: "https://www.linkedin.com/in/gwyndev/" },
@@ -15,7 +17,6 @@ const socials = [
     link: "https://www.youtube.com/channel/UCqsbqOqrLaKWaJ-1fB1RqyQ",
   },
 ];
-var isHovering = ref(null);
 </script>
 
 <template>
