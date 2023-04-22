@@ -210,7 +210,7 @@ const proficiencies = [
           <NuxtLink
             :to="lang.currentlyWorkingOn.link"
             target="_blank"
-            class="inline font-bold text-slate-200"
+            class="inline font-bold text-slate-200 hover:text-cyan-400 transition-colors duration-300"
             :class="{
               'pointer-events-none':
                 lang.currentlyWorkingOn.link == '' ||
@@ -222,7 +222,7 @@ const proficiencies = [
           {{ ", " + lang.currentlyWorkingOn.summary + " - " }}
           <NuxtLink
             to="/projectDetails/currentWork"
-            class="text-cyan-500 font-medium"
+            class="text-cyan-500 font-medium hover:text-cyan-300 transition-colors duration-300"
           >
             {{ lang.seeDetails }}
           </NuxtLink>
@@ -256,7 +256,7 @@ const proficiencies = [
           <NuxtLink
             :to="project.link"
             target="_blank"
-            class="inline font-bold text-slate-200"
+            class="inline font-bold text-slate-200 hover:text-cyan-400 transition-colors duration-300"
             :class="{
               'pointer-events-none':
                 project.link == '' || project.hasOwnProperty('link') == false,
@@ -267,7 +267,7 @@ const proficiencies = [
           {{ ", " + project.summary + " - " }}
           <NuxtLink
             :to="'/projectDetails/' + lang.previousProjects.indexOf(project)"
-            class="text-cyan-500 font-medium"
+            class="text-cyan-500 font-medium hover:text-cyan-300 transition-colors duration-300"
           >
             {{ lang.seeDetails }}
           </NuxtLink>
@@ -328,11 +328,11 @@ const proficiencies = [
           {{ lang.recentlyPlayedGames }}
         </h1>
         <div
-          class="flex flex-wrap gap-x-3 gap-y-2"
+          class="flex flex-wrap gap-3"
           v-if="recentlyPlayedGames?.api != null"
         >
           <div
-            class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full transition-all duration-300 border-1 border-transparent hover:border-sky-400 rounded-md"
+            class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) rounded-md"
             v-for="item in recentlyPlayedGames?.api"
             :key="item.name"
             :data-aos="`${animDirection(
@@ -359,10 +359,7 @@ const proficiencies = [
               </h2>
             </div>
 
-            <div
-              v-else
-              class="relative inline-flex overflow-hidden w-full rounded-md"
-            >
+            <div v-else class="relative flex overflow-hidden w-full rounded-md">
               <nuxt-img
                 format="webp"
                 quality="70"
@@ -423,56 +420,49 @@ const proficiencies = [
           </NuxtLink>
           {{ lang.mostPlayedGames }}
         </h1>
-        <div
-          class="flex flex-wrap gap-2 justify-between"
-          v-if="mostPlayedGames?.api != null"
-        >
+        <div class="flex flex-wrap gap-3" v-if="mostPlayedGames?.api != null">
           <div
-            class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full transition-all duration-300 border-1 border-transparent hover:border-sky-400 rounded-md"
+            class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) rounded-md relative flex overflow-hidden"
             v-for="item in mostPlayedGames?.api"
             :key="item.name"
             :data-aos="`${animDirection(mostPlayedGames?.api.indexOf(item))}`"
             :data-aos-delay="`${increaseDelay()}`"
           >
-            <div class="relative inline-flex overflow-hidden w-full rounded-md">
-              <nuxt-img
-                format="webp"
-                quality="70"
-                sizes="sm:100vw"
-                class="transform transition-all duration-300 filter w-full"
-                :class="{
-                  'scale-110 blur-[1px]':
-                    isHovering == mostPlayedGames?.api.indexOf(item) + 6,
-                }"
-                :src="`https://steamcdn-a.akamaihd.net/steam/apps/${item.appid}/header.jpg`"
-                :alt="item.name"
-              />
-              <NuxtLink
-                @mouseenter="
-                  isHovering = mostPlayedGames?.api.indexOf(item) + 6
-                "
-                @mouseleave="isHovering = null"
-                class="absolute w-full h-full flex flex-col justify-center items-center bg-black/70 text-white hover:bg-black/80 active:bg-black/85 transition-all duration-300 cursor-pointer"
-                :to="`https://store.steampowered.com/app/${item.appid}/`"
-                target="_blank"
-              >
-                <h2 class="text-2xl <md:text-xl font-bold text-center">
-                  {{ item.name }}
-                </h2>
-                <p class="text-lg <md:text-base font-semibold mt-2 -mb-2">
-                  {{
-                    `${lang.totalPlaytime}: ` +
-                    calculatePlayTime(item.playtime_forever, true)
-                  }}
-                </p>
-                <p class="text-lg <md:text-base font-semibold">
-                  {{
-                    `${lang.lastPlayed}: ` +
-                    calculateLastTimePlayed(item.rtime_last_played)
-                  }}
-                </p>
-              </NuxtLink>
-            </div>
+            <nuxt-img
+              format="webp"
+              quality="70"
+              sizes="sm:100vw"
+              class="transform transition-all duration-300 filter w-full"
+              :class="{
+                'scale-110 blur-[1px]':
+                  isHovering == mostPlayedGames?.api.indexOf(item) + 6,
+              }"
+              :src="`https://steamcdn-a.akamaihd.net/steam/apps/${item.appid}/header.jpg`"
+              :alt="item.name"
+            />
+            <NuxtLink
+              @mouseenter="isHovering = mostPlayedGames?.api.indexOf(item) + 6"
+              @mouseleave="isHovering = null"
+              class="absolute w-full h-full flex flex-col justify-center items-center bg-black/70 text-white hover:bg-black/80 active:bg-black/85 transition-all duration-300 cursor-pointer"
+              :to="`https://store.steampowered.com/app/${item.appid}/`"
+              target="_blank"
+            >
+              <h2 class="text-2xl <md:text-xl font-bold text-center">
+                {{ item.name }}
+              </h2>
+              <p class="text-lg <md:text-base font-semibold mt-2 -mb-2">
+                {{
+                  `${lang.totalPlaytime}: ` +
+                  calculatePlayTime(item.playtime_forever, true)
+                }}
+              </p>
+              <p class="text-lg <md:text-base font-semibold">
+                {{
+                  `${lang.lastPlayed}: ` +
+                  calculateLastTimePlayed(item.rtime_last_played)
+                }}
+              </p>
+            </NuxtLink>
           </div>
         </div>
       </section>
@@ -492,7 +482,8 @@ const proficiencies = [
           {{ lang.currentlyListening }}
         </h1>
         <NuxtLink
-          class="p-4 pr-14 w-fit rounded-md flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:(from-gray-800/80 to-gray-900/80)"
+          style="transition-property: all; transition-duration: 300ms"
+          class="p-4 md:pr-14 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) rounded-lg bg-clip-padding w-fit"
           :to="`${recentlyListenedTracks?.api[0].url}`"
           target="_blank"
           data-aos="fade-right"
@@ -523,7 +514,7 @@ const proficiencies = [
         </NuxtLink>
       </section>
 
-      <section class="flex flex-wrap gap-4">
+      <section class="flex flex-wrap gap-3">
         <h1
           class="text-4xl <md:text-3xl font-bold mb-6 w-full"
           data-aos="fade-left"
@@ -548,7 +539,7 @@ const proficiencies = [
           :key="song.name"
         >
           <NuxtLink
-            class="p-4 md:pr-14 flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:opacity-80 transition-all duration-300 rounded-md"
+            class="p-4 md:pr-14 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) transition-all duration-300 rounded-lg bg-clip-padding"
             :to="`${song.url}`"
             target="_blank"
           >
@@ -580,7 +571,7 @@ const proficiencies = [
         </div>
       </section>
 
-      <section class="mb-40 flex flex-wrap gap-4">
+      <section class="mb-40 flex flex-wrap gap-3">
         <h1
           class="text-4xl <md:text-3xl font-bold mb-6 w-full"
           data-aos="fade-left"
@@ -603,7 +594,7 @@ const proficiencies = [
           :key="song.name"
         >
           <NuxtLink
-            class="p-4 md:pr-14 flex items-center bg-gradient-to-b from-gray-800 to-gray-900 hover:opacity-80 transition-all duration-300 rounded-md"
+            class="p-4 md:pr-14 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) transition-all duration-300 rounded-lg bg-clip-padding"
             :to="`${song.url}`"
             target="_blank"
           >

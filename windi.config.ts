@@ -5,6 +5,12 @@ export default defineConfig({
         extend:{
             width:{
                 fit:'fit-content'
+            },
+            backgroundClip:{
+                padding:'padding-box'
+            },
+            boxShadow:{
+                'skyBloom':'0px 0px 20px 1px rgba(90, 90, 250, 0.8)'
             }
         }
     }
