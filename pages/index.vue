@@ -469,7 +469,10 @@ const proficiencies = [
         </div>
       </section>
 
-      <section v-if="recentlyListenedTracks?.api[0].hasOwnProperty('@attr')">
+      <section
+        class="leading-3"
+        v-if="recentlyListenedTracks?.api[0].hasOwnProperty('@attr')"
+      >
         <h1
           class="text-3xl <md:text-2xl font-bold mb-4 w-full"
           data-aos="fade-right"
@@ -485,7 +488,7 @@ const proficiencies = [
         </h1>
         <NuxtLink
           style="transition-property: all; transition-duration: 300ms"
-          class="md:pr-15 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) rounded-lg bg-clip-padding w-fit"
+          class="sm:pr-15 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) rounded-lg bg-clip-padding w-fit <sm:w-full"
           :to="`${recentlyListenedTracks?.api[0].url}`"
           target="_blank"
           data-aos="fade-right"
@@ -516,7 +519,7 @@ const proficiencies = [
         </NuxtLink>
       </section>
 
-      <section class="flex flex-wrap gap-2">
+      <section class="flex flex-wrap gap-2 leading-3">
         <h1
           class="text-3xl <md:text-2xl font-bold mb-2 w-full"
           data-aos="fade-left"
@@ -541,7 +544,7 @@ const proficiencies = [
           :key="song.name"
         >
           <NuxtLink
-            class="md:pr-15 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) transition-all duration-300 rounded-lg bg-clip-padding"
+            class="sm:pr-15 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) transition-all duration-300 rounded-lg bg-clip-padding"
             :to="`${song.url}`"
             target="_blank"
           >
@@ -573,7 +576,7 @@ const proficiencies = [
         </div>
       </section>
 
-      <section class="mb-40 flex flex-wrap gap-2">
+      <section class="mb-40 flex flex-wrap gap-2 leading-3">
         <h1
           class="text-3xl <md:text-2xl font-bold mb-2 w-full"
           data-aos="fade-left"
@@ -596,7 +599,7 @@ const proficiencies = [
           :key="song.name"
         >
           <NuxtLink
-            class="md:pr-15 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) transition-all duration-300 rounded-md bg-clip-padding"
+            class="sm:pr-15 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) transition-all duration-300 rounded-md bg-clip-padding"
             :to="`${song.url}`"
             target="_blank"
           >
@@ -622,8 +625,8 @@ const proficiencies = [
               </p>
               <div class="flex items-center flex-shrink-0">
                 <div
-                  class="pt-[1px] border-t-2 border-slate-500/80 w-6 mr-4"
-                ></div>
+                  class="pt-[1px] border-b-2 border-slate-600/80 w-6 mr-2 mt-1"
+                />
                 <p class="text-gray-500/80 font-semibold">
                   {{ song.playcount + ` ${lang.listens}` }}
                 </p>
