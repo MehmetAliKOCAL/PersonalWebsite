@@ -7,12 +7,12 @@ let mouseHoverID = ref(null);
 
 const headerTabs = [
   { mouseHoverID: 1, href: "/#hello", text: lang.value.headerHello },
+  { mouseHoverID: 3, href: "/#currently", text: lang.value.headerProjects },
   {
     mouseHoverID: 2,
     href: "/#proficiencies",
     text: lang.value.headerProficiencies,
   },
-  { mouseHoverID: 3, href: "/#currently", text: lang.value.headerProjects },
   {
     mouseHoverID: 4,
     href: "/#recentGames",
@@ -47,15 +47,11 @@ const headerTabs = [
       <nav class="<md:hidden flex flex-wrap gap-x-5 gap-y-4">
         <NuxtLink
           v-for="tab in headerTabs"
-          @mouseenter="mouseHoverID = tab.mouseHoverID"
-          @mouseleave="mouseHoverID = null"
-          class="hover:text-sky-500 transition-colors duration-300 text-shadow-xl"
+          :key="tab.text"
           :to="tab.href"
+          class="transform transition-transform duration-300 hover:-translate-y-1"
           >{{ tab.text }}
-          <hr
-            class="border-b-1 border-sky-500 transition-all duration-300"
-            :class="[mouseHoverID == tab.mouseHoverID ? 'w-full' : 'w-0']"
-        /></NuxtLink>
+        </NuxtLink>
       </nav>
 
       <div
@@ -112,7 +108,7 @@ const headerTabs = [
                 !globalVariables.isMobileMenuActive
             "
             :to="tab.href"
-            class="text-2xl font-semibold mb-4 hover:text-sky-400 transition-colors duration-300"
+            class="text-2xl font-semibold mb-4 hover:text-sky-500 transition-colors duration-300"
           >
             {{ tab.text }}
           </NuxtLink>

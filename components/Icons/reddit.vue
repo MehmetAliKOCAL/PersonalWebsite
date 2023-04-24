@@ -1,5 +1,5 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <svg viewBox="0 0 32 32">
     <path
       style="stroke: #000; stroke-width: 1; fill: #fff"
       d="M19.31 21.28a4.91 4.91 0 0 1-6.61 0 1 1 0 0 0-1.4 1.42 6.87 6.87 0 0 0 9.39 0 1 1 0 0 0-1.38-1.44zM13.5 17.5A1.5 1.5 0 1 0 12 19a1.5 1.5 0 0 0 1.5-1.5zM20 16a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 20 16z"

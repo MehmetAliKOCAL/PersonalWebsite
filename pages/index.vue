@@ -154,14 +154,14 @@ const proficiencies = [
       class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5 relative z-20 gap-y-20 flex flex-col"
     >
       <section id="hello" class="pt-60 <lg:pt-40">
-        <div class="flex text-4xl <md:text-3xl font-bold mb-6">
+        <div class="flex text-3xl <md:text-2xl font-bold mb-3">
           <NuxtLink
             to="#hello"
             class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300 mr-2"
           >
             #
           </NuxtLink>
-          <GlitchText
+          <GlitchedText
             :key="reRender"
             :id="'helloTitle'"
             :time="4200"
@@ -169,10 +169,10 @@ const proficiencies = [
             :defaultText="lang.loading"
           />
         </div>
-        <GlitchText
+        <GlitchedText
           :key="reRender"
           :id="'infoAboutMe'"
-          class="text-2xl <md:text-xl font-normal text-slate-400 min-h-24"
+          class="text-xl <md:text-lg font-normal text-slate-400 min-h-24"
           :time="2000"
           :messages="[
             lang.infoAboutMe1,
@@ -186,7 +186,7 @@ const proficiencies = [
 
       <section class="-mt-16">
         <h1
-          class="text-4xl <md:text-3xl font-bold mb-6"
+          class="text-3xl <md:text-2xl font-bold mb-3"
           data-aos="fade-right"
           data-aos-duration="900"
         >
@@ -200,7 +200,7 @@ const proficiencies = [
           {{ lang.currentlyWorkingOnTitle }}
         </h1>
         <p
-          class="text-2xl <md:text-xl font-normal text-slate-400"
+          class="text-xl <md:text-lg font-normal text-slate-400"
           data-aos="fade-right"
           data-aos-duration="550"
         >
@@ -210,7 +210,7 @@ const proficiencies = [
           <NuxtLink
             :to="lang.currentlyWorkingOn.link"
             target="_blank"
-            class="inline font-bold text-slate-200 hover:text-cyan-400 transition-colors duration-300"
+            class="inline font-bold text-slate-200 hover:text-sky-500 transition-colors duration-300"
             :class="{
               'pointer-events-none':
                 lang.currentlyWorkingOn.link == '' ||
@@ -222,7 +222,7 @@ const proficiencies = [
           {{ ", " + lang.currentlyWorkingOn.summary + " - " }}
           <NuxtLink
             to="/projectDetails/currentWork"
-            class="text-cyan-500 font-medium hover:text-cyan-300 transition-colors duration-300"
+            class="text-sky-500 font-medium hover:text-sky-300 transition-colors duration-300"
           >
             {{ lang.seeDetails }}
           </NuxtLink>
@@ -231,7 +231,7 @@ const proficiencies = [
 
       <section>
         <h1
-          class="text-4xl <md:text-3xl font-bold mb-6"
+          class="text-3xl <md:text-2xl font-bold mb-3"
           data-aos="fade-right"
           data-aos-duration="900"
         >
@@ -247,7 +247,7 @@ const proficiencies = [
         <p
           v-for="project in lang.previousProjects"
           :key="project.name"
-          class="text-2xl <md:text-xl font-normal text-slate-400 mb-2"
+          class="text-xl <md:text-lg font-normal text-slate-400"
           data-aos="fade-right"
           data-aos-duration="550"
           :data-aos-delay="increaseDelay()"
@@ -256,7 +256,7 @@ const proficiencies = [
           <NuxtLink
             :to="project.link"
             target="_blank"
-            class="inline font-bold text-slate-200 hover:text-cyan-400 transition-colors duration-300"
+            class="inline font-bold text-slate-200 hover:text-sky-500 transition-colors duration-300"
             :class="{
               'pointer-events-none':
                 project.link == '' || project.hasOwnProperty('link') == false,
@@ -267,7 +267,7 @@ const proficiencies = [
           {{ ", " + project.summary + " - " }}
           <NuxtLink
             :to="'/projectDetails/' + lang.previousProjects.indexOf(project)"
-            class="text-cyan-500 font-medium hover:text-cyan-300 transition-colors duration-300"
+            class="text-sky-500 font-medium hover:text-sky-300 transition-colors duration-300"
           >
             {{ lang.seeDetails }}
           </NuxtLink>
@@ -276,7 +276,7 @@ const proficiencies = [
 
       <section>
         <h1
-          class="text-4xl <md:text-3xl font-bold mb-6"
+          class="text-3xl <md:text-2xl font-bold mb-6"
           data-aos="fade-left"
           data-aos-duration="900"
         >
@@ -297,7 +297,9 @@ const proficiencies = [
             :data-aos-delay="`${increaseDelay()}`"
             class="w-[calc(50%-1rem)] <lg:w-full transition-all duration-300"
           >
-            <h2 class="font-semibold text-2xl <md:text-xl">{{ item.name }}</h2>
+            <h2 class="font-semibold text-xl <md:text-lgtext-2xl <md:text-xl">
+              {{ item.name }}
+            </h2>
             <div class="bg-slate-900 rounded-md">
               <div
                 class="py-5 rounded-md my-3 transition-all duration-2000"
@@ -314,7 +316,7 @@ const proficiencies = [
 
       <section>
         <h1
-          class="text-4xl <md:text-3xl font-bold mb-6"
+          class="text-3xl <md:text-2xl font-bold mb-6"
           data-aos="fade-left"
           data-aos-duration="1100"
         >
@@ -342,7 +344,7 @@ const proficiencies = [
           >
             <div
               v-if="item.img_icon_url == ''"
-              class="w-full text-2xl <md:text-xl flex relative rounded-md"
+              class="w-full text-xl <md:text-lg flex relative rounded-md"
             >
               <nuxt-img
                 format="webp"
@@ -381,16 +383,16 @@ const proficiencies = [
                 :to="`https://store.steampowered.com/app/${item.appid}/`"
                 target="_blank"
               >
-                <h2 class="text-2xl <md:text-xl font-bold text-center">
+                <h2 class="text-xl <md:text-lg font-bold text-center">
                   {{ item.name }}
                 </h2>
-                <p class="text-lg <md:text-base font-semibold mt-2 -mb-2">
+                <p class="font-semibold mt-2 -mb-2">
                   {{
                     calculatePlayTime(item.playtime_2weeks, false) +
                     ` ${lang.inLastTwoWeeks}`
                   }}
                 </p>
-                <p class="text-lg <md:text-base font-semibold">
+                <p class="font-semibold">
                   {{
                     calculatePlayTime(item.playtime_forever, false) +
                     ` ${lang.total}`
@@ -407,7 +409,7 @@ const proficiencies = [
 
       <section>
         <h1
-          class="text-4xl <md:text-3xl font-bold mb-6"
+          class="text-3xl <md:text-2xl font-bold mb-6"
           data-aos="fade-left"
           data-aos-duration="800"
         >
@@ -447,16 +449,16 @@ const proficiencies = [
               :to="`https://store.steampowered.com/app/${item.appid}/`"
               target="_blank"
             >
-              <h2 class="text-2xl <md:text-xl font-bold text-center">
+              <h2 class="text-xl <md:text-lg font-bold text-center">
                 {{ item.name }}
               </h2>
-              <p class="text-lg <md:text-base font-semibold mt-2 -mb-2">
+              <p class="font-semibold mt-2 -mb-2">
                 {{
                   `${lang.totalPlaytime}: ` +
                   calculatePlayTime(item.playtime_forever, true)
                 }}
               </p>
-              <p class="text-lg <md:text-base font-semibold">
+              <p class="font-semibold">
                 {{
                   `${lang.lastPlayed}: ` +
                   calculateLastTimePlayed(item.rtime_last_played)
@@ -469,7 +471,7 @@ const proficiencies = [
 
       <section v-if="recentlyListenedTracks?.api[0].hasOwnProperty('@attr')">
         <h1
-          class="text-4xl <md:text-3xl font-bold mb-6 w-full"
+          class="text-3xl <md:text-2xl font-bold mb-4 w-full"
           data-aos="fade-right"
           data-aos-duration="1000"
         >
@@ -483,7 +485,7 @@ const proficiencies = [
         </h1>
         <NuxtLink
           style="transition-property: all; transition-duration: 300ms"
-          class="p-4 md:pr-14 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) rounded-lg bg-clip-padding w-fit"
+          class="md:pr-15 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) rounded-lg bg-clip-padding w-fit"
           :to="`${recentlyListenedTracks?.api[0].url}`"
           target="_blank"
           data-aos="fade-right"
@@ -492,9 +494,9 @@ const proficiencies = [
           <nuxt-img
             format="webp"
             quality="50"
-            width="80"
-            height="80"
-            class="inline mr-5 rounded-sm"
+            width="60"
+            height="60"
+            class="inline m-4 mr-5 rounded-sm"
             :src="
               recentlyListenedTracks?.api[0].image[2]['#text'] != ''
                 ? `${recentlyListenedTracks?.api[0].image[2]['#text']}`
@@ -503,10 +505,10 @@ const proficiencies = [
             :alt="`${recentlyListenedTracks?.api[0].name}`"
           />
           <div>
-            <p class="text-slate-300/80 font-light text-lg">
+            <p class="text-slate-300/80 font-light">
               {{ recentlyListenedTracks?.api[0].artist["#text"] }}
             </p>
-            <p class="text-slate-200 font-bold text-xl">
+            <p class="text-slate-200 font-bold text-lg">
               {{ recentlyListenedTracks?.api[0].name }}
             </p>
             <p>{{ recentlyListenedTracks?.api[0].album["#text"] }}</p>
@@ -514,9 +516,9 @@ const proficiencies = [
         </NuxtLink>
       </section>
 
-      <section class="flex flex-wrap gap-3">
+      <section class="flex flex-wrap gap-2">
         <h1
-          class="text-4xl <md:text-3xl font-bold mb-6 w-full"
+          class="text-3xl <md:text-2xl font-bold mb-2 w-full"
           data-aos="fade-left"
           data-aos-duration="1100"
         >
@@ -539,16 +541,16 @@ const proficiencies = [
           :key="song.name"
         >
           <NuxtLink
-            class="p-4 md:pr-14 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) transition-all duration-300 rounded-lg bg-clip-padding"
+            class="md:pr-15 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) transition-all duration-300 rounded-lg bg-clip-padding"
             :to="`${song.url}`"
             target="_blank"
           >
             <nuxt-img
               format="webp"
               quality="50"
-              width="80"
-              height="80"
-              class="inline mr-5 rounded-sm"
+              width="60"
+              height="60"
+              class="inline m-4 mr-5 rounded-sm"
               :src="
                 song.image[2]['#text'] != ''
                   ? `${song.image[2]['#text']}`
@@ -557,13 +559,13 @@ const proficiencies = [
               :alt="`${song.name}`"
             />
             <div>
-              <p class="text-slate-300/80 font-light text-lg <md:text-base">
+              <p class="text-gray-400 font-light">
                 {{ song.artist["#text"] }}
               </p>
-              <p class="text-slate-200 font-bold text-xl <md:text-lg">
+              <p class="text-gray-200 font-bold text-lg">
                 {{ song.name }}
               </p>
-              <p class="text-gray-400 font-semibold">
+              <p class="text-gray-400 font-medium">
                 {{ song.album["#text"] }}
               </p>
             </div></NuxtLink
@@ -571,9 +573,9 @@ const proficiencies = [
         </div>
       </section>
 
-      <section class="mb-40 flex flex-wrap gap-3">
+      <section class="mb-40 flex flex-wrap gap-2">
         <h1
-          class="text-4xl <md:text-3xl font-bold mb-6 w-full"
+          class="text-3xl <md:text-2xl font-bold mb-2 w-full"
           data-aos="fade-left"
           data-aos-duration="1100"
         >
@@ -594,16 +596,16 @@ const proficiencies = [
           :key="song.name"
         >
           <NuxtLink
-            class="p-4 md:pr-14 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) transition-all duration-300 rounded-lg bg-clip-padding"
+            class="md:pr-15 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) transition-all duration-300 rounded-md bg-clip-padding"
             :to="`${song.url}`"
             target="_blank"
           >
             <nuxt-img
               format="webp"
               quality="50"
-              width="80"
-              height="80"
-              class="inline mr-5 rounded-sm"
+              width="60"
+              height="60"
+              class="inline m-4 mr-5 rounded-sm"
               :src="
                 song.image[2]['#text'] != ''
                   ? `${song.image[2]['#text']}`
@@ -612,10 +614,10 @@ const proficiencies = [
               :alt="`${song.name}`"
             />
             <div>
-              <p class="text-slate-300/80 font-light text-lg <md:text-base">
+              <p class="text-gray-400 font-light">
                 {{ song.artist.name }}
               </p>
-              <p class="text-slate-200 font-bold text-xl <md:text-lg">
+              <p class="text-gray-200 font-bold text-lg">
                 {{ song.name }}
               </p>
               <div class="flex items-center flex-shrink-0">

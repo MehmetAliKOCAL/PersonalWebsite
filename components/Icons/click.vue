@@ -1,14 +1,5 @@
 <template>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    version="1.1"
-    width="28"
-    height="28"
-    viewBox="0 0 256 256"
-    xml:space="preserve"
-    class="inline"
-  >
+  <svg width="28" height="28" viewBox="0 0 256 256" class="inline">
     <g
       style="
         stroke: none;

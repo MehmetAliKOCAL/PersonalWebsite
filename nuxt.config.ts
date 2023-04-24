@@ -69,7 +69,7 @@ export default defineNuxtConfig({
       enabled: false
     },
     icon:{
-      fileName:'favicon.png'
+      fileName:'favicon.png',
     },
     meta:{
       name:'GwynDev',
