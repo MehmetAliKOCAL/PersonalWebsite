@@ -59,6 +59,20 @@ const texts = {
   previousProjects: [
     {
       role: "Made",
+      name: "YT Music Clone",
+      link: "https://music.gwyndev.com",
+      emoji: "🎸",
+      summary: "a functional YouTube Music clone",
+    },
+    {
+      role: "Made",
+      name: "Corner Posts",
+      link: "https://cornerposts.gwyndev.com",
+      emoji: "✒️",
+      summary: "a website that you can write corner posts",
+    },
+    {
+      role: "Made",
       name: "Volcanoids Turkish Localization",
       link: "https://steamcommunity.com/sharedfiles/filedetails/?id=2952920316",
       emoji: "⚙️",
@@ -69,7 +83,7 @@ const texts = {
       name: "GwynDev",
       link: "https://gwyndev.com/",
       emoji: "📌",
-      summary: "to show off things about me",
+      summary: "my personal website (you are here!)",
     },
     {
       role: "Developed the front-end of",

@@ -58,6 +58,20 @@ const texts = {
   },
   previousProjects: [
     {
+      role: "Site - ",
+      name: "YT Music Clone",
+      link: "https://music.gwyndev.com",
+      emoji: "🎸",
+      summary: "fonksiyonel bir YouTube Music klonu",
+    },
+    {
+      role: "Site - ",
+      name: "Corner Posts",
+      link: "https://cornerposts.gwyndev.com",
+      emoji: "✒️",
+      summary: "köşe yazısı paylaşabileceğiniz bir internet sitesi",
+    },
+    {
       role: "Mod - ",
       name: "Volcanoids Türkçe Yama",
       link: "https://steamcommunity.com/sharedfiles/filedetails/?id=2952920316",
