@@ -484,7 +484,16 @@ const proficiencies = [
             class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
             >♪</NuxtLink
           >
-          {{ lang.currentlyListening }}
+          <div class="ml-2 inline-flex items-center">
+            <p>{{ lang.currentlyListening }}</p>
+            <div class="flex ml-3">
+              <div
+                v-for="soundBar in 5"
+                :key="soundBar"
+                class="bg-gray-400 animate-sound bottom-1 absolute h-1 w-[3px]"
+              />
+            </div>
+          </div>
         </h1>
         <NuxtLink
           style="transition-property: all; transition-duration: 300ms"
@@ -638,3 +647,37 @@ const proficiencies = [
     </div>
   </main>
 </template>
+
+<style>
+@keyframes sound {
+  0% {
+    opacity: 0.35;
+    height: 3px;
+  }
+  100% {
+    opacity: 1;
+    height: 20px;
+  }
+}
+
+.animate-sound:nth-child(1) {
+  margin-left: 1px;
+  animation-duration: 624ms;
+}
+.animate-sound:nth-child(2) {
+  margin-left: 7px;
+  animation-duration: 682ms;
+}
+.animate-sound:nth-child(3) {
+  margin-left: 13px;
+  animation-duration: 619ms;
+}
+.animate-sound:nth-child(4) {
+  margin-left: 19px;
+  animation-duration: 674ms;
+}
+.animate-sound:nth-child(5) {
+  margin-left: 25px;
+  animation-duration: 626ms;
+}
+</style>
