@@ -20,8 +20,8 @@ const texts = {
   noGamesPlayed:
     "It seems like I haven't played any video games in the last 2 weeks. 🥸",
   mostPlayedGames: "Most Played Games 🎮🔝",
-  currentlyListening: "Currently Listening 🎧",
-  recentlyListenedTracks: "Recently Listened Tracks 📻",
+  currentlyListening: "Currently Listening",
+  recentlyListenedTracks: "Recently Listened Tracks 🎧",
   mostListenedTracks: "Most Listened Tracks 🍒🔝",
   inLastTwoWeeks: "in last 2 weeks",
   total: "total",
