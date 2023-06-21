@@ -1,146 +1,148 @@
 <script setup>
-import { useElementVisibility } from "@vueuse/core";
-import { useGlobalVariablesStore } from "~/store/globalVariables.js";
-import { storeToRefs } from "pinia";
-const globalVariables = useGlobalVariablesStore();
-const { lang } = storeToRefs(globalVariables);
+  import { useElementVisibility } from '@vueuse/core';
+  import { useGlobalVariablesStore } from '~/store/globalVariables.js';
+  import { storeToRefs } from 'pinia';
+  const globalVariables = useGlobalVariablesStore();
+  const { lang } = storeToRefs(globalVariables);
 
-let reRender = ref(0);
-watch(lang, () => {
-  reRender.value++;
-});
+  let reRender = ref(0);
+  watch(lang, () => {
+    reRender.value++;
+  });
 
-const { data: mostPlayedGames } = useLazyAsyncData("mostPlayedGames", () =>
-  $fetch("/api/games/mostPlayedGames")
-);
-const { data: recentlyPlayedGames } = useLazyAsyncData(
-  "recentlyPlayedGames",
-  () => $fetch("/api/games/recentlyPlayedGames")
-);
-const { data: mostListenedTracks } = useLazyAsyncData(
-  "mostListenedTracks",
-  () => $fetch("/api/songs/topTracks")
-);
-const { data: recentlyListenedTracks } = useLazyAsyncData(
-  "recentlyListenedTracks",
-  () => $fetch("/api/songs/recentTracks/")
-);
+  const { data: mostPlayedGames } = useLazyAsyncData('mostPlayedGames', () =>
+    $fetch('/api/games/mostPlayedGames')
+  );
+  const { data: recentlyPlayedGames } = useLazyAsyncData(
+    'recentlyPlayedGames',
+    () => $fetch('/api/games/recentlyPlayedGames')
+  );
+  const { data: mostListenedTracks } = useLazyAsyncData(
+    'mostListenedTracks',
+    () => $fetch('/api/songs/topTracks')
+  );
+  const { data: recentlyListenedTracks } = useLazyAsyncData(
+    'recentlyListenedTracks',
+    () => $fetch('/api/songs/recentTracks/')
+  );
 
-function calculateLastTimePlayed(seconds) {
-  const resultInDays = Math.round((Date.now() / 1000 - seconds) / 60 / 60 / 24);
-  if (resultInDays < 1) return lang.value.today;
-  else if (resultInDays < 2) return lang.value.yesterday;
-  else if (resultInDays > 365)
-    return (resultInDays / 365).toFixed(0) + ` ${lang.value.yearsAgo}`;
-  else return resultInDays + ` ${lang.value.daysAgo}`;
-}
-
-function calculatePlayTime(minutes, shouldBeRounded) {
-  if (minutes < 2) return `${minutes} ${lang.value.minute}`;
-  else if (minutes < 60) return minutes + ` ${lang.value.minutes}`;
-  else if (minutes / 60 < 1.2) return lang.value.oneHour;
-  else {
-    if (
-      (minutes / 60).toFixed(1) % 1 < 0.2 ||
-      (minutes / 60).toFixed(1) % 1 >= 0.8 ||
-      shouldBeRounded == true
-    )
-      return `${Math.round(minutes / 60)} ${lang.value.hours}`;
-    else return `${(minutes / 60).toFixed(1)} ${lang.value.hours}`;
+  function calculateLastTimePlayed(seconds) {
+    const resultInDays = Math.round(
+      (Date.now() / 1000 - seconds) / 60 / 60 / 24
+    );
+    if (resultInDays < 1) return lang.value.today;
+    else if (resultInDays < 2) return lang.value.yesterday;
+    else if (resultInDays > 365)
+      return (resultInDays / 365).toFixed(0) + ` ${lang.value.yearsAgo}`;
+    else return resultInDays + ` ${lang.value.daysAgo}`;
   }
-}
 
-let isHovering = ref(null);
-const target = ref(null);
-const targetIsVisible = useElementVisibility(target);
-
-let animationDelay = 0;
-function increaseDelay() {
-  if (animationDelay == 300) {
-    animationDelay = 0;
+  function calculatePlayTime(minutes, shouldBeRounded) {
+    if (minutes < 2) return `${minutes} ${lang.value.minute}`;
+    else if (minutes < 60) return minutes + ` ${lang.value.minutes}`;
+    else if (minutes / 60 < 1.2) return lang.value.oneHour;
+    else {
+      if (
+        (minutes / 60).toFixed(1) % 1 < 0.2 ||
+        (minutes / 60).toFixed(1) % 1 >= 0.8 ||
+        shouldBeRounded == true
+      )
+        return `${Math.round(minutes / 60)} ${lang.value.hours}`;
+      else return `${(minutes / 60).toFixed(1)} ${lang.value.hours}`;
+    }
   }
-  animationDelay += 100;
-  return animationDelay;
-}
-function animDirection(itemIndex) {
-  if (itemIndex < 3) return "fade-right";
-  else return "fade-left";
-}
 
-const proficiencies = [
-  {
-    name: "HTML5",
-    firstColor: "#c2410c",
-    secondColor: "#f97316",
-    proficiencyLevel: "w-full",
-  },
-  {
-    name: "CSS3",
-    firstColor: "#2563eb",
-    secondColor: "#06b6d4",
-    proficiencyLevel: "w-8/10",
-  },
-  {
-    name: "Tailwind CSS",
-    firstColor: "#0e7490",
-    secondColor: "#06b6d4",
-    proficiencyLevel: "w-8/10",
-  },
-  {
-    name: "JavaScript",
-    firstColor: "#f59e0b",
-    secondColor: "#fbbf24",
-    proficiencyLevel: "w-7/10",
-  },
-  {
-    name: "Vue.JS",
-    firstColor: "#059669",
-    secondColor: "#334155",
-    proficiencyLevel: "w-6/10",
-  },
-  {
-    name: "Nuxt.JS",
-    firstColor: "#10b981",
-    secondColor: "#2dd4bf",
-    proficiencyLevel: "w-6/10",
-  },
-  {
-    name: "C#",
-    firstColor: "#7c3aed",
-    secondColor: "#d946ef",
-    proficiencyLevel: "w-5/10",
-  },
-  {
-    name: "MySQL",
-    firstColor: "#2563eb",
-    secondColor: "#475569",
-    proficiencyLevel: "w-7/10",
-  },
-  {
-    name: "Unity3D",
-    firstColor: "#000",
-    secondColor: "#374151",
-    proficiencyLevel: "w-4/10",
-  },
-  {
-    name: "Blender",
-    firstColor: "#ea580c",
-    secondColor: "#fb923c",
-    proficiencyLevel: "w-2/10",
-  },
-  {
-    name: "Adobe Photoshop",
-    firstColor: "#1E293B",
-    secondColor: "#0ea5e9",
-    proficiencyLevel: "w-5/10",
-  },
-  {
-    name: "Adobe After Effects",
-    firstColor: "#1e40af",
-    secondColor: "#6366f1",
-    proficiencyLevel: "w-5/10",
-  },
-];
+  let isHovering = ref(null);
+  const target = ref(null);
+  const targetIsVisible = useElementVisibility(target);
+
+  let animationDelay = 0;
+  function increaseDelay() {
+    if (animationDelay == 300) {
+      animationDelay = 0;
+    }
+    animationDelay += 100;
+    return animationDelay;
+  }
+  function animDirection(itemIndex) {
+    if (itemIndex < 3) return 'fade-right';
+    else return 'fade-left';
+  }
+
+  const proficiencies = [
+    {
+      name: 'HTML5',
+      firstColor: '#c2410c',
+      secondColor: '#f97316',
+      proficiencyLevel: 'w-full',
+    },
+    {
+      name: 'CSS3',
+      firstColor: '#2563eb',
+      secondColor: '#06b6d4',
+      proficiencyLevel: 'w-8/10',
+    },
+    {
+      name: 'Tailwind CSS',
+      firstColor: '#0e7490',
+      secondColor: '#06b6d4',
+      proficiencyLevel: 'w-8/10',
+    },
+    {
+      name: 'JavaScript',
+      firstColor: '#f59e0b',
+      secondColor: '#fbbf24',
+      proficiencyLevel: 'w-7/10',
+    },
+    {
+      name: 'Vue.JS',
+      firstColor: '#059669',
+      secondColor: '#334155',
+      proficiencyLevel: 'w-6/10',
+    },
+    {
+      name: 'Nuxt.JS',
+      firstColor: '#10b981',
+      secondColor: '#2dd4bf',
+      proficiencyLevel: 'w-6/10',
+    },
+    {
+      name: 'C#',
+      firstColor: '#7c3aed',
+      secondColor: '#d946ef',
+      proficiencyLevel: 'w-5/10',
+    },
+    {
+      name: 'MySQL',
+      firstColor: '#2563eb',
+      secondColor: '#475569',
+      proficiencyLevel: 'w-7/10',
+    },
+    {
+      name: 'Unity3D',
+      firstColor: '#000',
+      secondColor: '#374151',
+      proficiencyLevel: 'w-4/10',
+    },
+    {
+      name: 'Blender',
+      firstColor: '#ea580c',
+      secondColor: '#fb923c',
+      proficiencyLevel: 'w-2/10',
+    },
+    {
+      name: 'Adobe Photoshop',
+      firstColor: '#1E293B',
+      secondColor: '#0ea5e9',
+      proficiencyLevel: 'w-5/10',
+    },
+    {
+      name: 'Adobe After Effects',
+      firstColor: '#1e40af',
+      secondColor: '#6366f1',
+      proficiencyLevel: 'w-5/10',
+    },
+  ];
 </script>
 
 <template>
@@ -153,7 +155,10 @@ const proficiencies = [
     <div
       class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5 relative z-20 gap-y-20 flex flex-col"
     >
-      <section id="hello" class="pt-60 <lg:pt-40">
+      <section
+        id="hello"
+        class="pt-60 <lg:pt-40"
+      >
         <div class="flex text-3xl <md:text-2xl font-bold mb-3">
           <NuxtLink
             to="#hello"
@@ -200,26 +205,25 @@ const proficiencies = [
           {{ lang.currentlyWorkingOnTitle }}
         </h1>
         <p
+          v-for="project in lang.currentlyWorkingOn"
+          :key="project"
           class="text-xl <md:text-lg font-normal text-slate-400"
           data-aos="fade-right"
           data-aos-duration="550"
         >
-          {{
-            lang.currentlyWorkingOn.emoji + " " + lang.currentlyWorkingOn.role
-          }}
+          {{ project.emoji + ' ' + project.role }}
           <NuxtLink
-            :to="lang.currentlyWorkingOn.link"
+            :to="project.link"
             target="_blank"
             class="inline font-bold text-slate-200 hover:text-sky-500 transition-colors duration-300"
             :class="{
               'pointer-events-none':
-                lang.currentlyWorkingOn.link == '' ||
-                lang.currentlyWorkingOn.hasOwnProperty('link') == false,
+                project.link == '' || project.hasOwnProperty('link') == false,
             }"
           >
-            {{ " " + lang.currentlyWorkingOn.name }}
+            {{ ' ' + project.name }}
           </NuxtLink>
-          {{ ", " + lang.currentlyWorkingOn.summary + " - " }}
+          {{ ', ' + project.summary + ' - ' }}
           <NuxtLink
             to="/projectDetails/currentWork"
             class="text-sky-500 font-medium hover:text-sky-300 transition-colors duration-300"
@@ -246,13 +250,13 @@ const proficiencies = [
         </h1>
         <p
           v-for="project in lang.previousProjects"
-          :key="project.name"
+          :key="project"
           class="text-xl <md:text-lg font-normal text-slate-400"
           data-aos="fade-right"
           data-aos-duration="550"
           :data-aos-delay="increaseDelay()"
         >
-          {{ project.emoji + " " + project.role }}
+          {{ project.emoji + ' ' + project.role }}
           <NuxtLink
             :to="project.link"
             target="_blank"
@@ -262,9 +266,9 @@ const proficiencies = [
                 project.link == '' || project.hasOwnProperty('link') == false,
             }"
           >
-            {{ " " + project.name }}
+            {{ ' ' + project.name }}
           </NuxtLink>
-          {{ ", " + project.summary + " - " }}
+          {{ ', ' + project.summary + ' - ' }}
           <NuxtLink
             :to="'/projectDetails/' + lang.previousProjects.indexOf(project)"
             class="text-sky-500 font-medium hover:text-sky-300 transition-colors duration-300"
@@ -289,7 +293,10 @@ const proficiencies = [
           </NuxtLink>
           {{ lang.proficiencies }}
         </h1>
-        <div ref="target" class="flex w-full flex-wrap justify-between gap-x-4">
+        <div
+          ref="target"
+          class="flex w-full flex-wrap justify-between gap-x-4"
+        >
           <div
             v-for="item in proficiencies"
             :key="item.name"
@@ -361,7 +368,10 @@ const proficiencies = [
               </h2>
             </div>
 
-            <div v-else class="relative flex overflow-hidden w-full rounded-md">
+            <div
+              v-else
+              class="relative flex overflow-hidden w-full rounded-md"
+            >
               <nuxt-img
                 format="webp"
                 quality="70"
@@ -402,7 +412,10 @@ const proficiencies = [
             </div>
           </div>
         </div>
-        <div v-else class="text-2xl <md:text-xl font-normal text-slate-400">
+        <div
+          v-else
+          class="text-2xl <md:text-xl font-normal text-slate-400"
+        >
           {{ lang.noGamesPlayed }}
         </div>
       </section>
@@ -422,7 +435,10 @@ const proficiencies = [
           </NuxtLink>
           {{ lang.mostPlayedGames }}
         </h1>
-        <div class="flex flex-wrap gap-3" v-if="mostPlayedGames?.api != null">
+        <div
+          class="flex flex-wrap gap-3"
+          v-if="mostPlayedGames?.api != null"
+        >
           <div
             class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) rounded-md relative flex overflow-hidden"
             v-for="item in mostPlayedGames?.api"
@@ -518,12 +534,12 @@ const proficiencies = [
           />
           <div>
             <p class="text-slate-300/80 font-light">
-              {{ recentlyListenedTracks?.api[0].artist["#text"] }}
+              {{ recentlyListenedTracks?.api[0].artist['#text'] }}
             </p>
             <p class="text-slate-200 font-bold text-lg">
               {{ recentlyListenedTracks?.api[0].name }}
             </p>
-            <p>{{ recentlyListenedTracks?.api[0].album["#text"] }}</p>
+            <p>{{ recentlyListenedTracks?.api[0].album['#text'] }}</p>
           </div>
         </NuxtLink>
       </section>
@@ -572,13 +588,13 @@ const proficiencies = [
             />
             <div>
               <p class="text-gray-400 font-light">
-                {{ song.artist["#text"] }}
+                {{ song.artist['#text'] }}
               </p>
               <p class="text-gray-200 font-bold text-lg">
                 {{ song.name }}
               </p>
               <p class="text-gray-400 font-medium">
-                {{ song.album["#text"] }}
+                {{ song.album['#text'] }}
               </p>
             </div></NuxtLink
           >
@@ -649,35 +665,35 @@ const proficiencies = [
 </template>
 
 <style>
-@keyframes sound {
-  0% {
-    opacity: 0.35;
-    height: 3px;
+  @keyframes sound {
+    0% {
+      opacity: 0.35;
+      height: 3px;
+    }
+    100% {
+      opacity: 1;
+      height: 20px;
+    }
   }
-  100% {
-    opacity: 1;
-    height: 20px;
-  }
-}
 
-.animate-sound:nth-child(1) {
-  margin-left: 1px;
-  animation-duration: 624ms;
-}
-.animate-sound:nth-child(2) {
-  margin-left: 7px;
-  animation-duration: 682ms;
-}
-.animate-sound:nth-child(3) {
-  margin-left: 13px;
-  animation-duration: 619ms;
-}
-.animate-sound:nth-child(4) {
-  margin-left: 19px;
-  animation-duration: 674ms;
-}
-.animate-sound:nth-child(5) {
-  margin-left: 25px;
-  animation-duration: 626ms;
-}
+  .animate-sound:nth-child(1) {
+    margin-left: 1px;
+    animation-duration: 624ms;
+  }
+  .animate-sound:nth-child(2) {
+    margin-left: 7px;
+    animation-duration: 682ms;
+  }
+  .animate-sound:nth-child(3) {
+    margin-left: 13px;
+    animation-duration: 619ms;
+  }
+  .animate-sound:nth-child(4) {
+    margin-left: 19px;
+    animation-duration: 674ms;
+  }
+  .animate-sound:nth-child(5) {
+    margin-left: 25px;
+    animation-duration: 626ms;
+  }
 </style>
