@@ -1,6 +1,5 @@
 const age = Math.abs(
-  new Date(Date.now() - new Date('08/25/2000').getTime()).getUTCFullYear() -
-    1970
+  new Date(Date.now() - new Date('08/25/2000').getTime()).getUTCFullYear() - 1970
 );
 
 const texts = {
@@ -10,8 +9,7 @@ const texts = {
   infoAboutMe2: 'Yazılım ve 3D modelleme ile ilgileniyorum.',
   infoAboutMe3: 'Şu anda Blender, C#, Vue.js, ve Nuxt.js öğreniyorum.',
   infoAboutMe4: 'Ayrıca video oyunlarını çok seviyorum.',
-  infoAboutMe5:
-    'Boş zamanlarımda hobi olarak Unity ile oyun yapmaya çalışıyorum.',
+  infoAboutMe5: 'Boş zamanlarımda hobi olarak Unity ile oyun yapmaya çalışıyorum.',
   currentlyWorkingOnTitle: 'Şu An Üzerinde Çalıştığım Proje 👨🏻‍💻🌱',
   previousProjectsTitle: 'Tamamladığım Projeler 👨🏻‍💻🌳',
   seeDetails: 'detayları gör',
@@ -59,6 +57,13 @@ const texts = {
   ],
   previousProjects: [
     {
+      role: 'Site - ',
+      name: 'SVFP',
+      link: 'https://sikayetvarfp.vercel.app/students',
+      emoji: '💼',
+      summary: 'bir iş başvurusu için tamamladığım mülakat öncesi ön uç geliştirme ödevi',
+    },
+    {
       role: 'Renk Teması - ',
       name: 'Apatite Dark',
       link: 'https://marketplace.visualstudio.com/items?itemName=GwynDev.Apatite-Dark',
@@ -99,8 +104,7 @@ const texts = {
       name: 'AhniWeb',
       link: 'https://ahni-web.vercel.app/',
       emoji: '🎓',
-      summary:
-        'Ahni lisesi mezunlarının buluşma noktası olarak kullandıkları bir internet sitesi',
+      summary: 'Ahni lisesi mezunlarının buluşma noktası olarak kullandıkları bir internet sitesi',
     },
   ],
 };
