@@ -1,5 +1,6 @@
 const age = Math.abs(
-  new Date(Date.now() - new Date('08/25/2000').getTime()).getUTCFullYear() - 1970
+  new Date(Date.now() - new Date('08/25/2000').getTime()).getUTCFullYear() -
+    1970
 );
 
 const texts = {
@@ -16,7 +17,8 @@ const texts = {
   proficiencies: 'Proficiencies ✨',
   recentlyPlayedGames: 'Recently Played Games 🎮',
   gameNotAvailable: 'This game is not available on Steam.',
-  noGamesPlayed: "It seems like I haven't played any video games in the last 2 weeks. 🥸",
+  noGamesPlayed:
+    "It seems like I haven't played any video games in the last 2 weeks. 🥸",
   mostPlayedGames: 'Most Played Games 🎮🔝',
   currentlyListening: 'Currently Listening',
   recentlyListenedTracks: 'Recently Listened Tracks 🎧',
@@ -59,9 +61,10 @@ const texts = {
     {
       role: 'Made',
       name: 'SVFP',
-      link: 'https://sikayetvarfp.vercel.app/students',
+      link: 'https://sikayetvarcs.gwyndev.com/students',
       emoji: '💼',
-      summary: 'a pre-interview front-end app project I made for a job application',
+      summary:
+        'a pre-interview front-end app project I made for a job application',
     },
     {
       role: 'Made',
