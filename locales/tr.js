@@ -46,6 +46,18 @@ const texts = {
   footerOpenSource: 'Bu site açık kaynaklı!',
   buttonHomepage: 'Ana Sayfa',
   pageUnderConstruction: 'Üzgünüm, bu sayfa henüz yapım aşamasında.🥸',
+  languages: [
+    {
+      global: 'English',
+      local: 'İngilizce',
+      setLanguage: 'en',
+    },
+    {
+      global: 'Turkish',
+      local: 'Türkçe',
+      setLanguage: 'tr',
+    },
+  ],
   currentlyWorkingOn: [
     {
       role: 'Site - ',

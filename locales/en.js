@@ -46,6 +46,18 @@ const texts = {
   footerOpenSource: 'This website is open-source!',
   buttonHomepage: 'Homepage',
   pageUnderConstruction: 'Sorry, this page is under construction.🥸',
+  languages: [
+    {
+      global: 'English',
+      local: 'English',
+      setLanguage: 'en',
+    },
+    {
+      local: 'Turkish',
+      global: 'Türkçe',
+      setLanguage: 'tr',
+    },
+  ],
   currentlyWorkingOn: [
     {
       role: 'Making',
