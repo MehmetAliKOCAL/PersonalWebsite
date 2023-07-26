@@ -13,27 +13,21 @@
   const { data: mostPlayedGames } = useLazyAsyncData('mostPlayedGames', () =>
     $fetch('/api/games/mostPlayedGames')
   );
-  const { data: recentlyPlayedGames } = useLazyAsyncData(
-    'recentlyPlayedGames',
-    () => $fetch('/api/games/recentlyPlayedGames')
+  const { data: recentlyPlayedGames } = useLazyAsyncData('recentlyPlayedGames', () =>
+    $fetch('/api/games/recentlyPlayedGames')
   );
-  const { data: mostListenedTracks } = useLazyAsyncData(
-    'mostListenedTracks',
-    () => $fetch('/api/songs/topTracks')
+  const { data: mostListenedTracks } = useLazyAsyncData('mostListenedTracks', () =>
+    $fetch('/api/songs/topTracks')
   );
-  const { data: recentlyListenedTracks } = useLazyAsyncData(
-    'recentlyListenedTracks',
-    () => $fetch('/api/songs/recentTracks/')
+  const { data: recentlyListenedTracks } = useLazyAsyncData('recentlyListenedTracks', () =>
+    $fetch('/api/songs/recentTracks/')
   );
 
   function calculateLastTimePlayed(seconds) {
-    const resultInDays = Math.round(
-      (Date.now() / 1000 - seconds) / 60 / 60 / 24
-    );
+    const resultInDays = Math.round((Date.now() / 1000 - seconds) / 60 / 60 / 24);
     if (resultInDays < 1) return lang.value.today;
     else if (resultInDays < 2) return lang.value.yesterday;
-    else if (resultInDays > 365)
-      return (resultInDays / 365).toFixed(0) + ` ${lang.value.yearsAgo}`;
+    else if (resultInDays > 365) return (resultInDays / 365).toFixed(0) + ` ${lang.value.yearsAgo}`;
     else return resultInDays + ` ${lang.value.daysAgo}`;
   }
 
@@ -58,9 +52,7 @@
 
   let animationDelay = 0;
   function increaseDelay() {
-    if (animationDelay == 300) {
-      animationDelay = 0;
-    }
+    if (animationDelay == 300) animationDelay = 0;
     animationDelay += 100;
     return animationDelay;
   }
@@ -148,13 +140,9 @@
 <template>
   <main>
     <div class="<md:hidden absolute w-full h-50vh z-0 landing-section-color" />
-    <div
-      class="<md:hidden absolute w-full h-50vh z-10 landing-section-color-wrapper"
-    />
+    <div class="<md:hidden absolute w-full h-50vh z-10 landing-section-color-wrapper" />
 
-    <div
-      class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5 relative z-20 gap-y-20 flex flex-col"
-    >
+    <div class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5 relative z-20 gap-y-20 flex flex-col">
       <section
         id="hello"
         class="pt-60 <lg:pt-40"
@@ -217,8 +205,7 @@
             target="_blank"
             class="inline font-bold text-slate-200 hover:text-sky-500 transition-colors duration-300"
             :class="{
-              'pointer-events-none':
-                project.link == '' || project.hasOwnProperty('link') == false,
+              'pointer-events-none': project.link == '' || project.hasOwnProperty('link') == false,
             }"
           >
             {{ ' ' + project.name }}
@@ -262,8 +249,7 @@
             target="_blank"
             class="inline font-bold text-slate-200 hover:text-sky-500 transition-colors duration-300"
             :class="{
-              'pointer-events-none':
-                project.link == '' || project.hasOwnProperty('link') == false,
+              'pointer-events-none': project.link == '' || project.hasOwnProperty('link') == false,
             }"
           >
             {{ ' ' + project.name }}
@@ -344,9 +330,7 @@
             class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) rounded-md"
             v-for="item in recentlyPlayedGames?.api"
             :key="item.name"
-            :data-aos="`${animDirection(
-              recentlyPlayedGames?.api.indexOf(item)
-            )}`"
+            :data-aos="`${animDirection(recentlyPlayedGames?.api.indexOf(item))}`"
             :data-aos-delay="`${increaseDelay()}`"
           >
             <div
@@ -385,9 +369,7 @@
                 :alt="item.name"
               />
               <NuxtLink
-                @mouseenter="
-                  isHovering = recentlyPlayedGames?.api.indexOf(item)
-                "
+                @mouseenter="isHovering = recentlyPlayedGames?.api.indexOf(item)"
                 @mouseleave="isHovering = null"
                 class="absolute w-full h-full flex flex-col justify-center items-center bg-black/70 text-white hover:bg-black/80 active:bg-black/85 transition-all duration-300 cursor-pointer"
                 :to="`https://store.steampowered.com/app/${item.appid}/`"
@@ -397,16 +379,10 @@
                   {{ item.name }}
                 </h2>
                 <p class="font-semibold mt-2 -mb-2">
-                  {{
-                    calculatePlayTime(item.playtime_2weeks, false) +
-                    ` ${lang.inLastTwoWeeks}`
-                  }}
+                  {{ calculatePlayTime(item.playtime_2weeks, false) + ` ${lang.inLastTwoWeeks}` }}
                 </p>
                 <p class="font-semibold">
-                  {{
-                    calculatePlayTime(item.playtime_forever, false) +
-                    ` ${lang.total}`
-                  }}
+                  {{ calculatePlayTime(item.playtime_forever, false) + ` ${lang.total}` }}
                 </p>
               </NuxtLink>
             </div>
@@ -452,8 +428,7 @@
               sizes="sm:100vw"
               class="transform transition-all duration-300 filter w-full"
               :class="{
-                'scale-110 blur-[1px]':
-                  isHovering == mostPlayedGames?.api.indexOf(item) + 6,
+                'scale-110 blur-[1px]': isHovering == mostPlayedGames?.api.indexOf(item) + 6,
               }"
               :src="`https://steamcdn-a.akamaihd.net/steam/apps/${item.appid}/header.jpg`"
               :alt="item.name"
@@ -469,16 +444,10 @@
                 {{ item.name }}
               </h2>
               <p class="font-semibold mt-2 -mb-2">
-                {{
-                  `${lang.totalPlaytime}: ` +
-                  calculatePlayTime(item.playtime_forever, true)
-                }}
+                {{ `${lang.totalPlaytime}: ` + calculatePlayTime(item.playtime_forever, true) }}
               </p>
               <p class="font-semibold">
-                {{
-                  `${lang.lastPlayed}: ` +
-                  calculateLastTimePlayed(item.rtime_last_played)
-                }}
+                {{ `${lang.lastPlayed}: ` + calculateLastTimePlayed(item.rtime_last_played) }}
               </p>
             </NuxtLink>
           </div>
@@ -649,9 +618,7 @@
                 {{ song.name }}
               </p>
               <div class="flex items-center flex-shrink-0">
-                <div
-                  class="pt-[1px] border-b-2 border-slate-600/80 w-6 mr-2 mt-1"
-                />
+                <div class="pt-[1px] border-b-2 border-slate-600/80 w-6 mr-2 mt-1" />
                 <p class="text-gray-500/80 font-semibold">
                   {{ song.playcount + ` ${lang.listens}` }}
                 </p>
