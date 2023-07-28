@@ -10,17 +10,20 @@
     reRender.value++;
   });
 
-  const { data: mostPlayedGames } = useLazyAsyncData('mostPlayedGames', () =>
-    $fetch('/api/games/mostPlayedGames')
-  );
   const { data: recentlyPlayedGames } = useLazyAsyncData('recentlyPlayedGames', () =>
     $fetch('/api/games/recentlyPlayedGames')
   );
-  const { data: mostListenedTracks } = useLazyAsyncData('mostListenedTracks', () =>
-    $fetch('/api/songs/topTracks')
+  const { data: mostPlayedGames } = useLazyAsyncData('mostPlayedGames', () =>
+    $fetch('/api/games/mostPlayedGames')
+  );
+  const { data: currentlyListeningTrack } = useLazyAsyncData('currentlyListeningTrack', () =>
+    $fetch('/api/songs/currentlyListening')
   );
   const { data: recentlyListenedTracks } = useLazyAsyncData('recentlyListenedTracks', () =>
     $fetch('/api/songs/recentTracks/')
+  );
+  const { data: mostListenedTracks } = useLazyAsyncData('mostListenedTracks', () =>
+    $fetch('/api/songs/topTracks')
   );
 
   function calculateLastTimePlayed(seconds) {
@@ -39,7 +42,7 @@
       if (
         (minutes / 60).toFixed(1) % 1 < 0.2 ||
         (minutes / 60).toFixed(1) % 1 >= 0.8 ||
-        shouldBeRounded == true
+        shouldBeRounded === true
       )
         return `${Math.round(minutes / 60)} ${lang.value.hours}`;
       else return `${(minutes / 60).toFixed(1)} ${lang.value.hours}`;
@@ -52,7 +55,7 @@
 
   let animationDelay = 0;
   function increaseDelay() {
-    if (animationDelay == 300) animationDelay = 0;
+    if (animationDelay === 300) animationDelay = 0;
     animationDelay += 100;
     return animationDelay;
   }
@@ -205,7 +208,8 @@
             target="_blank"
             class="inline font-bold text-slate-200 hover:text-sky-500 transition-colors duration-300"
             :class="{
-              'pointer-events-none': project.link == '' || project.hasOwnProperty('link') == false,
+              'pointer-events-none':
+                project.link === '' || project.hasOwnProperty('link') === false,
             }"
           >
             {{ ' ' + project.name }}
@@ -249,7 +253,8 @@
             target="_blank"
             class="inline font-bold text-slate-200 hover:text-sky-500 transition-colors duration-300"
             :class="{
-              'pointer-events-none': project.link == '' || project.hasOwnProperty('link') == false,
+              'pointer-events-none':
+                project.link === '' || project.hasOwnProperty('link') === false,
             }"
           >
             {{ ' ' + project.name }}
@@ -324,17 +329,17 @@
         </h1>
         <div
           class="flex flex-wrap gap-3"
-          v-if="recentlyPlayedGames?.api != null"
+          v-if="recentlyPlayedGames != null"
         >
           <div
             class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) rounded-md"
-            v-for="item in recentlyPlayedGames?.api"
+            v-for="item in recentlyPlayedGames"
             :key="item.name"
-            :data-aos="`${animDirection(recentlyPlayedGames?.api.indexOf(item))}`"
+            :data-aos="`${animDirection(recentlyPlayedGames.indexOf(item))}`"
             :data-aos-delay="`${increaseDelay()}`"
           >
             <div
-              v-if="item.img_icon_url == ''"
+              v-if="item.img_icon_url === ''"
               class="w-full text-xl <md:text-lg flex relative rounded-md"
             >
               <nuxt-img
@@ -342,7 +347,7 @@
                 quality="70"
                 class="w-full"
                 sizes="sm:100vw"
-                src="https://steamcdn-a.akamaihd.net/steam/apps/753/header.jpg"
+                src="/steamBanner.webp"
                 alt="Steam Logo"
               />
               <h2
@@ -362,14 +367,13 @@
                 sizes="sm:100vw"
                 class="transform transition-all duration-300 w-full"
                 :class="{
-                  'scale-110 filter blur-[1px]':
-                    isHovering == recentlyPlayedGames?.api.indexOf(item),
+                  'scale-110 filter blur-[1px]': isHovering === recentlyPlayedGames.indexOf(item),
                 }"
                 :src="`https://steamcdn-a.akamaihd.net/steam/apps/${item.appid}/header.jpg`"
                 :alt="item.name"
               />
               <NuxtLink
-                @mouseenter="isHovering = recentlyPlayedGames?.api.indexOf(item)"
+                @mouseenter="isHovering = recentlyPlayedGames.indexOf(item)"
                 @mouseleave="isHovering = null"
                 class="absolute w-full h-full flex flex-col justify-center items-center bg-black/70 text-white hover:bg-black/80 active:bg-black/85 transition-all duration-300 cursor-pointer"
                 :to="`https://store.steampowered.com/app/${item.appid}/`"
@@ -413,13 +417,13 @@
         </h1>
         <div
           class="flex flex-wrap gap-3"
-          v-if="mostPlayedGames?.api != null"
+          v-if="mostPlayedGames !== null"
         >
           <div
             class="w-[calc(33.3%-0.5rem)] <2xl:w-[calc(50%-0.5rem)] <md:w-full border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) rounded-md relative flex overflow-hidden"
-            v-for="item in mostPlayedGames?.api"
+            v-for="item in mostPlayedGames"
             :key="item.name"
-            :data-aos="`${animDirection(mostPlayedGames?.api.indexOf(item))}`"
+            :data-aos="`${animDirection(mostPlayedGames.indexOf(item))}`"
             :data-aos-delay="`${increaseDelay()}`"
           >
             <nuxt-img
@@ -428,13 +432,13 @@
               sizes="sm:100vw"
               class="transform transition-all duration-300 filter w-full"
               :class="{
-                'scale-110 blur-[1px]': isHovering == mostPlayedGames?.api.indexOf(item) + 6,
+                'scale-110 blur-[1px]': isHovering === mostPlayedGames.indexOf(item) + 6,
               }"
               :src="`https://steamcdn-a.akamaihd.net/steam/apps/${item.appid}/header.jpg`"
               :alt="item.name"
             />
             <NuxtLink
-              @mouseenter="isHovering = mostPlayedGames?.api.indexOf(item) + 6"
+              @mouseenter="isHovering = mostPlayedGames.indexOf(item) + 6"
               @mouseleave="isHovering = null"
               class="absolute w-full h-full flex flex-col justify-center items-center bg-black/70 text-white hover:bg-black/80 active:bg-black/85 transition-all duration-300 cursor-pointer"
               :to="`https://store.steampowered.com/app/${item.appid}/`"
@@ -456,7 +460,7 @@
 
       <section
         class="leading-3"
-        v-if="recentlyListenedTracks?.api[0].hasOwnProperty('@attr')"
+        v-if="currentlyListeningTrack !== null"
       >
         <h1
           class="text-3xl <md:text-2xl font-bold mb-4 w-full"
@@ -483,7 +487,7 @@
         <NuxtLink
           style="transition-property: all; transition-duration: 300ms"
           class="sm:pr-15 flex items-center bg-gradient-to-b from-[rgb(20,20,20)] to-[rgb(15,15,15)] border-1 border-transparent hover:(border-sky-400 shadow-skyBloom) rounded-lg bg-clip-padding w-fit <sm:w-full"
-          :to="`${recentlyListenedTracks?.api[0].url}`"
+          :to="`${currentlyListeningTrack.url}`"
           target="_blank"
           data-aos="fade-right"
           data-aos-duration="700"
@@ -494,21 +498,17 @@
             width="60"
             height="60"
             class="inline m-4 mr-5 rounded-sm"
-            :src="
-              recentlyListenedTracks?.api[0].image[2]['#text'] != ''
-                ? `${recentlyListenedTracks?.api[0].image[2]['#text']}`
-                : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg'
-            "
-            :alt="`${recentlyListenedTracks?.api[0].name}`"
+            :src="currentlyListeningTrack.image[2]['#text'] || '/dummyTrackCover.webp'"
+            :alt="`${currentlyListeningTrack.name}`"
           />
           <div>
             <p class="text-slate-300/80 font-light">
-              {{ recentlyListenedTracks?.api[0].artist['#text'] }}
+              {{ currentlyListeningTrack.artist['#text'] }}
             </p>
             <p class="text-slate-200 font-bold text-lg">
-              {{ recentlyListenedTracks?.api[0].name }}
+              {{ currentlyListeningTrack.name }}
             </p>
-            <p>{{ recentlyListenedTracks?.api[0].album['#text'] }}</p>
+            <p>{{ currentlyListeningTrack.album['#text'] }}</p>
           </div>
         </NuxtLink>
       </section>
@@ -532,9 +532,7 @@
           class="w-fit <sm:w-full sm:(flex flex-wrap)"
           data-aos="fade-right"
           :data-aos-delay="`${increaseDelay()}`"
-          v-for="song in recentlyListenedTracks?.api.filter((song) => {
-            return !song.hasOwnProperty('@attr');
-          })"
+          v-for="song in recentlyListenedTracks"
           :key="song.name"
         >
           <NuxtLink
@@ -548,11 +546,7 @@
               width="60"
               height="60"
               class="inline m-4 mr-5 rounded-sm"
-              :src="
-                song.image[2]['#text'] != ''
-                  ? `${song.image[2]['#text']}`
-                  : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg'
-              "
+              :src="song.image[2]['#text'] || '/dummyTrackCover.webp'"
               :alt="`${song.name}`"
             />
             <div>
@@ -589,7 +583,7 @@
           class="w-fit <sm:w-full sm:(flex flex-wrap)"
           data-aos="fade-right"
           :data-aos-delay="`${increaseDelay()}`"
-          v-for="song in mostListenedTracks?.api"
+          v-for="song in mostListenedTracks"
           :key="song.name"
         >
           <NuxtLink
@@ -603,11 +597,7 @@
               width="60"
               height="60"
               class="inline m-4 mr-5 rounded-sm"
-              :src="
-                song.image[2]['#text'] != ''
-                  ? `${song.image[2]['#text']}`
-                  : 'https://lastfm.freetls.fastly.net/i/u/174s/4128a6eb29f94943c9d206c08e625904.jpg'
-              "
+              :src="song.image || '/dummyTrackCover.webp'"
               :alt="`${song.name}`"
             />
             <div>
