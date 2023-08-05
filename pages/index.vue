@@ -5,11 +5,6 @@
   const globalVariables = useGlobalVariablesStore();
   const { lang } = storeToRefs(globalVariables);
 
-  let reRender = ref(0);
-  watch(lang, () => {
-    reRender.value++;
-  });
-
   const { data: recentlyPlayedGames } = useLazyAsyncData('recentlyPlayedGames', () =>
     $fetch('/api/games/recentlyPlayedGames')
   );
@@ -42,7 +37,7 @@
       if (
         (minutes / 60).toFixed(1) % 1 < 0.2 ||
         (minutes / 60).toFixed(1) % 1 >= 0.8 ||
-        shouldBeRounded === true
+        shouldBeRounded
       )
         return `${Math.round(minutes / 60)} ${lang.value.hours}`;
       else return `${(minutes / 60).toFixed(1)} ${lang.value.hours}`;
@@ -83,23 +78,61 @@
       secondColor: '#06b6d4',
       proficiencyLevel: 'w-8/10',
     },
+
+    {
+      name: 'Windi CSS',
+      firstColor: '#52C7F0',
+      secondColor: '#348BEE',
+      proficiencyLevel: 'w-7/10',
+    },
     {
       name: 'JavaScript',
       firstColor: '#f59e0b',
       secondColor: '#fbbf24',
       proficiencyLevel: 'w-7/10',
     },
+
+    {
+      name: 'TypeScript',
+      firstColor: '#5994d1',
+      secondColor: '#3079C6',
+      proficiencyLevel: 'w-4/10',
+    },
     {
       name: 'Vue.JS',
       firstColor: '#059669',
       secondColor: '#334155',
-      proficiencyLevel: 'w-6/10',
+      proficiencyLevel: 'w-7/10',
     },
     {
       name: 'Nuxt.JS',
       firstColor: '#10b981',
       secondColor: '#2dd4bf',
-      proficiencyLevel: 'w-6/10',
+      proficiencyLevel: 'w-8/10',
+    },
+    {
+      name: 'Next.JS',
+      firstColor: '#000',
+      secondColor: '#4d4d4d',
+      proficiencyLevel: 'w-3/10',
+    },
+    {
+      name: 'Nest.JS',
+      firstColor: '#e33f66',
+      secondColor: '#E02A55',
+      proficiencyLevel: 'w-3/10',
+    },
+    {
+      name: 'Socket.IO',
+      firstColor: '#000',
+      secondColor: '#4d4d4d',
+      proficiencyLevel: 'w-3/10',
+    },
+    {
+      name: 'Prisma',
+      firstColor: '#567180',
+      secondColor: '#0D344A',
+      proficiencyLevel: 'w-2/10',
     },
     {
       name: 'C#',
@@ -123,7 +156,7 @@
       name: 'Blender',
       firstColor: '#ea580c',
       secondColor: '#fb923c',
-      proficiencyLevel: 'w-2/10',
+      proficiencyLevel: 'w-3/10',
     },
     {
       name: 'Adobe Photoshop',
@@ -158,7 +191,7 @@
             #
           </NuxtLink>
           <GlitchedText
-            :key="reRender"
+            :key="lang"
             :id="'helloTitle'"
             :time="4200"
             :messages="[lang.hello]"
@@ -166,17 +199,11 @@
           />
         </div>
         <GlitchedText
-          :key="reRender"
+          :key="lang"
           :id="'infoAboutMe'"
           class="text-xl <md:text-lg font-normal text-slate-400 min-h-24"
           :time="2000"
-          :messages="[
-            lang.infoAboutMe1,
-            lang.infoAboutMe2,
-            lang.infoAboutMe3,
-            lang.infoAboutMe4,
-            lang.infoAboutMe5,
-          ]"
+          :messages="lang.infoAboutMe"
         />
       </section>
 
@@ -208,8 +235,7 @@
             target="_blank"
             class="inline font-bold text-slate-200 hover:text-sky-500 transition-colors duration-300"
             :class="{
-              'pointer-events-none':
-                project.link === '' || project.hasOwnProperty('link') === false,
+              'pointer-events-none': project.link === '' || !project.hasOwnProperty('link'),
             }"
           >
             {{ ' ' + project.name }}
@@ -253,8 +279,7 @@
             target="_blank"
             class="inline font-bold text-slate-200 hover:text-sky-500 transition-colors duration-300"
             :class="{
-              'pointer-events-none':
-                project.link === '' || project.hasOwnProperty('link') === false,
+              'pointer-events-none': project.link === '' || !project.hasOwnProperty('link'),
             }"
           >
             {{ ' ' + project.name }}
