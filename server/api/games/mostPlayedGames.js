@@ -10,8 +10,8 @@ const getAllGames = async () =>
     .catch(() => null);
 
 async function findMostPlayedFirstSixGames() {
-  const games = await getAllGames();
+  let games = await getAllGames();
   if (games !== null)
-    return games.sort((a, b) => b.playtime_forever - a.playtime_forever).slice(0, 6);
-  else return null;
+    games = games.sort((a, b) => b.playtime_forever - a.playtime_forever).slice(0, 6);
+  return games;
 }

@@ -5,11 +5,13 @@ const age = Math.abs(
 const texts = {
   loading: 'Loading🧙🏼‍♂️',
   hello: 'Hello👋',
-  infoAboutMe1: `I\'m Mehmet, a ${age} years old student.`,
-  infoAboutMe2: 'I enjoy programming and 3D modeling.',
-  infoAboutMe3: "I'm currently studying Blender, C#, Vue.js, and Nuxt.js.",
-  infoAboutMe4: 'Also, I love video games.',
-  infoAboutMe5: 'I try to code games in Unity3D for fun in my spare time.',
+  infoAboutMe: [
+    `I'm Mehmet, a ${age} years old student.`,
+    'I enjoy programming and 3D modeling.',
+    "I'm currently studying Blender, C#, Vue.js, and Nuxt.js.",
+    'Also, I love video games.',
+    'I try to code games in Unity3D for fun in my spare time.',
+  ],
   currentlyWorkingOnTitle: 'Currently Working On 👨🏻‍💻🌱',
   previousProjectsTitle: 'Previous Projects 👨🏻‍💻🌳',
   seeDetails: 'see details',
@@ -48,14 +50,14 @@ const texts = {
   pageUnderConstruction: 'Sorry, this page is under construction.🥸',
   languages: [
     {
-      global: 'English',
-      local: 'English',
-      setLanguage: 'en',
+      inThisLanguage: 'English',
+      inOwnLanguage: 'English',
+      setLanguageTo: 'en',
     },
     {
-      local: 'Turkish',
-      global: 'Türkçe',
-      setLanguage: 'tr',
+      inThisLanguage: 'Turkish',
+      inOwnLanguage: 'Türkçe',
+      setLanguageTo: 'tr',
     },
   ],
   currentlyWorkingOn: [

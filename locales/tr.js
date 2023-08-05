@@ -5,11 +5,13 @@ const age = Math.abs(
 const texts = {
   loading: 'Yükleniyor🧙🏼‍♂️',
   hello: 'Merhaba👋',
-  infoAboutMe1: `Adım Mehmet, ${age} yaşındayım ve öğrenciyim.`,
-  infoAboutMe2: 'Yazılım ve 3D modelleme ile ilgileniyorum.',
-  infoAboutMe3: 'Şu anda Blender, C#, Vue.js, ve Nuxt.js öğreniyorum.',
-  infoAboutMe4: 'Ayrıca video oyunlarını çok seviyorum.',
-  infoAboutMe5: 'Boş zamanlarımda hobi olarak Unity ile oyun yapmaya çalışıyorum.',
+  infoAboutMe: [
+    `Adım Mehmet, ${age} yaşındayım ve öğrenciyim.`,
+    'Yazılım ve 3D modelleme ile ilgileniyorum.',
+    'Şu anda Blender, C#, Vue.js, ve Nuxt.js öğreniyorum.',
+    'Ayrıca video oyunlarını çok seviyorum.',
+    'Boş zamanlarımda hobi olarak Unity ile oyun yapmaya çalışıyorum.',
+  ],
   currentlyWorkingOnTitle: 'Şu An Üzerinde Çalıştığım Proje 👨🏻‍💻🌱',
   previousProjectsTitle: 'Tamamladığım Projeler 👨🏻‍💻🌳',
   seeDetails: 'detayları gör',
@@ -48,14 +50,14 @@ const texts = {
   pageUnderConstruction: 'Üzgünüm, bu sayfa henüz yapım aşamasında.🥸',
   languages: [
     {
-      global: 'English',
-      local: 'İngilizce',
-      setLanguage: 'en',
+      inThisLanguage: 'İngilizce',
+      inOwnLanguage: 'English',
+      setLanguageTo: 'en',
     },
     {
-      global: 'Turkish',
-      local: 'Türkçe',
-      setLanguage: 'tr',
+      inThisLanguage: 'Türkçe',
+      inOwnLanguage: 'Türkçe',
+      setLanguageTo: 'tr',
     },
   ],
   currentlyWorkingOn: [

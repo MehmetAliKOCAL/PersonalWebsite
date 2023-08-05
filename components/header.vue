@@ -53,10 +53,10 @@
           <button
             v-for="language in lang.languages"
             :key="language"
-            @click="globalVariables.setLanguage(language.setLanguage)"
+            @click="globalVariables.setLanguage(language.setLanguageTo)"
             class="w-full text-center font-semibold hover:text-sky-500 cursor-pointer transition-colors duration-300"
           >
-            {{ `${language.local} (${language.global})` }}
+            {{ `${language.inThisLanguage} (${language.inOwnLanguage})` }}
           </button>
         </div>
       </div>
