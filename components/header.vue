@@ -15,7 +15,9 @@
 </script>
 
 <template>
-  <header class="w-full text-slate-300 fixed top-0 z-30 text-md font-thin bg-[rgb(6,6,6)]">
+  <header
+    class="w-full text-slate-300 fixed top-0 z-30 text-md font-extralight text-[0.95rem] bg-[rgb(6,6,6)]"
+  >
     <div class="flex py-4 px-60 <2xl:px-40 <xl:px-20 <lg:px-5 items-center justify-between">
       <NuxtLink to="/#hello">
         <nuxt-img

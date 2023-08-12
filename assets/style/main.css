@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 html,
 body {
   scroll-behavior: smooth;
   overflow-x: hidden;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
 }
 
 ::selection {
@@ -26,18 +32,14 @@ body {
 }
 
 :target:before {
-  content: "";
+  content: '';
   display: block;
   height: 80px;
   margin: -80px 0 0;
 }
 
 .landing-section-color {
-  background-image: radial-gradient(
-    ellipse at center top,
-    #38bdf8 10%,
-    #1e40af 50%
-  );
+  background-image: radial-gradient(ellipse at center top, #38bdf8 10%, #1e40af 50%);
 }
 
 .landing-section-color-wrapper {
