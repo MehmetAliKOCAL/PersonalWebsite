@@ -64,6 +64,21 @@ function animDirection(itemIndex) {
   else return "fade-left";
 }
 
+let activeColorIndex = ref(0);
+const backgroundColors = [
+  "bg-slate-500",
+  "bg-zinc-500",
+  "bg-stone-500",
+  "bg-rose-500",
+  "bg-orange-500",
+  "bg-yellow-500",
+  "bg-green-500",
+  "bg-emerald-500",
+  "bg-sky-500",
+  "bg-indigo-500",
+  "bg-violet-500",
+];
+
 const proficiencies = [
   {
     name: "HTML5",
@@ -176,11 +191,25 @@ const proficiencies = [
     proficiencyLevel: "w-5/10",
   },
 ];
+
+onMounted(() => {
+  (function setActiveColorIndex() {
+    setTimeout(() => {
+      if (activeColorIndex.value === backgroundColors?.length - 1) {
+        activeColorIndex.value = 0;
+      } else activeColorIndex.value++;
+      setActiveColorIndex();
+    }, 3000);
+  })();
+});
 </script>
 
 <template>
   <main>
-    <div class="<md:hidden absolute w-full h-50vh z-0 landing-section-color" />
+    <div
+      class="<md:hidden absolute w-full h-50vh z-0 transition-all duration-3000"
+      :class="backgroundColors[activeColorIndex]"
+    />
     <div
       class="<md:hidden absolute w-full h-50vh z-10 landing-section-color-wrapper"
     />
