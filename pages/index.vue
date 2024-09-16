@@ -1,28 +1,28 @@
 <script setup>
-import { useElementVisibility } from '@vueuse/core';
-import { useGlobalVariablesStore } from '~/store/globalVariables.js';
-import { storeToRefs } from 'pinia';
+import { useElementVisibility } from "@vueuse/core";
+import { useGlobalVariablesStore } from "~/store/globalVariables.js";
+import { storeToRefs } from "pinia";
 const globalVariables = useGlobalVariablesStore();
 const { lang } = storeToRefs(globalVariables);
 
 const { data: recentlyPlayedGames } = useLazyAsyncData(
-  'recentlyPlayedGames',
-  () => $fetch('/api/games/recentlyPlayedGames')
+  "recentlyPlayedGames",
+  () => $fetch("/api/games/recentlyPlayedGames")
 );
-const { data: mostPlayedGames } = useLazyAsyncData('mostPlayedGames', () =>
-  $fetch('/api/games/mostPlayedGames')
+const { data: mostPlayedGames } = useLazyAsyncData("mostPlayedGames", () =>
+  $fetch("/api/games/mostPlayedGames")
 );
 const { data: currentlyListeningTrack } = useLazyAsyncData(
-  'currentlyListeningTrack',
-  () => $fetch('/api/songs/currentlyListening')
+  "currentlyListeningTrack",
+  () => $fetch("/api/songs/currentlyListening")
 );
 const { data: recentlyListenedTracks } = useLazyAsyncData(
-  'recentlyListenedTracks',
-  () => $fetch('/api/songs/recentTracks/')
+  "recentlyListenedTracks",
+  () => $fetch("/api/songs/recentTracks/")
 );
 const { data: mostListenedTracks } = useLazyAsyncData(
-  'mostListenedTracks',
-  () => $fetch('/api/songs/topTracks')
+  "mostListenedTracks",
+  () => $fetch("/api/songs/topTracks")
 );
 
 function calculateLastTimePlayed(seconds) {
@@ -60,120 +60,120 @@ function increaseDelay() {
   return animationDelay;
 }
 function animDirection(itemIndex) {
-  if (itemIndex < 3) return 'fade-right';
-  else return 'fade-left';
+  if (itemIndex < 3) return "fade-right";
+  else return "fade-left";
 }
 
 const proficiencies = [
   {
-    name: 'HTML5',
-    firstColor: '#c2410c',
-    secondColor: '#f97316',
-    proficiencyLevel: 'w-full',
+    name: "HTML5",
+    firstColor: "#c2410c",
+    secondColor: "#f97316",
+    proficiencyLevel: "w-full",
   },
   {
-    name: 'CSS3',
-    firstColor: '#2563eb',
-    secondColor: '#06b6d4',
-    proficiencyLevel: 'w-8/10',
+    name: "CSS3",
+    firstColor: "#2563eb",
+    secondColor: "#06b6d4",
+    proficiencyLevel: "w-8/10",
   },
   {
-    name: 'Tailwind CSS',
-    firstColor: '#0e7490',
-    secondColor: '#06b6d4',
-    proficiencyLevel: 'w-8/10',
-  },
-
-  {
-    name: 'Windi CSS',
-    firstColor: '#52C7F0',
-    secondColor: '#348BEE',
-    proficiencyLevel: 'w-7/10',
-  },
-  {
-    name: 'JavaScript',
-    firstColor: '#f59e0b',
-    secondColor: '#fbbf24',
-    proficiencyLevel: 'w-7/10',
+    name: "Tailwind CSS",
+    firstColor: "#0e7490",
+    secondColor: "#06b6d4",
+    proficiencyLevel: "w-8/10",
   },
 
   {
-    name: 'TypeScript',
-    firstColor: '#5994d1',
-    secondColor: '#3079C6',
-    proficiencyLevel: 'w-4/10',
+    name: "Windi CSS",
+    firstColor: "#52C7F0",
+    secondColor: "#348BEE",
+    proficiencyLevel: "w-7/10",
   },
   {
-    name: 'Vue.JS',
-    firstColor: '#059669',
-    secondColor: '#334155',
-    proficiencyLevel: 'w-7/10',
+    name: "JavaScript",
+    firstColor: "#f59e0b",
+    secondColor: "#fbbf24",
+    proficiencyLevel: "w-7/10",
+  },
+
+  {
+    name: "TypeScript",
+    firstColor: "#5994d1",
+    secondColor: "#3079C6",
+    proficiencyLevel: "w-4/10",
   },
   {
-    name: 'Nuxt.JS',
-    firstColor: '#10b981',
-    secondColor: '#2dd4bf',
-    proficiencyLevel: 'w-8/10',
+    name: "Vue.JS",
+    firstColor: "#059669",
+    secondColor: "#334155",
+    proficiencyLevel: "w-7/10",
   },
   {
-    name: 'Next.JS',
-    firstColor: '#000',
-    secondColor: '#4d4d4d',
-    proficiencyLevel: 'w-3/10',
+    name: "Nuxt.JS",
+    firstColor: "#10b981",
+    secondColor: "#2dd4bf",
+    proficiencyLevel: "w-8/10",
   },
   {
-    name: 'Nest.JS',
-    firstColor: '#e33f66',
-    secondColor: '#E02A55',
-    proficiencyLevel: 'w-3/10',
+    name: "Next.JS",
+    firstColor: "#000",
+    secondColor: "#4d4d4d",
+    proficiencyLevel: "w-3/10",
   },
   {
-    name: 'Socket.IO',
-    firstColor: '#000',
-    secondColor: '#4d4d4d',
-    proficiencyLevel: 'w-3/10',
+    name: "Nest.JS",
+    firstColor: "#e33f66",
+    secondColor: "#E02A55",
+    proficiencyLevel: "w-3/10",
   },
   {
-    name: 'Prisma',
-    firstColor: '#567180',
-    secondColor: '#0D344A',
-    proficiencyLevel: 'w-2/10',
+    name: "Socket.IO",
+    firstColor: "#000",
+    secondColor: "#4d4d4d",
+    proficiencyLevel: "w-3/10",
   },
   {
-    name: 'C#',
-    firstColor: '#7c3aed',
-    secondColor: '#d946ef',
-    proficiencyLevel: 'w-5/10',
+    name: "Prisma",
+    firstColor: "#567180",
+    secondColor: "#0D344A",
+    proficiencyLevel: "w-2/10",
   },
   {
-    name: 'MySQL',
-    firstColor: '#2563eb',
-    secondColor: '#475569',
-    proficiencyLevel: 'w-7/10',
+    name: "C#",
+    firstColor: "#7c3aed",
+    secondColor: "#d946ef",
+    proficiencyLevel: "w-5/10",
   },
   {
-    name: 'Unity3D',
-    firstColor: '#000',
-    secondColor: '#374151',
-    proficiencyLevel: 'w-4/10',
+    name: "MySQL",
+    firstColor: "#2563eb",
+    secondColor: "#475569",
+    proficiencyLevel: "w-7/10",
   },
   {
-    name: 'Blender',
-    firstColor: '#ea580c',
-    secondColor: '#fb923c',
-    proficiencyLevel: 'w-3/10',
+    name: "Unity3D",
+    firstColor: "#000",
+    secondColor: "#374151",
+    proficiencyLevel: "w-4/10",
   },
   {
-    name: 'Adobe Photoshop',
-    firstColor: '#1E293B',
-    secondColor: '#0ea5e9',
-    proficiencyLevel: 'w-5/10',
+    name: "Blender",
+    firstColor: "#ea580c",
+    secondColor: "#fb923c",
+    proficiencyLevel: "w-3/10",
   },
   {
-    name: 'Adobe After Effects',
-    firstColor: '#1e40af',
-    secondColor: '#6366f1',
-    proficiencyLevel: 'w-5/10',
+    name: "Adobe Photoshop",
+    firstColor: "#1E293B",
+    secondColor: "#0ea5e9",
+    proficiencyLevel: "w-5/10",
+  },
+  {
+    name: "Adobe After Effects",
+    firstColor: "#1e40af",
+    secondColor: "#6366f1",
+    proficiencyLevel: "w-5/10",
   },
 ];
 </script>
@@ -235,7 +235,7 @@ const proficiencies = [
           data-aos="fade-right"
           data-aos-duration="550"
         >
-          {{ project.emoji + ' ' + project.role }}
+          {{ project.emoji + " " + project.role }}
           <NuxtLink
             :to="project.link"
             target="_blank"
@@ -245,15 +245,9 @@ const proficiencies = [
                 project.link === '' || !project.hasOwnProperty('link'),
             }"
           >
-            {{ ' ' + project.name }}
+            {{ " " + project.name }}
           </NuxtLink>
-          {{ ', ' + project.summary + ' - ' }}
-          <NuxtLink
-            to="/projectDetails/currentWork"
-            class="text-sky-500 font-medium hover:text-sky-300 transition-colors duration-300"
-          >
-            {{ lang.seeDetails }}
-          </NuxtLink>
+          {{ ", " + project.summary }}
         </p>
       </section>
 
@@ -280,7 +274,7 @@ const proficiencies = [
           data-aos-duration="550"
           :data-aos-delay="increaseDelay()"
         >
-          {{ project.emoji + ' ' + project.role }}
+          {{ project.emoji + " " + project.role }}
           <NuxtLink
             :to="project.link"
             target="_blank"
@@ -290,15 +284,9 @@ const proficiencies = [
                 project.link === '' || !project.hasOwnProperty('link'),
             }"
           >
-            {{ ' ' + project.name }}
+            {{ " " + project.name }}
           </NuxtLink>
-          {{ ', ' + project.summary + ' - ' }}
-          <NuxtLink
-            :to="'/projectDetails/' + lang.previousProjects.indexOf(project)"
-            class="text-sky-500 font-medium hover:text-sky-300 transition-colors duration-300"
-          >
-            {{ lang.seeDetails }}
-          </NuxtLink>
+          {{ ", " + project.summary }}
         </p>
       </section>
 
@@ -535,12 +523,12 @@ const proficiencies = [
           />
           <div>
             <p class="text-slate-300/80 font-light">
-              {{ currentlyListeningTrack.artist['#text'] }}
+              {{ currentlyListeningTrack.artist["#text"] }}
             </p>
             <p class="text-slate-200 font-bold text-lg">
               {{ currentlyListeningTrack.name }}
             </p>
-            <p>{{ currentlyListeningTrack.album['#text'] }}</p>
+            <p>{{ currentlyListeningTrack.album["#text"] }}</p>
           </div>
         </NuxtLink>
       </section>
@@ -586,13 +574,13 @@ const proficiencies = [
             />
             <div>
               <p class="text-gray-400 font-light">
-                {{ song.artist['#text'] }}
+                {{ song.artist["#text"] }}
               </p>
               <p class="text-gray-200 font-bold text-lg">
                 {{ song.name }}
               </p>
               <p class="text-gray-400 font-medium">
-                {{ song.album['#text'] }}
+                {{ song.album["#text"] }}
               </p>
             </div>
           </NuxtLink>
