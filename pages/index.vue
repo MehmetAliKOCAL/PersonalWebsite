@@ -205,7 +205,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main>
+  <main class="mx-auto max-w-[2000px]">
     <div
       class="<md:hidden absolute w-full h-50vh z-0 transition-all duration-3000"
       :class="backgroundColors[activeColorIndex]"
