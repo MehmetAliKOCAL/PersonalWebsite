@@ -268,7 +268,7 @@ onMounted(() => {
           <NuxtLink
             :to="project.link"
             target="_blank"
-            class="inline font-bold text-slate-200 hover:text-sky-500 transition-colors duration-300"
+            class="inline font-bold text-slate-300 hover:text-slate-100 transition-colors duration-300"
             :class="{
               'pointer-events-none':
                 project.link === '' || !project.hasOwnProperty('link'),
@@ -307,7 +307,7 @@ onMounted(() => {
           <NuxtLink
             :to="project.link"
             target="_blank"
-            class="inline font-bold text-slate-200 hover:text-sky-500 transition-colors duration-300"
+            class="inline font-bold text-slate-300 hover:text-slate-100 transition-colors duration-300"
             :class="{
               'pointer-events-none':
                 project.link === '' || !project.hasOwnProperty('link'),
