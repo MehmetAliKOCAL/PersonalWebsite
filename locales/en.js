@@ -50,16 +50,8 @@ const texts = {
   buttonHomepage: "Homepage",
   pageUnderConstruction: "Sorry, this page is under construction.🥸",
   languages: [
-    {
-      inThisLanguage: "English",
-      inOwnLanguage: "English",
-      setLanguageTo: "en",
-    },
-    {
-      inThisLanguage: "Turkish",
-      inOwnLanguage: "Türkçe",
-      setLanguageTo: "tr",
-    },
+    { name: "English", iso: "en", icon: "/uk_flag.jpg" },
+    { name: "Türkçe", iso: "tr", icon: "/tr_flag.jpg" },
   ],
   currentlyWorkingOn: [
     {

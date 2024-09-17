@@ -49,16 +49,8 @@ const texts = {
   buttonHomepage: "Ana Sayfa",
   pageUnderConstruction: "Üzgünüm, bu sayfa henüz yapım aşamasında.🥸",
   languages: [
-    {
-      inThisLanguage: "İngilizce",
-      inOwnLanguage: "English",
-      setLanguageTo: "en",
-    },
-    {
-      inThisLanguage: "Türkçe",
-      inOwnLanguage: "Türkçe",
-      setLanguageTo: "tr",
-    },
+    { name: "English", iso: "en", icon: "/uk_flag.jpg" },
+    { name: "Türkçe", iso: "tr", icon: "/tr_flag.jpg" },
   ],
   currentlyWorkingOn: [
     {
