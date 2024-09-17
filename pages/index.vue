@@ -193,19 +193,19 @@ const proficiencies = [
 ];
 
 onMounted(() => {
-  (function setActiveColorIndex() {
+  (function cycleActiveColorIndex() {
     setTimeout(() => {
       if (activeColorIndex.value === backgroundColors?.length - 1) {
         activeColorIndex.value = 0;
       } else activeColorIndex.value++;
-      setActiveColorIndex();
+      cycleActiveColorIndex();
     }, 3000);
   })();
 });
 </script>
 
 <template>
-  <main class="mx-auto max-w-[2000px]">
+  <main class="relative mx-auto max-w-[2000px]">
     <div
       class="<md:hidden absolute w-full h-50vh z-0 transition-all duration-3000"
       :class="backgroundColors[activeColorIndex]"
