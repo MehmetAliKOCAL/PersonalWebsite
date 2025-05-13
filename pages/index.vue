@@ -66,17 +66,17 @@ function animDirection(itemIndex) {
 
 let activeColorIndex = ref(0);
 const backgroundColors = [
-  "bg-slate-500",
-  "bg-zinc-500",
-  "bg-stone-500",
-  "bg-rose-500",
-  "bg-orange-500",
-  "bg-yellow-500",
-  "bg-green-500",
-  "bg-emerald-500",
-  "bg-sky-500",
-  "bg-indigo-500",
-  "bg-violet-500",
+  "bg-slate-800",
+  "bg-zinc-800",
+  "bg-stone-800",
+  "bg-rose-900",
+  "bg-orange-900",
+  "bg-yellow-900",
+  "bg-green-900",
+  "bg-emerald-900",
+  "bg-sky-900",
+  "bg-indigo-900",
+  "bg-violet-900",
 ];
 
 const proficiencies = [

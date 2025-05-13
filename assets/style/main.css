@@ -45,7 +45,7 @@ body {
 .landing-section-color-wrapper {
   background-image: radial-gradient(
     ellipse at center top,
-    transparent -80%,
+    transparent -100%,
     rgb(10, 10, 10) 70%,
     rgb(10, 10, 10) 100%
   );
