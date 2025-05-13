@@ -205,17 +205,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="relative mx-auto max-w-[2000px]">
+  <main class="relative px-60 <2xl:px-40 <xl:px-20 <lg:px-5 mx-auto max-w-[2000px]">
     <div
-      class="<md:hidden absolute w-full h-50vh z-0 transition-all duration-3000"
+      class="z-0 landing_section-gradient_position transition-colors duration-3000"
       :class="backgroundColors[activeColorIndex]"
-    />
-    <div
-      class="<md:hidden absolute w-full h-50vh z-10 landing-section-color-wrapper"
+      />
+      <div
+      class="z-10 landing_section-gradient_position landing_section-color_wrapper"
     />
 
     <div
-      class="mx-auto px-60 <2xl:px-40 <xl:px-20 <lg:px-5 relative z-20 gap-y-20 flex flex-col"
+      class="mx-auto relative z-20 gap-y-20 flex flex-col"
     >
       <section id="hello" class="pt-60 <lg:pt-40">
         <div class="flex text-3xl <md:text-2xl font-bold mb-3">

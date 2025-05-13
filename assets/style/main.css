@@ -38,17 +38,17 @@ body {
   margin: -80px 0 0;
 }
 
-.landing-section-color {
-  background-image: radial-gradient(ellipse at center top, #38bdf8 10%, #1e40af 50%);
-}
-
-.landing-section-color-wrapper {
+.landing_section-color_wrapper {
   background-image: radial-gradient(
     ellipse at center top,
     transparent -100%,
     rgb(10, 10, 10) 70%,
     rgb(10, 10, 10) 100%
   );
+}
+
+.landing_section-gradient_position {
+  @apply <md:hidden absolute h-45vh right-52 <2xl:right-36 <xl:right-16 <lg:right-3 left-52 <2xl:left-36 <xl:left-16 <lg:left-3
 }
 
 .hoverShadow:hover {
