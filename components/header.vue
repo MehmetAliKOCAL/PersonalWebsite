@@ -28,7 +28,7 @@ const headerTabs = [
 
 <template>
   <header
-    class="w-full text-slate-300 fixed top-0 z-30 text-md font-extralight text-[0.95rem] bg-[rgb(6,6,6)]"
+    class="w-full text-slate-300 shadow-xl shadow-black/20 fixed top-0 z-30 text-md font-extralight text-[0.95rem] bg-black/70 backdrop-blur-md backdrop-filter"
   >
     <div
       class="flex max-w-[2000px] mx-auto py-4 px-60 <2xl:px-40 <xl:px-20 <lg:px-5 items-center justify-between"
