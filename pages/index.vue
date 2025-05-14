@@ -205,34 +205,31 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="relative px-60 <2xl:px-40 <xl:px-20 <lg:px-5 mx-auto max-w-[2000px]">
+  <main
+    class="relative px-60 <2xl:px-40 <xl:px-20 <lg:px-5 mx-auto max-w-[2000px]"
+  >
     <div
       class="z-0 landing_section-gradient_position transition-colors duration-3000"
       :class="backgroundColors[activeColorIndex]"
-      />
-      <div
+    />
+    <div
       class="z-10 landing_section-gradient_position landing_section-color_wrapper"
     />
 
-    <div
-      class="mx-auto relative z-20 gap-y-20 flex flex-col"
-    >
+    <div class="relative mx-auto mb-48 z-20">
       <section id="hello" class="pt-60 <lg:pt-40">
-        <div class="flex text-3xl <md:text-2xl font-bold mb-3">
-          <NuxtLink
-            to="#hello"
-            class="text-sky-500 hover:text-sky-300 cursor-pointer transition-colors duration-300 mr-2"
-          >
-            #
+        <h1 class="flex text-3xl <md:text-2xl font-bold mb-3">
+          <NuxtLink to="#hello" class="group flex gap-2">
+            <span class="section_header_indicator">#</span>
+            <GlitchedText
+              :key="lang"
+              :id="'helloTitle'"
+              :time="4200"
+              :messages="[lang.hello]"
+              :defaultText="lang.loading"
+            />
           </NuxtLink>
-          <GlitchedText
-            :key="lang"
-            :id="'helloTitle'"
-            :time="4200"
-            :messages="[lang.hello]"
-            :defaultText="lang.loading"
-          />
-        </div>
+        </h1>
         <GlitchedText
           :key="lang"
           :id="'infoAboutMe'"
@@ -244,18 +241,15 @@ onMounted(() => {
 
       <section v-if="lang.currentlyWorkingOn" class="-mt-16">
         <h1
-          class="text-3xl <md:text-2xl font-bold mb-3"
+          id="currentlyWorkingOn"
+          class="pt-24 mb-5 w-full text-3xl <md:text-2xl font-bold"
           data-aos="fade-right"
           data-aos-duration="900"
         >
-          <NuxtLink
-            id="currently"
-            to="#currently"
-            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
-          >
-            #
+          <NuxtLink to="#currentlyWorkingOn" class="group">
+            <span class="section_header_indicator">#</span>
+            {{ lang.currentlyWorkingOnTitle }}
           </NuxtLink>
-          {{ lang.currentlyWorkingOnTitle }}
         </h1>
         <p
           v-for="project in lang.currentlyWorkingOn"
@@ -282,18 +276,15 @@ onMounted(() => {
 
       <section v-if="lang?.previousProjects">
         <h1
-          class="text-3xl <md:text-2xl font-bold mb-3"
+          id="previousProjects"
+          class="pt-24 mb-5 w-full text-3xl <md:text-2xl font-bold"
           data-aos="fade-right"
           data-aos-duration="900"
         >
-          <NuxtLink
-            id="previousProjects"
-            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
-            to="#previousProjects"
-          >
-            #
+          <NuxtLink class="group" to="#previousProjects">
+            <span class="section_header_indicator">#</span>
+            {{ lang.previousProjectsTitle }}
           </NuxtLink>
-          {{ lang.previousProjectsTitle }}
         </h1>
         <p
           v-for="project in lang.previousProjects"
@@ -321,18 +312,15 @@ onMounted(() => {
 
       <section v-if="proficiencies">
         <h1
-          class="text-3xl <md:text-2xl font-bold mb-6"
+          id="proficiencies"
+          class="pt-24 mb-6 w-full text-3xl <md:text-2xl font-bold"
           data-aos="fade-left"
           data-aos-duration="900"
         >
-          <NuxtLink
-            to="#proficiencies"
-            id="proficiencies"
-            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
-          >
-            #
+          <NuxtLink to="#proficiencies" class="group">
+            <span class="section_header_indicator">#</span>
+            {{ lang.proficiencies }}
           </NuxtLink>
-          {{ lang.proficiencies }}
         </h1>
         <div ref="target" class="flex w-full flex-wrap justify-between gap-x-4">
           <div
@@ -361,18 +349,15 @@ onMounted(() => {
 
       <section>
         <h1
-          class="text-3xl <md:text-2xl font-bold mb-6"
+          id="recentGames"
+          class="pt-24 mb-5 w-full text-3xl <md:text-2xl font-bold"
           data-aos="fade-left"
           data-aos-duration="1100"
         >
-          <NuxtLink
-            to="#recentGames"
-            id="recentGames"
-            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
-          >
-            #
+          <NuxtLink to="#recentGames" class="group">
+            <span class="section_header_indicator">#</span>
+            {{ lang.recentlyPlayedGames }}
           </NuxtLink>
-          {{ lang.recentlyPlayedGames }}
         </h1>
         <div v-if="recentlyPlayedGames" class="flex flex-wrap gap-3">
           <div
@@ -447,18 +432,15 @@ onMounted(() => {
 
       <section v-if="mostPlayedGames">
         <h1
-          class="text-3xl <md:text-2xl font-bold mb-6"
+          id="topGames"
+          class="pt-24 mb-5 w-full text-3xl <md:text-2xl font-bold"
           data-aos="fade-left"
           data-aos-duration="800"
         >
-          <NuxtLink
-            to="#topGames"
-            id="topGames"
-            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
-          >
-            #
+          <NuxtLink to="#topGames" class="group">
+            <span class="section_header_indicator">#</span>
+            {{ lang.mostPlayedGames }}
           </NuxtLink>
-          {{ lang.mostPlayedGames }}
         </h1>
         <div class="flex flex-wrap gap-3">
           <div
@@ -509,26 +491,24 @@ onMounted(() => {
 
       <section v-if="currentlyListeningTrack" class="leading-3">
         <h1
-          class="text-3xl <md:text-2xl font-bold mb-4 w-full"
+          id="currentlyListening"
+          class="pt-24 mb-3 w-full text-3xl <md:text-2xl font-bold"
           data-aos="fade-right"
           data-aos-duration="1000"
         >
-          <NuxtLink
-            id="currentlyListening"
-            to="#currentlyListening"
-            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
-            >♪</NuxtLink
-          >
-          <div class="ml-2 inline-flex items-center">
-            <p>{{ lang.currentlyListening }}</p>
-            <div class="flex ml-3">
-              <div
-                v-for="soundBar in 5"
-                :key="soundBar"
-                class="bg-gray-400 animate-sound bottom-1 absolute h-1 w-[3px]"
-              />
+          <NuxtLink to="#currentlyListening" class="group">
+            <span class="section_header_indicator">♪</span>
+            <div class="ml-2 inline-flex items-center">
+              <p>{{ lang.currentlyListening }}</p>
+              <div class="flex ml-3">
+                <div
+                  v-for="soundBar in 5"
+                  :key="soundBar"
+                  class="bg-gray-400 animate-sound bottom-1 absolute h-1 w-[3px]"
+                />
+              </div>
             </div>
-          </div>
+          </NuxtLink>
         </h1>
         <NuxtLink
           style="transition-property: all; transition-duration: 300ms"
@@ -567,18 +547,15 @@ onMounted(() => {
         class="flex flex-wrap gap-2 leading-3"
       >
         <h1
-          class="text-3xl <md:text-2xl font-bold mb-2 w-full"
+          id="recentTracks"
+          class="pt-24 mb-3 w-full text-3xl <md:text-2xl font-bold"
           data-aos="fade-left"
           data-aos-duration="1100"
         >
-          <NuxtLink
-            to="#recentTracks"
-            id="recentTracks"
-            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
-          >
-            #
+          <NuxtLink to="#recentTracks" class="group">
+            <span class="section_header_indicator">#</span>
+            {{ lang.recentlyListenedTracks }}
           </NuxtLink>
-          {{ lang.recentlyListenedTracks }}
         </h1>
         <div
           class="w-fit <sm:w-full sm:(flex flex-wrap)"
@@ -616,23 +593,17 @@ onMounted(() => {
         </div>
       </section>
 
-      <section
-        v-if="mostListenedTracks"
-        class="mb-40 flex flex-wrap gap-2 leading-3"
-      >
+      <section v-if="mostListenedTracks" class="flex flex-wrap gap-2 leading-3">
         <h1
-          class="text-3xl <md:text-2xl font-bold mb-2 w-full"
+          id="topTracks"
+          class="pt-24 mb-3 w-full text-3xl <md:text-2xl font-bold"
           data-aos="fade-left"
           data-aos-duration="1100"
         >
-          <NuxtLink
-            to="#topTracks"
-            id="topTracks"
-            class="text-sky-500 hover:text-sky-300 pt-36 cursor-pointer transition-colors duration-300"
-          >
-            #
+          <NuxtLink to="#topTracks" class="group">
+            <span class="section_header_indicator">#</span>
+            {{ lang.mostListenedTracks }}
           </NuxtLink>
-          {{ lang.mostListenedTracks }}
         </h1>
         <div
           class="w-fit <sm:w-full sm:(flex flex-wrap)"
