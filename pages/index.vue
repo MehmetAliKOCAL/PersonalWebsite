@@ -408,7 +408,7 @@ onMounted(() => {
                 sizes="sm:100vw"
                 class="transform transition-all duration-300 w-full"
                 :class="{
-                  'scale-110 filter blur-[1px]':
+                  'scale-103 filter blur-[1px]':
                     isHovering === recentlyPlayedGames.indexOf(item),
                 }"
                 :src="`https://steamcdn-a.akamaihd.net/steam/apps/${item.appid}/header.jpg`"
@@ -474,7 +474,7 @@ onMounted(() => {
               sizes="sm:100vw"
               class="transform transition-all duration-300 filter w-full"
               :class="{
-                'scale-110 blur-[1px]':
+                'scale-103 blur-[1px]':
                   isHovering === mostPlayedGames.indexOf(item) + 6,
               }"
               :src="`https://steamcdn-a.akamaihd.net/steam/apps/${item.appid}/header.jpg`"
