@@ -54,14 +54,29 @@ const texts = {
   ],
   currentlyWorkingOn: [
     {
+      role: "Dashboard - ",
+      name: "Clemta",
+      link: "https://clemta.com",
+      emoji: "📊",
+      summary: "bu fintech SaaS şirketi için dashboard'lar geliştiriyorum",
+    },
+  ],
+  previousProjects: [
+    {
+      role: "Site - ",
+      name: "QRGen",
+      link: "https://qrgen.gwyndev.com",
+      emoji: "📷",
+      summary:
+        "kişiselleştirilebilir QR kodlar oluşturabileceğiniz bir internet sitesi",
+    },
+    {
       role: "Site - ",
       name: "YT Music Clone",
       link: "https://music.gwyndev.com",
       emoji: "🎸",
-      summary: "fonksiyonel bir YouTube Music klonu",
+      summary: "fonksiyonel bir YouTube Music klonu denemesi (tamamlanmadı)",
     },
-  ],
-  previousProjects: [
     {
       role: "Site - ",
       name: "CFP",

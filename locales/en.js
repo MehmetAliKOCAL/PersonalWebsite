@@ -55,14 +55,28 @@ const texts = {
   ],
   currentlyWorkingOn: [
     {
-      role: "Making",
-      name: "YT Music Clone",
-      link: "https://music.gwyndev.com",
-      emoji: "🎸",
-      summary: "a functional YouTube Music clone",
+      role: "Making dashboards for",
+      name: "Clemta",
+      link: "https://clemta.com",
+      emoji: "📊",
+      summary: "a fintech SaaS company",
     },
   ],
   previousProjects: [
+    {
+      role: "Made",
+      name: "QRGen",
+      link: "https://qrgen.gwyndev.com",
+      emoji: "📷",
+      summary: "a website where you can create customizable QR codes",
+    },
+    {
+      role: "Made",
+      name: "YT Music Clone",
+      link: "https://music.gwyndev.com",
+      emoji: "🎸",
+      summary: "a functional YouTube Music clone attempt (not completed)",
+    },
     {
       role: "Made",
       name: "CFP",
