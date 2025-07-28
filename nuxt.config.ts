@@ -37,11 +37,15 @@ export default defineNuxtConfig({
         },
         {
           name: 'keywords',
-          content: 'mehmet ali koçal, mehmet ali, gwyndev, gwyn',
+          content:
+            'mehmet ali koçal, mehmet ali, gwyndev, gwyn, kocal, kocaldev, kocal.dev, koçal, mehmet',
         },
         { name: 'author', content: 'Mehmet Ali KOÇAL' },
-        { name: 'application-name', content: 'Personal Website of GwynDev' },
-        { property: 'og:url', content: 'https://gwyndev.com' },
+        {
+          name: 'application-name',
+          content: 'Personal Website of Mehmet Ali KOÇAL',
+        },
+        { property: 'og:url', content: 'https://kocal.dev' },
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: 'Mehmet Ali KOÇAL' },
         {
@@ -54,8 +58,8 @@ export default defineNuxtConfig({
           content: 'https://avatars.githubusercontent.com/u/102923401?v=4',
         },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { property: 'twitter:domain', content: 'gwyndev.com' },
-        { property: 'twitter:url', content: 'https://gwyndev.com' },
+        { property: 'twitter:domain', content: 'kocal.dev' },
+        { property: 'twitter:url', content: 'https://kocal.dev' },
         { name: 'twitter:title', content: 'Mehmet Ali KOÇAL' },
         {
           name: 'twitter:description',
@@ -79,7 +83,6 @@ export default defineNuxtConfig({
       fileName: 'favicon.png',
     },
     meta: {
-      name: 'GwynDev',
       author: 'Mehmet Ali KOÇAL',
       description:
         'Mehmet is a front-end web developer, student, and video game lover. He develops websites or tries to make games in his spare time. Click to learn more!',
@@ -88,13 +91,13 @@ export default defineNuxtConfig({
       ogTitle: 'Mehmet Ali KOÇAL',
       ogDescription:
         'Mehmet is a front-end web developer, student, and video game lover. He develops websites or tries to make games in his spare time. Click to learn more!',
-      ogHost: 'gwyndev.com',
-      ogUrl: 'https://gwyndev.com/',
+      ogHost: 'kocal.dev',
+      ogUrl: 'https://kocal.dev/',
       twitterCard: 'summary_large_image',
     },
     manifest: {
-      name: 'GwynDev',
-      short_name: 'GwynDev',
+      name: 'kocal.dev',
+      short_name: 'kocal.dev',
       lang: 'en',
       description:
         'Mehmet is a front-end web developer, student, and video game lover. He develops websites or tries to make games in his spare time. Click to learn more!',

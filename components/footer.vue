@@ -1,19 +1,19 @@
 <script setup>
-import { useGlobalVariablesStore } from "@/store/globalVariables.js";
-import { storeToRefs } from "pinia";
+import { useGlobalVariablesStore } from '@/store/globalVariables.js';
+import { storeToRefs } from 'pinia';
 const globalVariables = useGlobalVariablesStore();
 const { lang } = storeToRefs(globalVariables);
 let isHovering = ref(null);
 
-const eMail = "root.gwyn@hotmail.com";
+const eMail = 'contact@kocal.dev';
 const socials = [
-  { name: "LinkedIn", link: "https://www.linkedin.com/in/gwyndev/" },
-  { name: "GitHub", link: "https://github.com/MehmetAliKOCAL" },
-  { name: "Discord", link: "https://discordapp.com/users/554061262229864458" },
-  { name: "LastFM", link: "https://www.last.fm/user/GwynDev" },
+  { name: 'LinkedIn', link: 'https://www.linkedin.com/in/kocal/' },
+  { name: 'GitHub', link: 'https://github.com/MehmetAliKOCAL' },
+  { name: 'Discord', link: 'https://discordapp.com/users/554061262229864458' },
+  { name: 'LastFM', link: 'https://www.last.fm/user/GwynDev' },
   {
-    name: "YouTube",
-    link: "https://www.youtube.com/channel/UCqsbqOqrLaKWaJ-1fB1RqyQ",
+    name: 'YouTube',
+    link: 'https://www.youtube.com/@TearsOfaPessimist',
   },
 ];
 </script>

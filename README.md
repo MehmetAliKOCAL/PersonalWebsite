@@ -19,7 +19,7 @@ PageSpeed Insights Score
 
 </p>
 
-### [Live Preview](https://gwyndev.com)
+### [Live Preview](https://kocal.dev)
 
 A multilingual personal website with a progressive web app that you can share your projects and latest activities, made with Nuxt 3 & WindiCSS. For further instructions about Nuxt, view [docs](https://nuxt.com/docs/getting-started/introduction).
 

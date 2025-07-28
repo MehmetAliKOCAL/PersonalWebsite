@@ -1,26 +1,26 @@
 <script setup>
-import { useGlobalVariablesStore } from "~/store/globalVariables.js";
-import { storeToRefs } from "pinia";
+import { useGlobalVariablesStore } from '~/store/globalVariables.js';
+import { storeToRefs } from 'pinia';
 const globalVariables = useGlobalVariablesStore();
 const { lang } = storeToRefs(globalVariables);
 let mouseHoverID = ref(null);
 
 const headerTabs = [
-  { mouseHoverID: 1, href: "/#hello", text: lang.value.headerHello },
-  { mouseHoverID: 3, href: "/#currently", text: lang.value.headerProjects },
+  { mouseHoverID: 1, href: '/#hello', text: lang.value.headerHello },
+  { mouseHoverID: 3, href: '/#currently', text: lang.value.headerProjects },
   {
     mouseHoverID: 2,
-    href: "/#proficiencies",
+    href: '/#proficiencies',
     text: lang.value.headerProficiencies,
   },
   {
     mouseHoverID: 4,
-    href: "/#recentGames",
+    href: '/#recentGames',
     text: lang.value.headerGamesPlayed,
   },
   {
     mouseHoverID: 5,
-    href: "/#recentTracks",
+    href: '/#recentTracks',
     text: lang.value.headerTracksListened,
   },
 ];
@@ -41,7 +41,7 @@ const headerTabs = [
           src="/favicon.png"
           width="40"
           height="40"
-          alt="GwynDev Logo"
+          alt="Website Logo"
         />
       </NuxtLink>
 
