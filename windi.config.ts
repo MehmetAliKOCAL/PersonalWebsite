@@ -1,19 +1,22 @@
-import { defineConfig } from "windicss/helpers";
+import { defineConfig } from 'windicss/helpers';
 
 export default defineConfig({
   theme: {
     extend: {
       width: {
-        fit: "fit-content",
+        fit: 'fit-content',
+      },
+      backgroundColor: {
+        primary: 'var(--primary-background-color)',
       },
       backgroundClip: {
-        padding: "padding-box",
+        padding: 'padding-box',
       },
       boxShadow: {
-        skyBloom: "0px 0px 20px 1px rgba(90, 90, 250, 0.8)",
+        skyBloom: '0px 0px 20px 1px rgba(90, 90, 250, 0.8)',
       },
       animation: {
-        sound: "sound 1000ms infinite",
+        sound: 'sound 1000ms infinite',
       },
     },
   },

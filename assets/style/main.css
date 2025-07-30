@@ -1,13 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --primary-background-color: rgb(10, 10, 10);
+}
 
 html,
 body {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  background-color: var(--primary-background-color);
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -36,7 +41,7 @@ body {
 }
 
 :target:before {
-  content: "";
+  content: '';
   display: block;
   height: 80px;
   margin: -80px 0 0;
@@ -50,8 +55,8 @@ body {
   background-image: radial-gradient(
     ellipse at center top,
     transparent -100%,
-    rgb(10, 10, 10) 70%,
-    rgb(10, 10, 10) 100%
+    var(--primary-background-color) 70%,
+    var(--primary-background-color) 100%
   );
 }
 
