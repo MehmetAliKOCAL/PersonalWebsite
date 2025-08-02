@@ -71,7 +71,21 @@ export default defineNuxtConfig({
           content: 'https://avatars.githubusercontent.com/u/102923401?v=4',
         },
       ],
+
       link: [{ rel: 'icon', type: 'image/png', href: '/favicon.png' }],
+
+      script:
+        process.env.NODE_ENV === 'production' && process.env.GOOGLE_ANALYTICS_ID
+          ? [
+              {
+                innerHTML: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.GOOGLE_ANALYTICS_ID}');`,
+              },
+              {
+                src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`,
+                async: true,
+              },
+            ]
+          : [],
     },
   },
 

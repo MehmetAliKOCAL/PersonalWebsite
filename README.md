@@ -52,15 +52,17 @@ pnpm install
 To get the project up and running, you need to use environment variables. Create a .env file in the root directory of the project where app.vue is located, then add these variables inside of the file:
 
 ```bash
-STEAM_WEB_API_KEY: 'YOUR_STEAM_WEB_API_KEY'
-STEAM_ID: 'YOUR_steamID64(DEC)'
-LASTFM_USERNAME: 'YOUR_LASTFM_USERNAME'
-LASTFM_WEB_API_KEY: 'YOUR_LASTFM_WEB_API_KEY'
+STEAM_WEB_API_KEY='YOUR_STEAM_WEB_API_KEY'
+STEAM_ID='YOUR_steamID64(DEC)'
+LASTFM_USERNAME='YOUR_LASTFM_USERNAME'
+LASTFM_WEB_API_KEY='YOUR_LASTFM_WEB_API_KEY'
+GOOGLE_ANALYTICS_ID="YOUR_GOOGLE_ANALYTICS_ID (G-XXXXXXXXXX)"
 ```
 
 To get your Steam Web API key, visit [here](https://steamcommunity.com/dev/apikey). <br>
 To find your SteamID64 (DEC), visit [here](https://www.steamidfinder.com/). <br>
-To get your LastFM API key, visit [here](https://www.last.fm/api/account/create).
+To get your LastFM API key, visit [here](https://www.last.fm/api/account/create). <br>
+If you don’t want Google Analytics, just don’t give it an ID to skip loading its scripts.
 
 Now your .env file should look like this:
 
