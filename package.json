@@ -1,6 +1,9 @@
 {
   "packageManager": "npm@9.6.7",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
