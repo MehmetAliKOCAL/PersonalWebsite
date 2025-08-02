@@ -7,7 +7,14 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@kevinmarrec/nuxt-pwa',
     '@nuxt/image',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
   ],
+
+  site: {
+    url: 'https://kocal.dev',
+    name: 'Mehmet Ali KOÇAL',
+  },
 
   css: ['@/assets/style/main.css'],
 
