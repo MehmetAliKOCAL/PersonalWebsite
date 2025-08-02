@@ -86,4 +86,4 @@ npm run build
 npm run preview
 ```
 
-Check out the [Nuxt deployment documentation](https://nuxt.com/docs/getting-started/deployment) for deployment instructions.
+Check out the [Nuxt deployment documentation](https://nuxt.com/docs/getting-started/deployment) for deployment instructions. Also don't forget to modify the content of nuxt.config.ts (meta tags, etc.) to your needs before deploying.
