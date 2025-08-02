@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://i.hizliresim.com/8afr6fj.png"/>
+<img src="/assets/preview.jpeg"/>
 </p>
 
 <h2 align="center">
